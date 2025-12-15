@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOMEUniversity</title>
+    <title>HOMEUniversity - Building Futures</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,144 +12,55 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
-            background: #000;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: rgba(0, 0, 0, 0.25);
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent: rgba(10, 132, 255, 0.8);
+            --pill-glow: rgba(10, 132, 255, 0.4);
         }
 
-        /* Full-screen background */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #000;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         .hero {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: center;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            overflow: hidden;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            background: url('images/background.jpg') center/cover no-repeat fixed;
         }
 
-        /* Subtle overlay to enhance readability */
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
-            pointer-events: none;
+            inset: 0;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.6) 50%,
+                rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
         }
 
-        /* Minimal branding */
-        .branding {
+        .content {
             position: relative;
-            z-index: 10;
+            z-index: 2;
             text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInUp 1.2s ease;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
         }
 
-        h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.05em;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.3);
-        }
-
-        .tagline {
-            font-size: 1.4rem;
-            color: rgba(255,255,255,0.85);
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-
-        /* Floating glassmorphic course modules */
-        .courses {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 900px;
-            animation: fadeInUp 1.4s ease;
-        }
-
-        .course-module {
-            width: 380px;
-            padding: 40px 35px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 20px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: #ffffff;
-        }
-
-        .course-module:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .module-status {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #4ade80;
-            margin-bottom: 15px;
-            padding: 4px 10px;
-            background: rgba(74, 222, 128, 0.15);
-            border-radius: 6px;
-        }
-
-        .module-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        .module-description {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.75);
-            font-weight: 400;
-        }
-
-        /* Footer - minimal copyright */
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding: 25px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 300;
-            z-index: 5;
-            letter-spacing: 0.05em;
-        }
-
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -160,59 +72,251 @@
             }
         }
 
-        /* Responsive */
+        h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .subtext {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--glass-border), 
+                transparent);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px var(--glass-shadow),
+                        0 0 40px var(--pill-glow);
+        }
+
+        .pill-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pill-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 20px var(--pill-glow));
+        }
+
+        .course-card:nth-child(1) .pill-icon svg {
+            animation-delay: 0s;
+        }
+
+        .course-card:nth-child(2) .pill-icon svg {
+            animation-delay: 0.3s;
+        }
+
+        .course-card h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1), 
+                rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3),
+                        0 0 30px var(--pill-glow);
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            .tagline {
-                font-size: 1.1rem;
-            }
-
             .courses {
-                flex-direction: column;
-                align-items: center;
-                padding: 0 20px;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .course-module {
-                width: 100%;
-                max-width: 400px;
+            .hero {
+                padding: 1.5rem;
             }
+        }
 
-            .branding {
-                margin-bottom: 50px;
-            }
+        /* Smooth entrance for pills */
+        .course-card:nth-child(1) {
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .course-card:nth-child(2) {
+            animation: fadeInUp 1s ease-out 0.85s both;
         }
     </style>
 </head>
 <body>
-
-    <div class="hero">
-        <div class="branding">
+    <section class="hero">
+        <div class="content">
             <h1>HOMEUniversity</h1>
             <p class="tagline">Building Futures</p>
+            <p class="subtext">Current courses hosted on Skool</p>
+
+            <div class="courses">
+                <!-- Gigapill Course -->
+                <div class="course-card">
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="pillGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0a84ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <g filter="url(#glow)">
+                                <rect x="20" y="30" width="30" height="40" rx="15" fill="url(#pillGrad1)" opacity="0.9"/>
+                                <rect x="50" y="30" width="30" height="40" rx="15" fill="url(#pillGrad1)" opacity="0.9"/>
+                                <ellipse cx="50" cy="50" rx="30" ry="20" fill="url(#pillGrad1)"/>
+                                <ellipse cx="35" cy="45" rx="8" ry="10" fill="rgba(255,255,255,0.3)"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h2>Gigapill</h2>
+                    <p>Transform your mindset and unlock limitless potential through advanced cognitive optimization techniques</p>
+                    <a href="#" class="cta-button">Enroll Now</a>
+                </div>
+
+                <!-- Musicpill Course -->
+                <div class="course-card">
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="pillGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ff006e;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ff66b2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <g filter="url(#glow)">
+                                <rect x="20" y="30" width="30" height="40" rx="15" fill="url(#pillGrad2)" opacity="0.9"/>
+                                <rect x="50" y="30" width="30" height="40" rx="15" fill="url(#pillGrad2)" opacity="0.9"/>
+                                <ellipse cx="50" cy="50" rx="30" ry="20" fill="url(#pillGrad2)"/>
+                                <ellipse cx="35" cy="45" rx="8" ry="10" fill="rgba(255,255,255,0.3)"/>
+                                <!-- Music note -->
+                                <path d="M 58 38 L 58 58 M 58 38 L 68 36 L 68 56" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                <circle cx="58" cy="60" r="4" fill="white"/>
+                                <circle cx="68" cy="58" r="4" fill="white"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h2>Musicpill</h2>
+                    <p>Master music production, theory, and creative expression from beginner to professional level</p>
+                    <a href="#" class="cta-button">Enroll Now</a>
+                </div>
+            </div>
         </div>
-
-        <div class="courses">
-            <a href="#" class="course-module">
-                <span class="module-status">● Live Now</span>
-                <div class="module-title">I AM GIGAPILLED</div>
-                <p class="module-description">15-module training to optimize your vessel and unlock maximum creative capacity.</p>
-            </a>
-
-            <a href="#" class="course-module">
-                <span class="module-status">● Live Now</span>
-                <div class="module-title">Music in the New Age</div>
-                <p class="module-description">Master the science of frequency, sound, and vibration to produce high-vibrational art.</p>
-            </a>
-        </div>
-
-        <footer>
-            © 2025 HOMEUniversity
-        </footer>
-    </div>
-
+    </section>
 </body>
 </html>
