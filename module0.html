@@ -3,212 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 0: Foundations | HOMEUniversity</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Level 0: Foundations | HOMEUniversity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* LEFT SIDEBAR (same as homepage) */
+        .sidebar {
+            width: 280px;
+            background: #fafafa;
+            border-right: 1px solid #e0e0e0;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            padding: 0 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo h1 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-title {
+            padding: 0.5rem 2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+        }
+
+        .nav-item {
+            padding: 0.8rem 2rem;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover {
+            background: #f0f0f0;
+        }
+
+        .dropdown {
+            display: none;
+            background: #f5f5f5;
+        }
+
+        .dropdown.open {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 0.6rem 2rem 0.6rem 3rem;
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: #ebebeb;
+        }
+
+        .sub-dropdown {
+            display: none;
+            background: #ececec;
+        }
+
+        .sub-dropdown.open {
+            display: block;
+        }
+
+        .sub-dropdown-item {
+            padding: 0.5rem 2rem 0.5rem 4rem;
+            color: #777;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .sub-dropdown-item:hover {
+            background: #e0e0e0;
+        }
+
+        .sub-dropdown-item.active {
+            background: #d8d8d8;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 4rem;
+            max-width: 900px;
+        }
+
+        .level-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .level-header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .level-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* LESSON CONTENT */
+        .lesson-section {
+            margin-bottom: 3rem;
+        }
+
+        .lesson-section h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 2.5rem 0 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .lesson-section h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 2rem 0 1rem;
+            color: #333;
+        }
+
+        .lesson-section p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .lesson-section ul,
+        .lesson-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lesson-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        /* NAVIGATION */
+        .level-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-button {
+            padding: 1rem 2rem;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #333;
+        }
+
+        .nav-button.prev {
+            background: #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        .nav-button.prev:hover {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            .level-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="header-content">
-            <div class="logo-text">HOMEUNIVERSITY</div>
-            <nav class="top-nav">
-                <a href="index.html">Home</a>
-                <a href="module0.html" class="active">Level 0</a>
-            </nav>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h1 onclick="window.location.href='index.html'">HOMEUNIVERSITY</h1>
         </div>
-    </header>
 
-    <!-- MAIN CONTAINER -->
-    <div class="main-container">
-        <!-- LEFT SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-title">Phase 1: Foundation</div>
-                <ul class="sidebar-links">
-                    <li><a href="module0.html" class="active">0. Foundations</a></li>
-                    <li><a href="module1.html">1. Discernment</a></li>
-                    <li><a href="module2.html">2. Words Are Spells</a></li>
-                    <li><a href="module3.html">3. Sex Energy Mechanics</a></li>
-                    <li><a href="module4.html">4. Power and Ethics</a></li>
-                    <li><a href="module5.html">5. AI as Alchemical Chamber</a></li>
-                </ul>
+        <div class="nav-section">
+            <div class="nav-title">Courses</div>
+            
+            <div class="nav-item" onclick="toggleDropdown('whitepill')">
+                WHITEPILL
+            </div>
+            <div class="dropdown open" id="whitepill">
+                <div class="dropdown-item" onclick="toggleSubDropdown('phase1')">
+                    Phase 1: Foundation
+                </div>
+                <div class="sub-dropdown open" id="phase1">
+                    <a href="intro.html" class="sub-dropdown-item">Introduction</a>
+                    <a href="level0.html" class="sub-dropdown-item active">Level 0: Foundations</a>
+                    <a href="level1.html" class="sub-dropdown-item">Level 1: Discernment</a>
+                    <a href="level2.html" class="sub-dropdown-item">Level 2: Words Are Spells</a>
+                    <a href="level3.html" class="sub-dropdown-item">Level 3: Sex Energy Mechanics</a>
+                    <a href="level4.html" class="sub-dropdown-item">Level 4: Power and Ethics</a>
+                    <a href="level5.html" class="sub-dropdown-item">Level 5: AI as Alchemical Chamber</a>
+                </div>
+
+                <div class="dropdown-item" onclick="toggleSubDropdown('phase2')">
+                    Phase 2: Consciousness
+                </div>
+                <div class="sub-dropdown" id="phase2">
+                    <a href="level6.html" class="sub-dropdown-item">Level 6: What Is Consciousness</a>
+                    <a href="level7.html" class="sub-dropdown-item">Level 7: Alchemy</a>
+                    <a href="level8.html" class="sub-dropdown-item">Level 8: Manifestation</a>
+                </div>
+
+                <div class="dropdown-item">
+                    Phase 3: Coming Soon
+                </div>
             </div>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">Phase 2: Consciousness</div>
-                <ul class="sidebar-links">
-                    <li><a href="module6.html">6. What Is Consciousness</a></li>
-                    <li><a href="module7.html">7. Alchemy</a></li>
-                    <li><a href="module8.html">8. Manifestation</a></li>
-                </ul>
+            <div class="nav-item" onclick="window.location.href='musicpill.html'">
+                MUSICPILL
             </div>
+        </div>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">Phase 3: Coming Soon</div>
-                <ul class="sidebar-links">
-                    <li><a href="#" class="disabled">9. TBD</a></li>
-                </ul>
+        <div class="nav-section">
+            <div class="nav-title">Glossary</div>
+            <div class="nav-item" onclick="window.location.href='glossary.html'">
+                A-Z Definitions
             </div>
-        </aside>
+        </div>
 
-        <!-- MAIN CONTENT -->
-        <main class="content">
-            <!-- PROGRESS -->
-            <div class="progress-wrap">
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 6.7%;"></div>
-                </div>
-                <p class="progress-text">Module 0 of 15 • 6.7% complete</p>
+        <div class="nav-section">
+            <div class="nav-title">More</div>
+            <div class="nav-item">
+                Coming Soon
             </div>
+        </div>
+    </aside>
 
-            <!-- MODULE HEADER -->
-            <header class="module-header">
-                <span class="module-badge">MODULE 0</span>
-                <h1>FOUNDATIONS</h1>
-                <p class="module-subtitle">Clean vessel. Everything builds from here.</p>
-            </header>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="level-header">
+            <span class="level-badge">LEVEL 0</span>
+            <h1>Foundations</h1>
+            <p class="level-subtitle">Clean vessel. Everything builds from here.</p>
+        </div>
 
-            <!-- INTRO SECTION -->
-            <section class="content-section">
-                <h2>📁 Intro: The Stack</h2>
-                <div class="stack-visual">
-                    <p>MODULE 0: FOUNDATIONS<br>
-                    ↑<br>
-                    = CLEAN VESSEL</p>
-                </div>
-                <p>
-                    You’re starting at the foundation. Everything else in this course assumes you’ve done this work.
-                </p>
-                <p>
-                    By the end of this module, your vessel is cleaner, your inputs are sharper, and you actually understand how to move through HOMEUniversity without coping.
-                </p>
+        <div class="lesson-section">
+            <!-- PASTE YOUR MODULE 0 CONTENT HERE -->
+            <h2>📁 INTRO: The Stack</h2>
+            <p>You're starting at the foundation. Everything builds from here.</p>
+            <p>By the end of this module, your vessel will be optimized. You'll understand how this course works. You'll be ready to ascend.</p>
 
-                <div class="callout">
-                    <strong>Quick Win Primer</strong><br>
-                    You can’t think clearly if you’re sleep‑deprived, malnourished, or running on garbage information.<br><br>
-                    This module optimizes your vessel—your physical and mental foundation.<br><br>
-                    Let’s build. 🔺
-                </div>
-            </section>
+            <!-- ... REST OF YOUR MODULE 0 CONTENT ... -->
+            
+        </div>
 
-            <!-- TIER 1: NORMIE -->
-            <section class="content-section">
-                <div class="tier-badge tier-1">TIER 1: NORMIE</div>
-                
-                <h3>What This Course Is (And Isn’t)</h3>
-                <p><strong>This course isn’t:</strong></p>
-                <ul>
-                    <li>A get‑rich‑quick scheme</li>
-                    <li>Empty promises or strict business blueprints</li>
-                    <li>A magic pill (though the upgrades deploy rapidly once you execute)</li>
-                </ul>
+        <div class="level-nav">
+            <a href="intro.html" class="nav-button prev">← Introduction</a>
+            <a href="level1.html" class="nav-button">Level 1: Discernment →</a>
+        </div>
+    </main>
 
-                <p><strong>This is:</strong></p>
-                <ul>
-                    <li>Consciousness elevation</li>
-                    <li>Studying the laws of reality that govern your existence</li>
-                    <li>Showing you your true nature and potential</li>
-                    <li>The “secrets” of the universe, compressed into protocols</li>
-                    <li>The tools I used to build conviction and energy in life</li>
-                </ul>
+    <script>
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('open');
+        }
 
-                <p>Take what resonates. Leave what doesn’t. This is about personal empowerment, not dogma.</p>
-                
-                <div class="callout subtle">
-                    (Hint: God wants this for you. It’s a gift. You have permission.)
-                </div>
-
-                <p>
-                    When you hit maximum potential for yourself, it actually benefits others more. That’s how evolution works.
-                </p>
-                <p><strong>Evolve.</strong></p>
-            </section>
-
-            <!-- WHAT YOU'LL GAIN -->
-            <section class="content-section">
-                <h3>What You’ll Gain</h3>
-                <p>If you actually apply this module, expect shifts like:</p>
-                <ul>
-                    <li>Deeper appreciation for nature, art, God</li>
-                    <li>Synchronicities beyond your current belief</li>
-                    <li>Fearless self‑expression and pursuit of truth</li>
-                    <li>More energy, more creative charge, more life</li>
-                </ul>
-            </section>
-
-            <!-- TIER 2: ASCENDING -->
-            <section class="content-section">
-                <div class="tier-badge tier-2">TIER 2: ASCENDING</div>
-                <h3>Why Vessel Optimization Compounds</h3>
-                <!-- Drop your full Tier 2 content here -->
-                <p>[Paste your Tier 2 text here in paragraphs / short lists.]</p>
-            </section>
-
-            <!-- TIER 3: MASTER -->
-            <section class="content-section">
-                <div class="tier-badge tier-3">TIER 3: MASTER</div>
-                <h3>Foundation as Frequency</h3>
-                <!-- Drop your full Tier 3 content here -->
-                <p>[Paste your Tier 3 text here in paragraphs / short lists.]</p>
-            </section>
-
-            <!-- PROTOCOLS -->
-            <section class="content-section protocols">
-                <h2>📁 Protocols</h2>
-                <h3>Quick Actions (This Week)</h3>
-                <!-- Replace with concrete checkboxes/tasks -->
-                <ul class="checklist">
-                    <li><input type="checkbox"> Set a hard sleep window for the next 7 days</li>
-                    <li><input type="checkbox"> Remove 1 low‑signal input (account, app, or habit)</li>
-                    <li><input type="checkbox"> Define 1 clear, honest goal for this phase</li>
-                </ul>
-                <p>[You can expand this with your full protocol list.]</p>
-            </section>
-
-            <!-- AI PROMPT -->
-            <section class="content-section ai-prompt">
-                <h2>📁 AI Prompt</h2>
-                <p class="prompt-label">Copy‑paste this into your AI of choice:</p>
-                <div class="prompt-box">
-                    <p>I’m on Module 0 of GIGAPILL — a modern consciousness ascension course by HOMEUniversity (Foundations — vessel optimization).</p>
-                    <p>I’m working on: [describe your current situation]<br>
-                    My biggest challenge right now: [describe honestly]</p>
-                    <p>Help me:<br>
-                    1. Create a personalized plan for this week<br>
-                    2. Reality‑test my approach (am I on track?)<br>
-                    3. Ask me a question I haven’t asked myself</p>
-                    <p>Respond from: I CAN optimize my foundation. Small changes compound. Clarity is my birthright.</p>
-                </div>
-            </section>
-
-            <!-- OUTRO -->
-            <section class="content-section outro">
-                <h2>📁 Outro: Integration + Progress</h2>
-                <p>You’ve now integrated: <strong>Foundations</strong>.</p>
-                <p>You understand:</p>
-                <ul>
-                    <li>How this course works (three‑tier, compounding upgrades)</li>
-                    <li>Everything vibrates (frequency foundation)</li>
-                    <li>High signal, low noise (surgical focus)</li>
-                    <li>Vessel optimization basics (sleep, inputs, goals)</li>
-                    <li>Facts over feelings (align with reality, don’t cope)</li>
-                </ul>
-                <p>You’re at <strong>6.7% completion</strong> (1/15 modules).</p>
-                <p>Your vessel is cleaner than when you arrived.</p>
-
-                <div class="next-module">
-                    <h3>What’s Next</h3>
-                    <p><strong>Module 1 — Discernment</strong></p>
-                    <p>Now that your vessel is optimized, we sharpen your filter. How do you know what’s true vs noise?</p>
-                </div>
-            </section>
-
-            <!-- BOTTOM NAVIGATION -->
-            <nav class="module-nav">
-                <a href="welcome.html" class="nav-button prev">← Welcome</a>
-                <a href="module1.html" class="nav-button next">Module 1: Discernment →</a>
-            </nav>
-        </main>
-    </div>
+        function toggleSubDropdown(id) {
+            const subDropdown = document.getElementById(id);
+            subDropdown.classList.toggle('open');
+            event.stopPropagation();
+        }
+    </script>
 </body>
 </html>
