@@ -3,101 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOMEUniversity | Sequential Awakening Protocol</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>HOMEUniversity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* LEFT SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: #fafafa;
+            border-right: 1px solid #e0e0e0;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            padding: 0 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo h1 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: #1a1a1a;
+        }
+
+        /* NAVIGATION SECTIONS */
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-title {
+            padding: 0.5rem 2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+        }
+
+        .nav-item {
+            padding: 0.8rem 2rem;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover {
+            background: #f0f0f0;
+        }
+
+        .nav-item.active {
+            background: #e8e8e8;
+            font-weight: 500;
+        }
+
+        /* DROPDOWN */
+        .dropdown {
+            display: none;
+            background: #f5f5f5;
+        }
+
+        .dropdown.open {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 0.6rem 2rem 0.6rem 3rem;
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: #ebebeb;
+        }
+
+        .sub-dropdown {
+            display: none;
+            background: #ececec;
+        }
+
+        .sub-dropdown.open {
+            display: block;
+        }
+
+        .sub-dropdown-item {
+            padding: 0.5rem 2rem 0.5rem 4rem;
+            color: #777;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .sub-dropdown-item:hover {
+            background: #e0e0e0;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .cube-container {
+            margin-bottom: 3rem;
+        }
+
+        .cube-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
-<body class="home-body">
-    <!-- TOP NAV -->
-    <header class="site-header">
-        <div class="header-content">
-            <div class="logo-text">HOMEUNIVERSITY</div>
-            <nav class="top-nav">
-                <a href="index.html" class="active">Home</a>
-                <a href="module0.html">Start Level 0</a>
-            </nav>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>HOMEUNIVERSITY</h1>
         </div>
-    </header>
 
-    <!-- MAIN -->
-    <main class="home-main">
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-inner">
-                <h1>HOMEUniversity</h1>
-                <p class="hero-tagline">
-                    A free framework for consciousness, sovereignty, and truth.<br>
-                    Built during activation. Take what serves you.
-                </p>
-
-                <p class="hero-subcopy">
-                    15 levels. 3 phases. A sequential awakening protocol.<br>
-                    You don’t skip levels. You start at Level 0. You build a clean vessel, then ascend.
-                </p>
-
-                <a href="module0.html" class="cta-button">Start Level 0 →</a>
-
-                <p class="cta-caption">
-                    Estimated time: 45–90 minutes. Bring a notebook, water, and honesty.
-                </p>
+        <!-- COURSES SECTION -->
+        <div class="nav-section">
+            <div class="nav-title">Courses</div>
+            
+            <!-- WHITEPILL -->
+            <div class="nav-item" onclick="toggleDropdown('whitepill')">
+                WHITEPILL
             </div>
-        </section>
-
-        <!-- COURSE OVERVIEW -->
-        <section class="course-overview">
-            <h2>The Course</h2>
-            <p class="course-intro">
-                Each level stacks on the last. Think of it as a firmware upgrade for your awareness.
-            </p>
-
-            <div class="phase-grid">
-                <!-- PHASE 1 -->
-                <div class="phase-card">
-                    <h3>Phase 1: Foundation</h3>
-                    <p class="phase-range">Levels 0–5</p>
-                    <p class="phase-copy">
-                        Vessel optimization, discernment, power. You clean the hardware and install a reality‑aligned OS.
-                    </p>
-                    <ul class="phase-list">
-                        <li>0. Foundations</li>
-                        <li>1. Discernment</li>
-                        <li>2. Words Are Spells</li>
-                        <li>3. Sex Energy Mechanics</li>
-                        <li>4. Power and Ethics</li>
-                        <li>5. AI as Alchemical Chamber</li>
-                    </ul>
+            <div class="dropdown" id="whitepill">
+                <div class="dropdown-item" onclick="toggleSubDropdown('phase1')">
+                    Phase 1: Foundation
+                </div>
+                <div class="sub-dropdown" id="phase1">
+                    <a href="intro.html" class="sub-dropdown-item">Introduction</a>
+                    <a href="level0.html" class="sub-dropdown-item">Level 0: Foundations</a>
+                    <a href="level1.html" class="sub-dropdown-item">Level 1: Discernment</a>
+                    <a href="level2.html" class="sub-dropdown-item">Level 2: Words Are Spells</a>
+                    <a href="level3.html" class="sub-dropdown-item">Level 3: Sex Energy Mechanics</a>
+                    <a href="level4.html" class="sub-dropdown-item">Level 4: Power and Ethics</a>
+                    <a href="level5.html" class="sub-dropdown-item">Level 5: AI as Alchemical Chamber</a>
                 </div>
 
-                <!-- PHASE 2 -->
-                <div class="phase-card">
-                    <h3>Phase 2: Consciousness</h3>
-                    <p class="phase-range">Levels 6–8</p>
-                    <p class="phase-copy">
-                        What consciousness is, how alchemy works, how manifestation actually plugs into physics and attention.
-                    </p>
-                    <ul class="phase-list">
-                        <li>6. What Is Consciousness</li>
-                        <li>7. Alchemy</li>
-                        <li>8. Manifestation</li>
-                    </ul>
+                <div class="dropdown-item" onclick="toggleSubDropdown('phase2')">
+                    Phase 2: Consciousness
+                </div>
+                <div class="sub-dropdown" id="phase2">
+                    <a href="level6.html" class="sub-dropdown-item">Level 6: What Is Consciousness</a>
+                    <a href="level7.html" class="sub-dropdown-item">Level 7: Alchemy</a>
+                    <a href="level8.html" class="sub-dropdown-item">Level 8: Manifestation</a>
                 </div>
 
-                <!-- PHASE 3 -->
-                <div class="phase-card disabled">
-                    <h3>Phase 3: Integration</h3>
-                    <p class="phase-range">Levels 9–14</p>
-                    <p class="phase-copy">
-                        Coming soon. The part where you embody, stabilize, and transmit.
-                    </p>
-                    <ul class="phase-list">
-                        <li>9–14. Integration protocols</li>
-                    </ul>
+                <div class="dropdown-item">
+                    Phase 3: Coming Soon
                 </div>
             </div>
 
-            <p class="course-note">
-                You’re not here to binge information. You’re here to <strong>rebuild</strong> your baseline.
-            </p>
-        </section>
+            <!-- MUSICPILL -->
+            <div class="nav-item" onclick="window.location.href='musicpill.html'">
+                MUSICPILL
+            </div>
+        </div>
+
+        <!-- GLOSSARY SECTION -->
+        <div class="nav-section">
+            <div class="nav-title">Glossary</div>
+            <div class="nav-item" onclick="window.location.href='glossary.html'">
+                A-Z Definitions
+            </div>
+        </div>
+
+        <!-- COMING SOON SECTION -->
+        <div class="nav-section">
+            <div class="nav-title">More</div>
+            <div class="nav-item">
+                Coming Soon
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="cube-container">
+            <img src="images/cube.png" alt="White Cube">
+        </div>
+
+        <h2>HOMEUniversity</h2>
+        <p>A free educational consciousness resource for you.</p>
     </main>
+
+    <script>
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('open');
+        }
+
+        function toggleSubDropdown(id) {
+            const subDropdown = document.getElementById(id);
+            subDropdown.classList.toggle('open');
+            event.stopPropagation();
+        }
+    </script>
 </body>
 </html>
