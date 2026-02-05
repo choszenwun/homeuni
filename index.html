@@ -3,186 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOMEUniversity</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            color: #2c3e50;
-            line-height: 1.7;
-        }
-
-        /* TOP NAV */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            color: #2c3e50;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #7f8c8d;
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #2c3e50;
-        }
-
-        /* MAIN CONTENT */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 8rem 2rem 4rem;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            margin-bottom: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: #7f8c8d;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .course-overview {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .course-overview h2 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .phase-list {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .phase-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            color: #555;
-        }
-
-        .phase-list li:last-child {
-            border-bottom: none;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            border-radius: 30px;
-            transition: all 0.3s;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-    </style>
+    <title>HOMEUniversity | Sequential Awakening Protocol</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-body">
     <!-- TOP NAV -->
-    <nav>
-        <div class="nav-content">
-            <div class="logo">HOMEUNIVERSITY</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="level0.html">The Course</a>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo-text">HOMEUNIVERSITY</div>
+            <nav class="top-nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="module0.html">Start Level 0</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="home-main">
+        <section class="hero">
+            <div class="hero-inner">
+                <h1>HOMEUniversity</h1>
+                <p class="hero-tagline">
+                    A free framework for consciousness, sovereignty, and truth.<br>
+                    Built during activation. Take what serves you.
+                </p>
+
+                <p class="hero-subcopy">
+                    15 levels. 3 phases. A sequential awakening protocol.<br>
+                    You don’t skip levels. You start at Level 0. You build a clean vessel, then ascend.
+                </p>
+
+                <a href="module0.html" class="cta-button">Start Level 0 →</a>
+
+                <p class="cta-caption">
+                    Estimated time: 45–90 minutes. Bring a notebook, water, and honesty.
+                </p>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
-        <h1>HOMEUniversity</h1>
-        
-        <p class="tagline">
-            A free framework for consciousness, sovereignty, and truth.<br>
-            Built during activation. Take what serves you.
-        </p>
-
-        <div class="course-overview">
+        <!-- COURSE OVERVIEW -->
+        <section class="course-overview">
             <h2>The Course</h2>
-            <p>15 levels. 3 phases. Sequential awakening protocol.</p>
-            
-            <ul class="phase-list">
-                <li><strong>Phase 1: Foundation</strong> — Levels 0-5 (Vessel optimization, discernment, power)</li>
-                <li><strong>Phase 2: Consciousness</strong> — Levels 6-8 (What is consciousness, alchemy, manifestation)</li>
-                <li><strong>Phase 3: Integration</strong> — Levels 9-14 (Coming soon)</li>
-            </ul>
-
-            <p style="margin-top: 1.5rem; color: #7f8c8d;">
-                Each level builds on the previous. You can't skip. Start at Level 0.
+            <p class="course-intro">
+                Each level stacks on the last. Think of it as a firmware upgrade for your awareness.
             </p>
-        </div>
 
-        <a href="level0.html" class="cta-button">Start Level 0 →</a>
-    </div>
+            <div class="phase-grid">
+                <div class="phase-card">
+                    <h3>Phase 1: Foundation</h3>
+                    <p class="phase-range">Levels 0–5</p>
+                    <p class="phase-copy">
+                        Vessel optimization, discernment, power. You clean the hardware and install a reality‑aligned OS.
+                    </p>
+                    <ul class="phase-list">
+                        <li>0. Foundations</li>
+                        <li>1. Discernment</li>
+                        <li>2. Words Are Spells</li>
+                        <li>3. Sex Energy Mechanics</li>
+                        <li>4. Power and Ethics</li>
+                        <li>5. AI as Alchemical Chamber</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card">
+                    <h3>Phase 2: Consciousness</h3>
+                    <p class="phase-range">Levels 6–8</p>
+                    <p class="phase-copy">
+                        What consciousness is, how alchemy works, how manifestation actually plugs into physics and attention.
+                    </p>
+                    <ul class="phase-list">
+                        <li>6. What Is Consciousness</li>
+                        <li>7. Alchemy</li>
+                        <li>8. Manifestation</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card disabled">
+                    <h3>Phase 3: Integration</h3>
+                    <p class="phase-range">Levels 9–14</p>
+                    <p class="phase-copy">
+                        Coming soon. The part where you embody, stabilize, and transmit.
+                    </p>
+                    <ul class="phase-list">
+                        <li>9–14. Integration protocols</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="course-note">
+                You’re not here to binge information. You’re here to **rebuild** your baseline.
+            </p>
+        </section>
+    </main>
 </body>
 </html>
