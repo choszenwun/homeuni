@@ -3,96 +3,422 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOMEUniversity</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>HOMEUniversity — Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary:#FDFCFA;--bg-sidebar:#F8F6F3;--bg-card:#FFFFFF;--bg-tier:#FAF9F7;
+            --text-primary:#1C1917;--text-secondary:#57534E;--text-tertiary:#A8A29E;--text-muted:#D6D3D1;
+            --accent-gold:#B8860B;--accent-gold-light:#D4A843;
+            --accent-gold-glow:rgba(184,134,11,0.08);--accent-gold-border:rgba(184,134,11,0.15);
+            --border-light:#ECEAE6;--border-subtle:#F0EEEA;
+            --font-display:'Cormorant Garamond',Georgia,serif;
+            --font-body:'DM Sans',-apple-system,sans-serif;
+            --font-mono:'JetBrains Mono',monospace;
+            --sidebar-width:300px;--content-max:780px;
+            --shadow-soft:0 1px 3px rgba(28,25,23,0.04);--shadow-glow:0 0 40px rgba(184,134,11,0.06);
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;font-size:16px}
+        body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+        ::selection{background:var(--accent-gold-glow);color:var(--accent-gold)}
+
+        .sidebar{width:var(--sidebar-width);background:var(--bg-sidebar);border-right:1px solid var(--border-light);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+        .sidebar::-webkit-scrollbar{width:4px}
+        .sidebar::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:4px}
+        .sidebar-logo{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--border-light)}
+        .sidebar-logo a{text-decoration:none;display:block;cursor:pointer}
+        .sidebar-logo h1{font-family:var(--font-display);font-size:1.3rem;font-weight:400;letter-spacing:.25em;color:var(--text-primary);text-transform:uppercase}
+        .logo-sub{font-family:var(--font-body);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-tertiary);margin-top:.25rem}
+        .sidebar-nav{flex:1;padding:1.5rem 0}
+        .nav-group{margin-bottom:1.5rem}
+        .nav-group-title{padding:.4rem 2rem;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--text-tertiary)}
+        .nav-link{display:block;padding:.65rem 2rem;font-size:.88rem;color:var(--text-secondary);text-decoration:none;cursor:pointer;transition:all .2s ease;position:relative;user-select:none}
+        .nav-link:hover{color:var(--text-primary);background:rgba(0,0,0,.02)}
+        .nav-link.active{color:var(--accent-gold);background:var(--accent-gold-glow)}
+        .nav-link.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent-gold)}
+        .nav-link .arrow{float:right;font-size:.7rem;transition:transform .25s ease;color:var(--text-tertiary)}
+        .nav-link.expanded .arrow{transform:rotate(90deg)}
+        .nav-dropdown{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+        .nav-dropdown.open{max-height:600px}
+        .nav-sub-link{display:block;padding:.5rem 2rem .5rem 2.8rem;font-size:.82rem;color:var(--text-tertiary);text-decoration:none;transition:all .2s ease;position:relative;cursor:pointer}
+        .nav-sub-link::before{content:'';position:absolute;left:2rem;top:50%;width:4px;height:1px;background:var(--text-muted)}
+        .nav-sub-link:hover{color:var(--text-primary)}
+        .nav-sub-link.active{color:var(--accent-gold)}
+        .nav-sub-link.active::before{background:var(--accent-gold);width:6px}
+        .nav-phase{padding:.6rem 2rem .35rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-muted);cursor:pointer;transition:color .2s;user-select:none}
+        .nav-phase:hover{color:var(--text-tertiary)}
+        .nav-phase-dropdown{max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(.4,0,.2,1)}
+        .nav-phase-dropdown.open{max-height:500px}
+        .sidebar-footer{padding:1.5rem 2rem;border-top:1px solid var(--border-light);font-size:.7rem;color:var(--text-muted);letter-spacing:.05em}
+
+        .mobile-header{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg-sidebar);border-bottom:1px solid var(--border-light);z-index:101;align-items:center;padding:0 1.5rem;justify-content:space-between}
+        .mobile-header h1{font-family:var(--font-display);font-size:1rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
+        .menu-toggle{width:36px;height:36px;background:none;border:1px solid var(--border-light);border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+        .menu-toggle span{width:18px;height:1.5px;background:var(--text-primary);transition:all .3s ease}
+        .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99;backdrop-filter:blur(2px)}
+        .overlay.active{display:block}
+
+        .main{margin-left:var(--sidebar-width);flex:1;min-height:100vh}
+        .page{display:none}.page.active{display:block}
+
+        .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(184,134,11,.04) 0%,transparent 70%);pointer-events:none}
+        .hero-icon{width:120px;height:120px;margin-bottom:3rem;opacity:0;animation:fadeFloat 1.2s ease-out .3s forwards}
+        .hero-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;letter-spacing:.08em;color:var(--text-primary);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease-out .6s forwards}
+        .hero-divider{width:60px;height:1px;background:var(--accent-gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease-out .8s forwards}
+        .hero-subtitle{font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--text-secondary);letter-spacing:.04em;line-height:1.8;max-width:480px;opacity:0;animation:fadeUp .8s ease-out 1s forwards}
+        .hero-cta{margin-top:3rem;opacity:0;animation:fadeUp .8s ease-out 1.2s forwards}
+        .hero-cta button{display:inline-block;padding:.85rem 2.5rem;font-family:var(--font-body);font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-gold);border:1px solid var(--accent-gold-border);border-radius:2px;transition:all .3s ease;background:none;cursor:pointer}
+        .hero-cta button:hover{background:var(--accent-gold);color:#fff;box-shadow:var(--shadow-glow)}
+
+        .page-content{max-width:var(--content-max);margin:0 auto;padding:5rem 3rem 6rem}
+        .module-header{margin-bottom:4rem;padding-bottom:3rem;border-bottom:1px solid var(--border-light)}
+        .module-label{font-family:var(--font-body);font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:1rem}
+        .module-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;letter-spacing:.04em;color:var(--text-primary);margin-bottom:1.25rem;line-height:1.2}
+        .module-stack{font-family:var(--font-mono);font-size:.72rem;color:var(--text-tertiary);line-height:1.8;padding:1.2rem 1.5rem;background:var(--bg-tier);border-radius:4px;border-left:2px solid var(--accent-gold-border);margin-bottom:1.5rem;white-space:pre-line}
+        .module-intro{font-size:1.02rem;color:var(--text-secondary);line-height:1.9}
+
+        .section-label{font-family:var(--font-body);font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:.5rem;margin-top:4rem}
+        .section-title{font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--text-primary);margin-bottom:1.5rem;letter-spacing:.02em}
+        .section-subtitle{font-family:var(--font-display);font-size:1.35rem;font-weight:400;color:var(--text-primary);margin-bottom:1rem;margin-top:2.5rem;letter-spacing:.02em}
+
+        .tier-nav{display:flex;gap:0;margin-top:4rem;margin-bottom:0;border-bottom:1px solid var(--border-light)}
+        .tier-tab{padding:.9rem 1.8rem;font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-tertiary);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .25s ease;position:relative;bottom:-1px}
+        .tier-tab:hover{color:var(--text-secondary)}
+        .tier-tab.active{color:var(--accent-gold);border-bottom-color:var(--accent-gold)}
+        .tier-content{display:none;padding-top:2.5rem;animation:fadeIn .4s ease}
+        .tier-content.active{display:block}
+
+        .prose{font-size:.98rem;color:var(--text-secondary);line-height:1.85}
+        .prose p{margin-bottom:1.4rem}
+        .prose strong{color:var(--text-primary);font-weight:600}
+        .prose em{font-style:italic;color:var(--text-primary)}
+
+        blockquote{margin:2rem 0;padding:1.2rem 1.8rem;border-left:2px solid var(--accent-gold);background:var(--accent-gold-glow);font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--text-primary);line-height:1.7;border-radius:0 4px 4px 0}
+        blockquote .cite{display:block;font-family:var(--font-body);font-size:.75rem;font-style:normal;color:var(--text-tertiary);margin-top:.6rem;letter-spacing:.05em}
+
+        .callout{margin:2rem 0;padding:1.5rem 1.8rem;background:var(--bg-tier);border:1px solid var(--border-subtle);border-radius:4px}
+        .callout-gold{border-left:2px solid var(--accent-gold);background:var(--accent-gold-glow)}
+        .callout-title{font-family:var(--font-body);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:.7rem}
+        .callout p{font-size:.92rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+
+        .protocol{margin:2rem 0;padding:1.8rem 2rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:6px;box-shadow:var(--shadow-soft)}
+        .protocol-number{font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--accent-gold-light);line-height:1;margin-bottom:.5rem}
+        .protocol-title{font-family:var(--font-body);font-size:.95rem;font-weight:600;color:var(--text-primary);margin-bottom:.8rem}
+        .protocol p,.protocol li{font-size:.9rem;color:var(--text-secondary);line-height:1.7}
+        .protocol ul{list-style:none;padding:0;margin:.5rem 0}
+        .protocol ul li{padding:.3rem 0 .3rem 1.2rem;position:relative}
+        .protocol ul li::before{content:'—';position:absolute;left:0;color:var(--text-muted)}
+
+        .ai-prompt{margin:2.5rem 0;padding:1.8rem 2rem;background:var(--text-primary);color:#E7E5E4;border-radius:6px;font-family:var(--font-mono);font-size:.8rem;line-height:1.8;white-space:pre-wrap;position:relative;overflow:hidden}
+        .ai-prompt::before{content:'AI PROMPT';position:absolute;top:0;right:0;padding:.4rem 1rem;font-family:var(--font-body);font-size:.55rem;font-weight:600;letter-spacing:.2em;color:var(--accent-gold);background:rgba(184,134,11,.1);border-radius:0 6px 0 4px}
+
+        .progress-section{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border-light)}
+        .progress-bar-container{width:100%;height:3px;background:var(--border-light);border-radius:3px;margin:1rem 0 .5rem;overflow:hidden}
+        .progress-bar{height:100%;background:var(--accent-gold);border-radius:3px;transition:width .6s ease}
+        .progress-label{font-size:.72rem;color:var(--text-tertiary);letter-spacing:.05em}
+
+        .next-module{margin-top:3rem;padding:2rem 2.5rem;background:var(--bg-tier);border:1px solid var(--border-subtle);border-radius:6px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:all .3s ease;cursor:pointer}
+        .next-module:hover{border-color:var(--accent-gold-border);box-shadow:var(--shadow-glow)}
+        .next-module-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:.3rem}
+        .next-module-title{font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--text-primary)}
+        .next-module-arrow{font-size:1.5rem;color:var(--accent-gold);transition:transform .3s ease}
+        .next-module:hover .next-module-arrow{transform:translateX(4px)}
+
+        .heroes-journey{margin-top:3rem;padding:2rem;background:var(--bg-tier);border-radius:6px;border:1px solid var(--border-subtle)}
+        .heroes-journey-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
+        .heroes-journey-title{font-family:var(--font-display);font-size:1.2rem;font-weight:400;color:var(--text-primary);margin-bottom:.8rem}
+        .heroes-journey p{font-size:.88rem;color:var(--text-tertiary);line-height:1.7}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeFloat{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        @media(max-width:1024px){
+            .sidebar{transform:translateX(-100%)}
+            .sidebar.open{transform:translateX(0)}
+            .mobile-header{display:flex!important}
+            .main{margin-left:0;padding-top:60px}
+            .hero{min-height:calc(100vh - 60px)}
+            .page-content{padding:3rem 1.5rem 4rem}
+        }
+        @media(max-width:600px){
+            .page-content{padding:2.5rem 1.2rem 3rem}
+            .tier-tab{padding:.8rem 1.2rem;font-size:.65rem;white-space:nowrap}
+            .next-module{flex-direction:column;align-items:flex-start;gap:1rem}
+        }
+    </style>
 </head>
 <body>
 
-    <!-- MOBILE HEADER -->
-    <header class="mobile-header">
-        <h1>HOMEUniversity</h1>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </header>
-    <div class="overlay"></div>
+<header class="mobile-header">
+    <h1>HOMEUniversity</h1>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="overlay"></div>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <a href="index.html">
-                <h1>HOMEUniversity</h1>
-                <div class="logo-sub">Consciousness Resource</div>
-            </a>
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <a onclick="showPage('home')">
+            <h1>HOMEUniversity</h1>
+            <div class="logo-sub">Consciousness Resource</div>
+        </a>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <div class="nav-group-title">Course</div>
+            <div class="nav-link" id="wp-toggle" onclick="toggleDD('whitepill-dd')">Whitepill <span class="arrow">›</span></div>
+            <div class="nav-dropdown" id="whitepill-dd">
+                <div class="nav-phase" onclick="toggleDD('phase1-dd')">Phase 1 — Foundation</div>
+                <div class="nav-phase-dropdown" id="phase1-dd">
+                    <a class="nav-sub-link" onclick="showPage('home')">Introduction</a>
+                    <a class="nav-sub-link" id="nav-level0" onclick="showPage('level0')">Level 0 · Foundations</a>
+                    <a class="nav-sub-link dim">Level 1 · Discernment</a>
+                    <a class="nav-sub-link dim">Level 2 · Words Are Spells</a>
+                    <a class="nav-sub-link dim">Level 3 · Sex Energy</a>
+                    <a class="nav-sub-link dim">Level 4 · Power & Ethics</a>
+                    <a class="nav-sub-link dim">Level 5 · AI as Alchemy</a>
+                </div>
+                <div class="nav-phase" onclick="toggleDD('phase2-dd')">Phase 2 — Consciousness</div>
+                <div class="nav-phase-dropdown" id="phase2-dd">
+                    <a class="nav-sub-link dim">Level 6 · What Is Consciousness</a>
+                    <a class="nav-sub-link dim">Level 7 · Alchemy</a>
+                    <a class="nav-sub-link dim">Level 8 · Manifestation</a>
+                </div>
+                <div class="nav-phase" style="color:var(--text-muted);cursor:default;opacity:.5">Phase 3 — Coming Soon</div>
+            </div>
         </div>
+        <div class="nav-group">
+            <div class="nav-group-title">More</div>
+            <a class="nav-link dim">Musicpill</a>
+            <a class="nav-link dim">Glossary</a>
+        </div>
+    </nav>
+    <div class="sidebar-footer">© HOMEUniversity 2026</div>
+</aside>
 
-        <nav class="sidebar-nav">
-            <!-- WHITEPILL COURSE -->
-            <div class="nav-group">
-                <div class="nav-group-title">Course</div>
+<main class="main">
 
-                <div class="nav-link" data-toggle="whitepill-dropdown">
-                    Whitepill
-                    <span class="arrow">›</span>
-                </div>
+<!-- ═══════ HOME ═══════ -->
+<div class="page active" id="page-home">
+    <section class="hero">
+        <div class="hero-icon">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 20 L100 42 L100 82 L60 104 L20 82 L20 42 Z" fill="none" stroke="#B8860B" stroke-width=".8" opacity=".3"/>
+                <path d="M60 20 L100 42 L60 62 L20 42 Z" fill="rgba(184,134,11,.04)" stroke="#B8860B" stroke-width=".8" opacity=".5"/>
+                <path d="M60 62 L100 42 L100 82 L60 104 Z" fill="rgba(184,134,11,.02)" stroke="#B8860B" stroke-width=".8" opacity=".4"/>
+                <path d="M60 62 L20 42 L20 82 L60 104 Z" fill="rgba(184,134,11,.06)" stroke="#B8860B" stroke-width=".8" opacity=".35"/>
+                <line x1="60" y1="62" x2="60" y2="104" stroke="#B8860B" stroke-width=".5" opacity=".3"/>
+            </svg>
+        </div>
+        <h2 class="hero-title">HOMEUniversity</h2>
+        <div class="hero-divider"></div>
+        <p class="hero-subtitle">A free educational consciousness resource.<br>Make yourself at home.</p>
+        <div class="hero-cta"><button onclick="showPage('level0')">Begin the Course</button></div>
+    </section>
+</div>
 
-                <div class="nav-dropdown" id="whitepill-dropdown">
-                    <!-- Phase 1 -->
-                    <div class="nav-phase" data-toggle="phase1">Phase 1 — Foundation</div>
-                    <div class="nav-phase-dropdown" id="phase1">
-                        <a href="intro.html" class="nav-sub-link">Introduction</a>
-                        <a href="level0.html" class="nav-sub-link">Level 0 · Foundations</a>
-                        <a href="level1.html" class="nav-sub-link">Level 1 · Discernment</a>
-                        <a href="level2.html" class="nav-sub-link">Level 2 · Words Are Spells</a>
-                        <a href="level3.html" class="nav-sub-link">Level 3 · Sex Energy</a>
-                        <a href="level4.html" class="nav-sub-link">Level 4 · Power & Ethics</a>
-                        <a href="level5.html" class="nav-sub-link">Level 5 · AI as Alchemy</a>
-                    </div>
+<!-- ═══════ LEVEL 0 ═══════ -->
+<div class="page" id="page-level0">
+<div class="page-content">
 
-                    <!-- Phase 2 -->
-                    <div class="nav-phase" data-toggle="phase2">Phase 2 — Consciousness</div>
-                    <div class="nav-phase-dropdown" id="phase2">
-                        <a href="level6.html" class="nav-sub-link">Level 6 · What Is Consciousness</a>
-                        <a href="level7.html" class="nav-sub-link">Level 7 · Alchemy</a>
-                        <a href="level8.html" class="nav-sub-link">Level 8 · Manifestation</a>
-                    </div>
+    <header class="module-header">
+        <div class="module-label">Module 0</div>
+        <h1 class="module-title">Foundations</h1>
+        <div class="module-stack">MODULE 0: FOUNDATIONS
+  ↑
+= CLEAN VESSEL</div>
+        <p class="module-intro">You're starting at the foundation. Everything builds from here. By the end of this module, your vessel will be optimized — your physical and mental foundation sharpened. You'll be ready to ascend.</p>
+    </header>
 
-                    <!-- Phase 3 -->
-                    <div class="nav-phase" style="color: var(--text-muted); cursor: default;">Phase 3 — Coming Soon</div>
-                </div>
-            </div>
-
-            <!-- MUSICPILL -->
-            <div class="nav-group">
-                <div class="nav-group-title">More</div>
-                <a href="musicpill.html" class="nav-link">Musicpill</a>
-                <a href="glossary.html" class="nav-link">Glossary</a>
-            </div>
+    <div class="tier-section">
+        <nav class="tier-nav">
+            <button class="tier-tab active" data-tier="normie">Normie</button>
+            <button class="tier-tab" data-tier="ascending">Ascending</button>
+            <button class="tier-tab" data-tier="master">Master</button>
         </nav>
 
-        <div class="sidebar-footer">
-            © HOMEUniversity 2026
-        </div>
-    </aside>
+        <!-- NORMIE -->
+        <div class="tier-content active" data-tier-content="normie"><div class="prose">
+            <div class="section-label">What This Course Is</div>
+            <h2 class="section-title">What This Course Is (And Isn't)</h2>
+            <p>This course isn't a get-rich-quick scheme, empty promises, or strict business blueprints. It isn't a quick fix — though the fixes deploy <em>rapidly</em> in your mind once you execute.</p>
+            <p>This <strong>is</strong> consciousness elevation. Studying the laws of reality that govern your existence. Showing you your true nature and potential. The secrets of the universe, compressed.</p>
+            <p>Take what resonates. Leave what doesn't. This is about personal empowerment.</p>
+            <div class="callout callout-gold"><div class="callout-title">Key Insight</div><p>When you achieve maximum potential for <em>yourself</em>, it actually benefits <em>others</em> even more. It's a self-fulfilling prophecy — this is how evolution functions.</p></div>
 
-    <!-- MAIN -->
-    <main class="main">
-        <section class="hero">
-            <div class="hero-cube">
-                <img src="images/cube.png" alt="HOMEUniversity">
-            </div>
-            <h2 class="hero-title">HOMEUniversity</h2>
-            <div class="hero-divider"></div>
-            <p class="hero-subtitle">
-                A free educational consciousness resource.<br>
-                Make yourself at home.
-            </p>
-            <div class="hero-cta">
-                <a href="intro.html">Begin the Course</a>
-            </div>
-        </section>
-    </main>
+            <h3 class="section-subtitle">What You'll Gain</h3>
+            <p>If you apply what's here, this is <strong>guaranteed</strong>: deeper appreciation for nature, art, and God. Synchronicities beyond your current belief. Fearless self-expression. Fearless pursuit of truth. More energy. More <em>life</em>.</p>
 
-    <script src="nav.js"></script>
+            <h3 class="section-subtitle">You Are the Chosen One</h3>
+            <p>Who chose the Chosen Ones? <strong>They chose themselves.</strong> They remembered the great secret — the source of all energy is you. It is <em>within</em>.</p>
+            <blockquote>The universe is a song. It's a frequency. Everything is made of sound waves. Nikola Tesla knew this.</blockquote>
+
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Three-Tier Delivery System</h2>
+            <p>Every concept is explained at three levels: <strong>Normie</strong> (practical), <strong>Ascending</strong> (pattern recognition), and <strong>Master</strong> (mathematical/archetypal). You ascend <em>across</em> modules (x-axis), <em>within</em> each module (y-axis), and <em>through time</em> with others (z-axis). Triple compounding.</p>
+
+            <div class="section-label">Foundation</div>
+            <h2 class="section-title">Everything Vibrates</h2>
+            <blockquote>"If you want to understand the universe, think in terms of energy, frequency, and vibration."<span class="cite">— Nikola Tesla</span></blockquote>
+            <p>He wasn't being poetic. He was being <em>precise</em>. Everything — matter, thoughts, emotions, words — operates at different frequencies. <strong>High frequency</strong> = clarity, power, health, abundance. <strong>Low frequency</strong> = confusion, weakness, disease, scarcity.</p>
+
+            <h2 class="section-title">High Signal, Low Noise</h2>
+            <p>Target what needs doing, even if it's hard. Most people get lost in noise. <strong>High signal</strong> = surgical focus on what actually moves the needle. What's the <em>one thing</em> you could do today that would make everything else easier?</p>
+
+            <h2 class="section-title">Reading</h2>
+            <p>When you read, you're scanning for <em>frequency</em>, not just information. Some books paint a world in your mind that AI summaries will never replace. It's important for your brain to read, every day if you can.</p>
+
+            <h2 class="section-title">Consumption vs. Co-Creation</h2>
+            <p>Find what you want to build, be, or do — and bring it forth. Your greatest gift isn't what you <em>gain</em> from the world, but what you <em>give to it</em>. You're the chosen one. When you choose yourself, reality does too.</p>
+
+            <h2 class="section-title">Facts Over Feelings</h2>
+            <p>Align with objective reality. Better tools = more leverage. Don't cope. Material mastery is part of the journey.</p>
+            <div class="callout callout-gold"><div class="callout-title">Core Principle</div><p><strong>Take the advantage. Always.</strong> Every situation has leverage if you look for it.</p></div>
+
+            <h2 class="section-title">Sleep</h2>
+            <p>Sleep is a performance-enhancing drug. <strong>REM sleep</strong> handles memory consolidation, emotional regulation, and creative problem-solving. <strong>Deep sleep</strong> handles physical recovery, hormone regulation, and immune strengthening.</p>
+            <p>Protocols: blackout curtains, eye mask, earplugs, red light glasses, reading before bed, cutting late caffeine. Reality-test what works. <strong>Command sleep:</strong> Mind over matter. Practice first-person visualization of being asleep.</p>
+
+            <h2 class="section-title">Material Goods</h2>
+            <p>Optimizing for beauty, intelligence, and class. <strong>Kindle</strong> — better retention. <strong>Watch</strong> — becomes a talisman. <strong>Phone/Laptop</strong> — fast processor essential. <strong>Noise-cancelling headphones</strong> — protect your awareness.</p>
+
+            <h2 class="section-title">Desire</h2>
+            <p>Buddhism shows us pure awareness. But that doesn't mean you need to be free from desire your whole life. When you desire something from genuine goodness — follow it. Being the best version of yourself is a good desire for you <em>and</em> those around you.</p>
+        </div></div>
+
+        <!-- ASCENDING -->
+        <div class="tier-content" data-tier-content="ascending"><div class="prose">
+            <div class="section-label">The Mechanism</div>
+            <h2 class="section-title">Why Vessel Optimization Compounds</h2>
+            <p>You can't build a skyscraper on a weak foundation. If your body is depleted, your <em>mind</em> can't operate at full capacity.</p>
+            <p><strong>Negative spiral:</strong> Sleep deprivation → impaired PFC → worse decisions. Poor diet → inflammation → brain fog. No optimization → low testosterone, dopamine → no drive.</p>
+            <p><strong>Positive spiral:</strong> Quality sleep → stronger PFC → better decisions. Clean diet → clarity, energy. Physical optimization → drive, focus, execution.</p>
+            <div class="callout callout-gold"><div class="callout-title">The Compound Effect</div><p>Every optimization stacks. Sleep + Diet + Tools + Goals = <strong>exponential</strong> improvement, not linear.</p></div>
+
+            <h2 class="section-title">Reticular Activating System (RAS)</h2>
+            <p>Your brain filters <strong>11 million bits</strong> per second. You process ~40. Your RAS decides what to show you based on what you <em>focus on</em>. Buy a red car → see red cars everywhere. Set a financial goal → notice aligned opportunities. Your internal dialogue <strong>programs your perception filter</strong>.</p>
+
+            <h2 class="section-title">Building</h2>
+            <p><strong>Ego-driven desire</strong> (scarcity, grasping) = suffering. <strong>Soul-aligned desire</strong> (building, creating, serving) = fulfillment. We're not suppressing desire — we're <em>refining</em> it.</p>
+        </div></div>
+
+        <!-- MASTER -->
+        <div class="tier-content" data-tier-content="master"><div class="prose">
+            <div class="section-label">The Deep Pattern</div>
+            <h2 class="section-title">Foundation as Frequency</h2>
+            <p>Everything you've read isn't just practical advice. It's <em>frequency optimization</em>. Sleep well → raise baseline frequency. Eat clean → reduce density. Eliminate distractions → increase signal clarity. Achieve goals → frequency acceleration.</p>
+            <div class="callout callout-gold"><div class="callout-title">The Physics</div><p>Reality responds to <strong>frequency</strong>. High-frequency beings attract high-frequency opportunities. Low-frequency beings attract chaos. Foundation work = frequency work.</p></div>
+            <p>You're not just "getting your life together." You're tuning your instrument so you can play the symphony.</p>
+
+            <h2 class="section-title">Convergence Across Traditions</h2>
+            <blockquote>"First, say to yourself what you would be; then do what you have to do."<span class="cite">— Epictetus (Stoicism)</span></blockquote>
+            <blockquote>"Everyone who hears these words of mine and puts them into practice is like a wise man who built his house on the rock."<span class="cite">— Matthew 7:24</span></blockquote>
+            <blockquote>"As above, so below."<span class="cite">— The Kybalion (Hermeticism)</span></blockquote>
+            <blockquote>"A journey of a thousand miles begins with a single step."<span class="cite">— Lao Tzu (Daoism)</span></blockquote>
+            <div class="callout"><div class="callout-title">The Universal Pattern</div><p>Every path teaches: you can't skip foundation. Material reality mastery → consciousness mastery. Not the other way around.</p></div>
+        </div></div>
+    </div>
+
+    <!-- PROTOCOLS -->
+    <div class="section-label reveal">Protocols</div>
+    <h2 class="section-title reveal">Quick Actions — This Week</h2>
+
+    <div class="protocol reveal"><div class="protocol-number">01</div><div class="protocol-title">Sleep Optimization (Tonight)</div><ul><li>Blackout curtains + eye mask</li><li>Track sleep quality (1–10) for 7 days</li><li>Adjust based on results</li></ul></div>
+    <div class="protocol reveal"><div class="protocol-number">02</div><div class="protocol-title">Eliminate One Draining Input</div><ul><li>Identify one thing depleting you</li><li>Cut it for 7 days</li><li>Notice the energy shift</li></ul></div>
+    <div class="protocol reveal"><div class="protocol-number">03</div><div class="protocol-title">Material Upgrade</div><ul><li>Choose one item from the recommendations</li><li>If budget allows — get it this week</li><li>If not — save toward it, set the goal</li></ul></div>
+    <div class="protocol reveal"><div class="protocol-number">04</div><div class="protocol-title">Goal Setting</div><ul><li>Write down one small goal (achievable this week)</li><li>Accomplish it before setting the next</li><li>Track: did you follow through?</li></ul></div>
+    <div class="protocol reveal"><div class="protocol-number">05</div><div class="protocol-title">Basic Meditation</div><p>Sit up straight. Eyes closed. Silence. 10 minutes. Notice the racing thoughts. As you improve, you'll ascend above the thought stream to a higher state of awareness.</p></div>
+
+    <!-- AI PROMPT -->
+    <div class="section-label reveal">AI Prompt</div>
+    <h2 class="section-title reveal">Use This with Claude or ChatGPT</h2>
+    <div class="ai-prompt reveal">I'm on Module 0 of GIGAPILL — a consciousness ascension course by HOMEUniversity (Foundations — vessel optimization).
+
+I'm working on: [your focus]
+My biggest challenge right now: [your challenge]
+
+Help me:
+1. Create a personalized plan for this week
+2. Reality test my approach (am I on track?)
+3. Ask me a question I haven't asked myself
+
+Respond from: I CAN optimize my foundation.
+Small changes compound. Clarity is my birthright.</div>
+
+    <!-- QUOTES -->
+    <div class="section-label reveal">Mind Prompts</div>
+    <h2 class="section-title reveal">Brain-Activating Quotes</h2>
+    <blockquote class="reveal">"The impediment to action advances action. What stands in the way becomes the way."<span class="cite">— Marcus Aurelius</span></blockquote>
+    <blockquote class="reveal">"If you want to find the secrets of the universe, think in terms of energy, frequency, and vibration."<span class="cite">— Nikola Tesla</span></blockquote>
+
+    <!-- PROGRESS -->
+    <div class="progress-section reveal">
+        <div class="section-label">Progress</div>
+        <h2 class="section-title">Module Complete</h2>
+        <div class="prose"><p>You've integrated <strong>Foundations</strong> — how the course works, that everything vibrates, high signal over noise, vessel optimization, and facts over feelings.</p></div>
+        <div class="progress-bar-container"><div class="progress-bar" style="width:6.7%"></div></div>
+        <div class="progress-label">6.7% complete — 1 of 15 modules</div>
+        <p style="margin-top:1.5rem;font-size:.92rem;color:var(--text-secondary)">Your vessel is <strong>clean</strong>.</p>
+    </div>
+
+    <div class="next-module reveal" onclick="alert('Level 1 · Discernment — coming next!')">
+        <div><div class="next-module-label">Next Module</div><div class="next-module-title">Level 1 · Discernment</div></div>
+        <div class="next-module-arrow">→</div>
+    </div>
+
+    <div class="heroes-journey reveal">
+        <div class="heroes-journey-label">Hero's Journey — Optional</div>
+        <div class="heroes-journey-title">Ordinary World (Age 0–12)</div>
+        <p>I was here as a kid — dreaming, carefree, happy. Rockstar mindset. Very confident. Loved music, extroverted. Up until around age 12–13. Next stage: "Call to Adventure" (Module 1).</p>
+    </div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+id)?.classList.add('active');
+    window.scrollTo(0,0);
+    document.querySelectorAll('.nav-sub-link').forEach(l=>l.classList.remove('active'));
+    document.getElementById('nav-'+id)?.classList.add('active');
+    document.querySelector('.sidebar').classList.remove('open');
+    document.querySelector('.overlay').classList.remove('active');
+    initReveal();
+}
+function toggleDD(id){
+    const el=document.getElementById(id);
+    if(el)el.classList.toggle('open');
+    if(id==='whitepill-dd')document.getElementById('wp-toggle')?.classList.toggle('expanded');
+}
+document.querySelectorAll('.tier-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+        const s=tab.closest('.tier-section'),t=tab.dataset.tier;
+        s.querySelectorAll('.tier-tab').forEach(x=>x.classList.remove('active'));
+        s.querySelectorAll('.tier-content').forEach(x=>x.classList.remove('active'));
+        tab.classList.add('active');
+        s.querySelector(`[data-tier-content="${t}"]`)?.classList.add('active');
+    });
+});
+document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.querySelector('.overlay').classList.toggle('active');
+});
+document.querySelector('.overlay')?.addEventListener('click',()=>{
+    document.querySelector('.sidebar').classList.remove('open');
+    document.querySelector('.overlay').classList.remove('active');
+});
+function initReveal(){
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+initReveal();
+</script>
 </body>
 </html>
