@@ -6,540 +6,317 @@
     <title>HOMEUniversity</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary:#FDFCFA;--bg-sidebar:#F8F6F3;--bg-card:#FFFFFF;--bg-tier:#FAF9F7;
-            --text-primary:#1C1917;--text-secondary:#57534E;--text-tertiary:#A8A29E;--text-muted:#D6D3D1;
-            --accent:#B8860B;--accent-light:#D4A843;
-            --accent-glow:rgba(184,134,11,0.08);--accent-border:rgba(184,134,11,0.15);
-            --border-light:#ECEAE6;--border-subtle:#F0EEEA;
-            --font-display:'Cormorant Garamond',Georgia,serif;
-            --font-body:'DM Sans',-apple-system,sans-serif;
-            --font-mono:'JetBrains Mono',monospace;
-            --sidebar-width:300px;--content-max:780px;
-            --shadow-soft:0 1px 3px rgba(28,25,23,0.04);--shadow-glow:0 0 40px rgba(184,134,11,0.06);
-        }
+        :root{--bg:#FDFCFA;--bg-side:#F8F6F3;--bg-card:#FFFFFF;--bg-tier:#FAF9F7;--t1:#1C1917;--t2:#57534E;--t3:#A8A29E;--tm:#D6D3D1;--ac:#B8860B;--ac-l:#D4A843;--ac-g:rgba(184,134,11,.08);--ac-b:rgba(184,134,11,.15);--bl:#ECEAE6;--bs:#F0EEEA;--fd:'Cormorant Garamond',Georgia,serif;--fb:'DM Sans',-apple-system,sans-serif;--fm:'JetBrains Mono',monospace;--sw:300px;--cw:780px;--ss:0 1px 3px rgba(28,25,23,.04);--sg:0 0 40px rgba(184,134,11,.06)}
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;font-size:16px}
-        body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
-        ::selection{background:var(--accent-glow);color:var(--accent)}
+        body{font-family:var(--fb);background:var(--bg);color:var(--t1);line-height:1.7;display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+        ::selection{background:var(--ac-g);color:var(--ac)}
 
-        /* ═══ SIDEBAR ═══ */
-        .sidebar{width:var(--sidebar-width);background:var(--bg-sidebar);border-right:1px solid var(--border-light);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.4,0,.2,1)}
-        .sidebar::-webkit-scrollbar{width:4px}
-        .sidebar::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:4px}
-        .sidebar-logo{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--border-light)}
-        .sidebar-logo a{text-decoration:none;display:block;cursor:pointer}
-        .sidebar-logo h1{font-family:var(--font-display);font-size:1.3rem;font-weight:400;letter-spacing:.25em;color:var(--text-primary);text-transform:uppercase}
-        .logo-sub{font-family:var(--font-body);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-tertiary);margin-top:.25rem}
-        .sidebar-nav{flex:1;padding:1.5rem 0}
-        .nav-group{margin-bottom:1.5rem}
-        .nav-group-title{padding:.4rem 2rem;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--text-tertiary)}
-        .nav-link{display:block;padding:.65rem 2rem;font-size:.88rem;color:var(--text-secondary);text-decoration:none;cursor:pointer;transition:all .2s ease;position:relative;user-select:none}
-        .nav-link:hover{color:var(--text-primary);background:rgba(0,0,0,.02)}
-        .nav-link.active{color:var(--accent);background:var(--accent-glow)}
-        .nav-link.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent)}
-        .nav-link .arrow{float:right;font-size:.7rem;transition:transform .25s ease;color:var(--text-tertiary)}
-        .nav-link.expanded .arrow{transform:rotate(90deg)}
-        .nav-dropdown{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
-        .nav-dropdown.open{max-height:600px}
-        .nav-sub-link{display:block;padding:.5rem 2rem .5rem 2.8rem;font-size:.82rem;color:var(--text-tertiary);text-decoration:none;transition:all .2s ease;position:relative;cursor:pointer}
-        .nav-sub-link::before{content:'';position:absolute;left:2rem;top:50%;width:4px;height:1px;background:var(--text-muted)}
-        .nav-sub-link:hover{color:var(--text-primary)}
-        .nav-sub-link.active{color:var(--accent)}
-        .nav-sub-link.active::before{background:var(--accent);width:6px}
-        .nav-sub-link.dim{opacity:.45;cursor:default}
-        .nav-sub-link.dim:hover{color:var(--text-tertiary)}
-        .nav-phase{padding:.6rem 2rem .35rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-muted);cursor:pointer;transition:color .2s;user-select:none}
-        .nav-phase:hover{color:var(--text-tertiary)}
-        .nav-phase-dropdown{max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(.4,0,.2,1)}
-        .nav-phase-dropdown.open{max-height:500px}
-        .sidebar-footer{padding:1.5rem 2rem;border-top:1px solid var(--border-light);font-size:.7rem;color:var(--text-muted);letter-spacing:.05em}
+        /* SIDEBAR */
+        .sidebar{width:var(--sw);background:var(--bg-side);border-right:1px solid var(--bl);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+        .sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:var(--tm);border-radius:4px}
+        .s-logo{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--bl)}
+        .s-logo a{text-decoration:none;display:block;cursor:pointer}
+        .s-logo h1{font-family:var(--fd);font-size:1.3rem;font-weight:400;letter-spacing:.25em;color:var(--t1);text-transform:uppercase}
+        .s-logo .sub{font-family:var(--fb);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--t3);margin-top:.25rem}
+        .s-nav{flex:1;padding:1.5rem 0}
+        .ng{margin-bottom:1.5rem}
+        .ng-t{padding:.4rem 2rem;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--t3)}
+        .nl{display:block;padding:.65rem 2rem;font-size:.88rem;color:var(--t2);text-decoration:none;cursor:pointer;transition:all .2s;position:relative;user-select:none}
+        .nl:hover{color:var(--t1);background:rgba(0,0,0,.02)}
+        .nl.active{color:var(--ac);background:var(--ac-g)}
+        .nl.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ac)}
+        .nl .arr{float:right;font-size:.7rem;transition:transform .25s;color:var(--t3)}
+        .nl.exp .arr{transform:rotate(90deg)}
+        .ndd{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+        .ndd.open{max-height:600px}
+        .nsl{display:block;padding:.5rem 2rem .5rem 2.8rem;font-size:.82rem;color:var(--t3);text-decoration:none;transition:all .2s;position:relative;cursor:pointer}
+        .nsl::before{content:'';position:absolute;left:2rem;top:50%;width:4px;height:1px;background:var(--tm)}
+        .nsl:hover{color:var(--t1)}.nsl.active{color:var(--ac)}.nsl.active::before{background:var(--ac);width:6px}
+        .nsl.dim{opacity:.45;cursor:default}.nsl.dim:hover{color:var(--t3)}
+        .s-foot{padding:1.5rem 2rem;border-top:1px solid var(--bl);font-size:.7rem;color:var(--tm);letter-spacing:.05em}
 
-        /* ═══ MOBILE ═══ */
-        .mobile-header{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg-sidebar);border-bottom:1px solid var(--border-light);z-index:101;align-items:center;padding:0 1.5rem;justify-content:space-between}
-        .mobile-header h1{font-family:var(--font-display);font-size:1rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
-        .menu-toggle{width:36px;height:36px;background:none;border:1px solid var(--border-light);border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-        .menu-toggle span{width:18px;height:1.5px;background:var(--text-primary);transition:all .3s ease}
-        .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99;backdrop-filter:blur(2px)}
-        .overlay.active{display:block}
+        /* MOBILE */
+        .mh{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg-side);border-bottom:1px solid var(--bl);z-index:101;align-items:center;padding:0 1.5rem;justify-content:space-between}
+        .mh h1{font-family:var(--fd);font-size:1rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
+        .mt{width:36px;height:36px;background:none;border:1px solid var(--bl);border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+        .mt span{width:18px;height:1.5px;background:var(--t1)}
+        .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99;backdrop-filter:blur(2px)}.ov.active{display:block}
 
-        /* ═══ MAIN ═══ */
-        .main{margin-left:var(--sidebar-width);flex:1;min-height:100vh}
+        /* MAIN */
+        .main{margin-left:var(--sw);flex:1;min-height:100vh}
         .page{display:none}.page.active{display:block}
 
-        /* ═══ HERO ═══ */
+        /* HERO */
         .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
         .hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(184,134,11,.04) 0%,transparent 70%);pointer-events:none}
-        .hero-icon{width:120px;height:120px;margin-bottom:3rem;opacity:0;animation:fadeFloat 1.2s ease-out .3s forwards}
-        .hero-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;letter-spacing:.08em;color:var(--text-primary);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease-out .6s forwards}
-        .hero-divider{width:60px;height:1px;background:var(--accent);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease-out .8s forwards}
-        .hero-subtitle{font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--text-secondary);letter-spacing:.04em;line-height:1.8;max-width:520px;opacity:0;animation:fadeUp .8s ease-out 1s forwards}
-        .hero-cta{margin-top:3rem;opacity:0;animation:fadeUp .8s ease-out 1.2s forwards;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-        .btn{display:inline-block;padding:.85rem 2.5rem;font-family:var(--font-body);font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s ease;cursor:pointer;border:1px solid var(--accent-border)}
-        .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-        .btn-primary:hover{background:#9A7209;box-shadow:var(--shadow-glow)}
-        .btn-ghost{background:none;color:var(--accent)}
-        .btn-ghost:hover{background:var(--accent);color:#fff}
+        .h-icon{width:120px;height:120px;margin-bottom:3rem;opacity:0;animation:ff 1.2s ease-out .3s forwards}
+        .h-title{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;letter-spacing:.08em;color:var(--t1);margin-bottom:1.5rem;opacity:0;animation:fu .8s ease-out .6s forwards}
+        .h-div{width:60px;height:1px;background:var(--ac);margin-bottom:1.5rem;opacity:0;animation:fu .8s ease-out .8s forwards}
+        .h-sub{font-family:var(--fb);font-size:1.05rem;font-weight:300;color:var(--t2);letter-spacing:.04em;line-height:1.8;max-width:520px;opacity:0;animation:fu .8s ease-out 1s forwards}
+        .h-cta{margin-top:3rem;opacity:0;animation:fu .8s ease-out 1.2s forwards;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+        .btn{display:inline-block;padding:.85rem 2.5rem;font-family:var(--fb);font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s;cursor:pointer;border:1px solid var(--ac-b)}
+        .btn-p{background:var(--ac);color:#fff;border-color:var(--ac)}.btn-p:hover{background:#9A7209;box-shadow:var(--sg)}
+        .btn-g{background:none;color:var(--ac)}.btn-g:hover{background:var(--ac);color:#fff}
 
-        /* ═══ CONTENT PAGES ═══ */
-        .page-content{max-width:var(--content-max);margin:0 auto;padding:5rem 3rem 6rem}
-        .page-header{margin-bottom:3.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border-light)}
-        .page-label{font-family:var(--font-body);font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-        .page-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;letter-spacing:.04em;color:var(--text-primary);margin-bottom:1.25rem;line-height:1.2}
-
-        .section-label{font-family:var(--font-body);font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;margin-top:3.5rem}
-        .section-title{font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--text-primary);margin-bottom:1.5rem;letter-spacing:.02em}
-        .section-subtitle{font-family:var(--font-display);font-size:1.35rem;font-weight:400;color:var(--text-primary);margin-bottom:1rem;margin-top:2.5rem;letter-spacing:.02em}
-
-        .prose{font-size:.98rem;color:var(--text-secondary);line-height:1.85}
+        /* CONTENT */
+        .pc{max-width:var(--cw);margin:0 auto;padding:5rem 3rem 6rem}
+        .ph{margin-bottom:3.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--bl)}
+        .pl{font-family:var(--fb);font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--ac);margin-bottom:1rem}
+        .pt{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:300;letter-spacing:.04em;color:var(--t1);margin-bottom:1.25rem;line-height:1.2}
+        .sl{font-family:var(--fb);font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--ac);margin-bottom:.5rem;margin-top:3.5rem}
+        .st{font-family:var(--fd);font-size:1.8rem;font-weight:400;color:var(--t1);margin-bottom:1.5rem;letter-spacing:.02em}
+        .sst{font-family:var(--fd);font-size:1.35rem;font-weight:400;color:var(--t1);margin-bottom:1rem;margin-top:2.5rem;letter-spacing:.02em}
+        .prose{font-size:.98rem;color:var(--t2);line-height:1.85}
         .prose p{margin-bottom:1.4rem}
-        .prose strong{color:var(--text-primary);font-weight:600}
-        .prose em{font-style:italic;color:var(--text-primary)}
+        .prose strong{color:var(--t1);font-weight:600}
+        .prose em{font-style:italic;color:var(--t1)}
+        blockquote{margin:2rem 0;padding:1.2rem 1.8rem;border-left:2px solid var(--ac);background:var(--ac-g);font-family:var(--fd);font-size:1.1rem;font-style:italic;color:var(--t1);line-height:1.7;border-radius:0 4px 4px 0}
+        blockquote .ci{display:block;font-family:var(--fb);font-size:.75rem;font-style:normal;color:var(--t3);margin-top:.6rem;letter-spacing:.05em}
+        .co{margin:2rem 0;padding:1.5rem 1.8rem;background:var(--bg-tier);border:1px solid var(--bs);border-radius:4px}
+        .co-g{border-left:2px solid var(--ac);background:var(--ac-g)}
+        .co-t{font-family:var(--fb);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem}
+        .co p{font-size:.92rem;color:var(--t2);line-height:1.7;margin-bottom:0}
 
-        blockquote{margin:2rem 0;padding:1.2rem 1.8rem;border-left:2px solid var(--accent);background:var(--accent-glow);font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--text-primary);line-height:1.7;border-radius:0 4px 4px 0}
-        blockquote .cite{display:block;font-family:var(--font-body);font-size:.75rem;font-style:normal;color:var(--text-tertiary);margin-top:.6rem;letter-spacing:.05em}
+        /* COURSE MAP */
+        .cm{display:grid;gap:1rem;margin:2rem 0}
+        .cc{padding:1.5rem 1.8rem;background:var(--bg-card);border:1px solid var(--bl);border-radius:6px;cursor:pointer;transition:all .3s;text-decoration:none;display:block}
+        .cc:hover{border-color:var(--ac-b);box-shadow:var(--sg);transform:translateY(-1px)}
+        .cc.lk{opacity:.4;cursor:default;pointer-events:none}
+        .cc-n{font-family:var(--fd);font-size:1.6rem;font-weight:300;color:var(--ac-l);margin-bottom:.25rem}
+        .cc-ti{font-family:var(--fb);font-size:.95rem;font-weight:600;color:var(--t1);margin-bottom:.4rem}
+        .cc-d{font-size:.82rem;color:var(--t3);line-height:1.5}
+        .cc-b{display:inline-block;margin-top:.6rem;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);padding:.2rem .6rem;border:1px solid var(--bl);border-radius:2px}
 
-        .callout{margin:2rem 0;padding:1.5rem 1.8rem;background:var(--bg-tier);border:1px solid var(--border-subtle);border-radius:4px}
-        .callout-gold{border-left:2px solid var(--accent);background:var(--accent-glow)}
-        .callout-title{font-family:var(--font-body);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
-        .callout p{font-size:.92rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+        /* TIERS */
+        .tn{display:flex;gap:0;margin-top:3.5rem;border-bottom:1px solid var(--bl);flex-wrap:wrap}
+        .tt{padding:.9rem 1.3rem;font-family:var(--fb);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .25s;position:relative;bottom:-1px}
+        .tt:hover{color:var(--t2)}.tt.active{color:var(--ac);border-bottom-color:var(--ac)}
+        .tc{display:none;padding-top:2.5rem;animation:fi .4s ease}.tc.active{display:block}
 
-        /* ═══ COURSE MAP ═══ */
-        .course-map{display:grid;gap:1rem;margin:2rem 0}
-        .course-card{padding:1.5rem 1.8rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:6px;cursor:pointer;transition:all .3s ease;text-decoration:none;display:block}
-        .course-card:hover{border-color:var(--accent-border);box-shadow:var(--shadow-glow);transform:translateY(-1px)}
-        .course-card.locked{opacity:.4;cursor:default;pointer-events:none}
-        .course-card-num{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--accent-light);margin-bottom:.25rem}
-        .course-card-title{font-family:var(--font-body);font-size:.95rem;font-weight:600;color:var(--text-primary);margin-bottom:.4rem}
-        .course-card-desc{font-size:.82rem;color:var(--text-tertiary);line-height:1.5}
-        .course-card-badge{display:inline-block;margin-top:.6rem;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);padding:.2rem .6rem;border:1px solid var(--border-light);border-radius:2px}
+        /* PROTOCOLS */
+        .proto{margin:1.5rem 0;padding:1.8rem 2rem;background:var(--bg-card);border:1px solid var(--bl);border-radius:6px;box-shadow:var(--ss)}
+        .proto-n{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--ac-l);line-height:1;margin-bottom:.5rem}
+        .proto-ti{font-family:var(--fb);font-size:.95rem;font-weight:600;color:var(--t1);margin-bottom:.8rem}
+        .proto p,.proto li{font-size:.9rem;color:var(--t2);line-height:1.7}
+        .proto ul{list-style:none;padding:0;margin:.5rem 0}
+        .proto ul li{padding:.3rem 0 .3rem 1.2rem;position:relative}
+        .proto ul li::before{content:'—';position:absolute;left:0;color:var(--tm)}
 
-        /* ═══ TIER TABS ═══ */
-        .tier-nav{display:flex;gap:0;margin-top:3.5rem;margin-bottom:0;border-bottom:1px solid var(--border-light);flex-wrap:wrap}
-        .tier-tab{padding:.9rem 1.4rem;font-family:var(--font-body);font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text-tertiary);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .25s ease;position:relative;bottom:-1px}
-        .tier-tab:hover{color:var(--text-secondary)}
-        .tier-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-        .tier-content{display:none;padding-top:2.5rem;animation:fadeIn .4s ease}
-        .tier-content.active{display:block}
+        .aip{margin:1.5rem 0;padding:1.8rem 2rem;background:var(--t1);color:#E7E5E4;border-radius:6px;font-family:var(--fm);font-size:.8rem;line-height:1.8;white-space:pre-wrap;position:relative;overflow:hidden}
+        .aip::before{content:'AI PROMPT';position:absolute;top:0;right:0;padding:.4rem 1rem;font-family:var(--fb);font-size:.55rem;font-weight:600;letter-spacing:.2em;color:var(--ac);background:rgba(184,134,11,.1);border-radius:0 6px 0 4px}
 
-        /* ═══ PROTOCOL CARDS ═══ */
-        .protocol{margin:1.5rem 0;padding:1.8rem 2rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:6px;box-shadow:var(--shadow-soft)}
-        .protocol-number{font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--accent-light);line-height:1;margin-bottom:.5rem}
-        .protocol-title{font-family:var(--font-body);font-size:.95rem;font-weight:600;color:var(--text-primary);margin-bottom:.8rem}
-        .protocol p,.protocol li{font-size:.9rem;color:var(--text-secondary);line-height:1.7}
-        .protocol ul{list-style:none;padding:0;margin:.5rem 0}
-        .protocol ul li{padding:.3rem 0 .3rem 1.2rem;position:relative}
-        .protocol ul li::before{content:'—';position:absolute;left:0;color:var(--text-muted)}
+        /* STACK */
+        .ms{font-family:var(--fm);font-size:.72rem;color:var(--t3);line-height:1.8;padding:1.2rem 1.5rem;background:var(--bg-tier);border-radius:4px;border-left:2px solid var(--ac-b);margin-bottom:1.5rem;white-space:pre-line}
+        .mi{font-size:1.02rem;color:var(--t2);line-height:1.9}
 
-        .ai-prompt{margin:1.5rem 0;padding:1.8rem 2rem;background:var(--text-primary);color:#E7E5E4;border-radius:6px;font-family:var(--font-mono);font-size:.8rem;line-height:1.8;white-space:pre-wrap;position:relative;overflow:hidden}
-        .ai-prompt::before{content:'AI PROMPT';position:absolute;top:0;right:0;padding:.4rem 1rem;font-family:var(--font-body);font-size:.55rem;font-weight:600;letter-spacing:.2em;color:var(--accent);background:rgba(184,134,11,.1);border-radius:0 6px 0 4px}
+        /* PROGRESS */
+        .pbc{width:100%;height:3px;background:var(--bl);border-radius:3px;margin:1rem 0 .5rem;overflow:hidden}
+        .pb{height:100%;background:var(--ac);border-radius:3px;transition:width .6s}
+        .pbl{font-size:.72rem;color:var(--t3);letter-spacing:.05em}
 
-        /* ═══ MODULE STACK ═══ */
-        .module-stack{font-family:var(--font-mono);font-size:.72rem;color:var(--text-tertiary);line-height:1.8;padding:1.2rem 1.5rem;background:var(--bg-tier);border-radius:4px;border-left:2px solid var(--accent-border);margin-bottom:1.5rem;white-space:pre-line}
-        .module-intro{font-size:1.02rem;color:var(--text-secondary);line-height:1.9}
+        .nm{margin-top:2rem;padding:2rem 2.5rem;background:var(--bg-tier);border:1px solid var(--bs);border-radius:6px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:all .3s;cursor:pointer}
+        .nm:hover{border-color:var(--ac-b);box-shadow:var(--sg)}
+        .nm-l{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:.3rem}
+        .nm-ti{font-family:var(--fd);font-size:1.3rem;font-weight:400;color:var(--t1)}
+        .nm-a{font-size:1.5rem;color:var(--ac);transition:transform .3s}.nm:hover .nm-a{transform:translateX(4px)}
 
-        /* ═══ PROGRESS ═══ */
-        .progress-section{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border-light)}
-        .progress-bar-container{width:100%;height:3px;background:var(--border-light);border-radius:3px;margin:1rem 0 .5rem;overflow:hidden}
-        .progress-bar{height:100%;background:var(--accent);border-radius:3px;transition:width .6s ease}
-        .progress-label{font-size:.72rem;color:var(--text-tertiary);letter-spacing:.05em}
+        /* PRINCIPLES */
+        .prins{display:grid;gap:1rem;margin:2rem 0}
+        .prin{padding:1.2rem 1.5rem;border-left:2px solid var(--ac-b);background:var(--bg-tier);border-radius:0 4px 4px 0}
+        .prin strong{display:block;font-size:.88rem;color:var(--t1);margin-bottom:.25rem}
+        .prin span{font-size:.85rem;color:var(--t3);line-height:1.5}
 
-        .next-module{margin-top:3rem;padding:2rem 2.5rem;background:var(--bg-tier);border:1px solid var(--border-subtle);border-radius:6px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:all .3s ease;cursor:pointer}
-        .next-module:hover{border-color:var(--accent-border);box-shadow:var(--shadow-glow)}
-        .next-module-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:.3rem}
-        .next-module-title{font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--text-primary)}
-        .next-module-arrow{font-size:1.5rem;color:var(--accent);transition:transform .3s ease}
-        .next-module:hover .next-module-arrow{transform:translateX(4px)}
+        @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes ff{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fi{from{opacity:0}to{opacity:1}}
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}.reveal.visible{opacity:1;transform:translateY(0)}
 
-        .heroes-journey{margin-top:3rem;padding:2rem;background:var(--bg-tier);border-radius:6px;border:1px solid var(--border-subtle)}
-        .heroes-journey-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
-        .heroes-journey-title{font-family:var(--font-display);font-size:1.2rem;font-weight:400;color:var(--text-primary);margin-bottom:.8rem}
-        .heroes-journey p{font-size:.88rem;color:var(--text-tertiary);line-height:1.7}
-
-        /* ═══ PRINCIPLES LIST ═══ */
-        .principles{display:grid;gap:1rem;margin:2rem 0}
-        .principle{padding:1.2rem 1.5rem;border-left:2px solid var(--accent-border);background:var(--bg-tier);border-radius:0 4px 4px 0}
-        .principle strong{display:block;font-size:.88rem;color:var(--text-primary);margin-bottom:.25rem}
-        .principle span{font-size:.85rem;color:var(--text-tertiary);line-height:1.5}
-
-        /* ═══ ANIMATIONS ═══ */
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeFloat{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-        .reveal.visible{opacity:1;transform:translateY(0)}
-
-        @media(max-width:1024px){
-            .sidebar{transform:translateX(-100%)}
-            .sidebar.open{transform:translateX(0)}
-            .mobile-header{display:flex!important}
-            .main{margin-left:0;padding-top:60px}
-            .hero{min-height:calc(100vh - 60px)}
-            .page-content{padding:3rem 1.5rem 4rem}
-        }
-        @media(max-width:600px){
-            .page-content{padding:2.5rem 1.2rem 3rem}
-            .tier-tab{padding:.7rem 1rem;font-size:.6rem}
-            .next-module{flex-direction:column;align-items:flex-start;gap:1rem}
-        }
+        @media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.mh{display:flex!important}.main{margin-left:0;padding-top:60px}.hero{min-height:calc(100vh - 60px)}.pc{padding:3rem 1.5rem 4rem}}
+        @media(max-width:600px){.pc{padding:2.5rem 1.2rem 3rem}.tt{padding:.7rem .9rem;font-size:.58rem}.nm{flex-direction:column;align-items:flex-start;gap:1rem}}
     </style>
 </head>
 <body>
 
-<header class="mobile-header">
-    <h1>HOMEUniversity</h1>
-    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-</header>
-<div class="overlay"></div>
+<header class="mh"><h1>HOMEUniversity</h1><button class="mt" aria-label="Menu"><span></span><span></span><span></span></button></header>
+<div class="ov"></div>
 
-<!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar">
-    <div class="sidebar-logo">
-        <a onclick="showPage('home')">
-            <h1>HOMEUniversity</h1>
-            <div class="logo-sub">Elevate · Empower · Evolve</div>
-        </a>
-    </div>
-    <nav class="sidebar-nav">
-        <div class="nav-group">
-            <div class="nav-group-title">Start Here</div>
-            <a class="nav-link" id="nav-welcome" onclick="showPage('welcome')">Welcome</a>
-        </div>
-        <div class="nav-group">
-            <div class="nav-group-title">Whitepill</div>
-            <div class="nav-link" id="wp-toggle" onclick="toggleDD('whitepill-dd')">Phase 1 — Foundation <span class="arrow">›</span></div>
-            <div class="nav-dropdown" id="whitepill-dd">
-                <a class="nav-sub-link" onclick="showPage('intro')" id="nav-intro">Introduction</a>
-                <a class="nav-sub-link" onclick="showPage('level0')" id="nav-level0">Level 0 · Foundations</a>
-                <a class="nav-sub-link dim">Level 1 · Discernment</a>
-                <a class="nav-sub-link dim">Level 2 · Words Are Spells</a>
-                <a class="nav-sub-link dim">Level 3 · Energy Mechanics</a>
-                <a class="nav-sub-link dim">Level 4 · Power & Ethics</a>
-                <a class="nav-sub-link dim">Level 5 · AI as Alchemy</a>
+    <div class="s-logo"><a onclick="showPage('home')"><h1>HOMEUniversity</h1><div class="sub">Elevate · Empower · Evolve</div></a></div>
+    <nav class="s-nav">
+        <div class="ng"><div class="ng-t">Start Here</div><a class="nl" id="nav-welcome" onclick="showPage('welcome')">Welcome</a></div>
+        <div class="ng">
+            <div class="ng-t">Whitepill</div>
+            <div class="nl" id="wp-toggle" onclick="toggleDD('wp')">Phase 1 — Foundation <span class="arr">›</span></div>
+            <div class="ndd" id="wp">
+                <a class="nsl" onclick="showPage('level0')" id="nav-level0">Level 0 · Foundations</a>
+                <a class="nsl" onclick="showPage('level1')" id="nav-level1">Level 1 · Discernment</a>
+                <a class="nsl" onclick="showPage('level2')" id="nav-level2">Level 2 · Words Are Spells</a>
+                <a class="nsl dim">Level 3 · Energy Mechanics</a>
+                <a class="nsl dim">Level 4 · Power & Ethics</a>
+                <a class="nsl dim">Level 5 · AI as Alchemy</a>
             </div>
-            <div class="nav-link" style="opacity:.4;cursor:default;font-size:.82rem">Phase 2 — Coming Soon</div>
+            <div class="nl" style="opacity:.4;cursor:default;font-size:.82rem">Phase 2 — Coming Soon</div>
         </div>
-        <div class="nav-group">
-            <div class="nav-group-title">More</div>
-            <a class="nav-link dim" style="opacity:.4;cursor:default">Musicpill</a>
-            <a class="nav-link dim" style="opacity:.4;cursor:default">Glossary</a>
-        </div>
+        <div class="ng"><div class="ng-t">More</div><a class="nl" style="opacity:.4;cursor:default">Musicpill</a><a class="nl" style="opacity:.4;cursor:default">Glossary</a></div>
     </nav>
-    <div class="sidebar-footer">© HOMEUniversity 2026</div>
+    <div class="s-foot">© HOMEUniversity 2026</div>
 </aside>
 
 <main class="main">
 
-<!-- ════════════════════════════════════════
-     HOME — LANDING
-     ════════════════════════════════════════ -->
+<!-- ══════════ HOME ══════════ -->
 <div class="page active" id="page-home">
-    <section class="hero">
-        <div class="hero-icon">
-            <svg viewBox="0 0 120 120" fill="none"><path d="M60 20 L100 42 L100 82 L60 104 L20 82 L20 42 Z" fill="none" stroke="#B8860B" stroke-width=".8" opacity=".3"/><path d="M60 20 L100 42 L60 62 L20 42 Z" fill="rgba(184,134,11,.04)" stroke="#B8860B" stroke-width=".8" opacity=".5"/><path d="M60 62 L100 42 L100 82 L60 104 Z" fill="rgba(184,134,11,.02)" stroke="#B8860B" stroke-width=".8" opacity=".4"/><path d="M60 62 L20 42 L20 82 L60 104 Z" fill="rgba(184,134,11,.06)" stroke="#B8860B" stroke-width=".8" opacity=".35"/><line x1="60" y1="62" x2="60" y2="104" stroke="#B8860B" stroke-width=".5" opacity=".3"/></svg>
-        </div>
-        <h2 class="hero-title">HOMEUniversity</h2>
-        <div class="hero-divider"></div>
-        <p class="hero-subtitle">
-            A modern educational resource designed to help you understand consciousness, master your mind, and build a life of clarity and purpose.
-        </p>
-        <div class="hero-cta">
-            <button class="btn btn-primary" onclick="showPage('welcome')">Learn More</button>
-            <button class="btn btn-ghost" onclick="showPage('level0')">Start Learning</button>
-        </div>
-    </section>
+<section class="hero">
+    <div class="h-icon"><svg viewBox="0 0 120 120" fill="none"><path d="M60 20 L100 42 L100 82 L60 104 L20 82 L20 42 Z" fill="none" stroke="#B8860B" stroke-width=".8" opacity=".3"/><path d="M60 20 L100 42 L60 62 L20 42 Z" fill="rgba(184,134,11,.04)" stroke="#B8860B" stroke-width=".8" opacity=".5"/><path d="M60 62 L100 42 L100 82 L60 104 Z" fill="rgba(184,134,11,.02)" stroke="#B8860B" stroke-width=".8" opacity=".4"/><path d="M60 62 L20 42 L20 82 L60 104 Z" fill="rgba(184,134,11,.06)" stroke="#B8860B" stroke-width=".8" opacity=".35"/><line x1="60" y1="62" x2="60" y2="104" stroke="#B8860B" stroke-width=".5" opacity=".3"/></svg></div>
+    <h2 class="h-title">HOMEUniversity</h2>
+    <div class="h-div"></div>
+    <p class="h-sub">A modern educational resource designed to help you understand consciousness, master your mind, and build a life of clarity and purpose.</p>
+    <div class="h-cta"><button class="btn btn-p" onclick="showPage('welcome')">Learn More</button><button class="btn btn-g" onclick="showPage('level0')">Start Learning</button></div>
+</section>
 </div>
 
-<!-- ════════════════════════════════════════
-     WELCOME — ABOUT PAGE
-     ════════════════════════════════════════ -->
+<!-- ══════════ WELCOME ══════════ -->
 <div class="page" id="page-welcome">
-<div class="page-content">
-
-    <header class="page-header">
-        <div class="page-label">Welcome</div>
-        <h1 class="page-title">Welcome Home</h1>
-        <div class="prose">
-            <p>You're here because something pulled you in. Trust that.</p>
-            <p>HOMEUniversity is an open educational resource built to help people understand <strong>how consciousness works</strong> — and how to use that understanding to build a clearer, more powerful, more purposeful life.</p>
-        </div>
-    </header>
-
+<div class="pc">
+    <header class="ph"><div class="pl">Welcome</div><h1 class="pt">Welcome Home</h1><div class="prose"><p>You're here because something pulled you in. Trust that.</p><p>HOMEUniversity is an open educational resource built to help people understand <strong>how consciousness works</strong> — and how to use that understanding to build a clearer, more powerful, more purposeful life.</p></div></header>
     <div class="prose">
-        <div class="section-label">What This Is</div>
-        <h2 class="section-title">A System Update for Your Mind</h2>
-        <p>This isn't a typical course. It's a <em>consciousness patch</em> — a structured system for understanding reality at a deeper level. You'll learn the mechanics of how your mind works, why some people seem to operate with extraordinary power and clarity, and how to apply those same principles to your own life.</p>
-        <p>This knowledge sits at the intersection of neuroscience, physics, ancient wisdom traditions, psychology, philosophy, and modern AI. It's the same understanding that high-performers, builders, and seekers throughout history have used to create extraordinary outcomes.</p>
-        <p>Now it's yours.</p>
-
-        <div class="section-label">Who This Is For</div>
-        <h2 class="section-title">Everyone</h2>
-        <p>This resource was designed to empower <strong>anyone</strong> ready to take their thinking, their energy, and their life to a higher level. Whether you're an entrepreneur, artist, student, parent, or simply someone who feels there's more to life than what's on the surface — this is for you.</p>
+        <div class="sl">What This Is</div><h2 class="st">A System Update for Your Mind</h2>
+        <p>This isn't a typical course. It's a <em>consciousness patch</em> — a structured system for understanding reality at a deeper level. You'll learn the mechanics of how your mind works, why some people seem to operate with extraordinary clarity and power, and how to apply those same principles to your own life.</p>
+        <p>This knowledge sits at the intersection of neuroscience, physics, ancient wisdom traditions, psychology, philosophy, and modern AI. It's the same understanding that high-performers, builders, and seekers throughout history have used. Now it's yours.</p>
+        <div class="sl">Who This Is For</div><h2 class="st">Everyone</h2>
+        <p>This resource was designed to empower <strong>anyone</strong> ready to take their thinking, energy, and life to a higher level. Entrepreneur, artist, student, parent, or simply someone who feels there's more to life than what's on the surface — this is for you.</p>
         <p>The goal is societal. When individuals elevate, communities elevate. When communities elevate, the world shifts. This is how we rebuild from the ground up — one mind at a time.</p>
-
-        <div class="section-label">How It Works</div>
-        <h2 class="section-title">Three-Tier Learning</h2>
-        <p>Every module is structured across three depth levels:</p>
+        <div class="sl">How It Works</div><h2 class="st">Three-Tier Learning</h2>
+        <p>Every level is structured across multiple depth tiers:</p>
     </div>
-
-    <div class="principles">
-        <div class="principle"><strong>Beginner</strong><span>Practical tools, immediate application. Things you can use today.</span></div>
-        <div class="principle"><strong>Ascending</strong><span>Pattern recognition. How the science, psychology, and mechanics connect.</span></div>
-        <div class="principle"><strong>Master</strong><span>Archetypal and cross-traditional understanding. How every wisdom tradition converges on the same truths.</span></div>
+    <div class="prins">
+        <div class="prin"><strong>Beginner</strong><span>Practical tools, immediate application. Things you can use today.</span></div>
+        <div class="prin"><strong>Ascending</strong><span>Pattern recognition. How the science, psychology, and mechanics connect.</span></div>
+        <div class="prin"><strong>Master</strong><span>Archetypal and cross-traditional understanding. The deep patterns.</span></div>
     </div>
-
     <div class="prose">
-        <p>You move across modules (breadth), within each module (depth), and through time with others (collective understanding). This creates a triple-compounding effect. The harder you engage, the faster things click.</p>
-
-        <div class="section-label">Principles</div>
-        <h2 class="section-title">What We Stand For</h2>
+        <p>Plus dedicated tabs for <strong>Convergence</strong> (how wisdom traditions align), <strong>Protocols</strong> (actionable steps), and <strong>Prompts</strong> (AI tools and quotes). You move across levels (breadth), within each level (depth), and through time with others (collective understanding). Triple compounding.</p>
+        <div class="sl">Principles</div><h2 class="st">What We Stand For</h2>
     </div>
-
-    <div class="principles">
-        <div class="principle"><strong>Always Improving</strong><span>Optimization is a lifestyle, not a destination.</span></div>
-        <div class="principle"><strong>No Coping</strong><span>No victim mentality, no excuses, no spiritual bypassing.</span></div>
-        <div class="principle"><strong>Be Good to Others</strong><span>Generative, not extractive. Build people up.</span></div>
-        <div class="principle"><strong>Pursue Truth</strong><span>Verify everything. Reality-test. Trust yourself first.</span></div>
-        <div class="principle"><strong>High Signal, Low Noise</strong><span>Focus on what matters, even when it's hard.</span></div>
-        <div class="principle"><strong>Choose Your Vision</strong><span>You become the chosen one when you choose yourself.</span></div>
+    <div class="prins">
+        <div class="prin"><strong>Always Improving</strong><span>Optimization is a lifestyle, not a destination.</span></div>
+        <div class="prin"><strong>No Coping</strong><span>No victim mentality, no excuses, no spiritual bypassing.</span></div>
+        <div class="prin"><strong>Be Good to Others</strong><span>Generative, not extractive. Build people up.</span></div>
+        <div class="prin"><strong>Pursue Truth</strong><span>Verify everything. Reality-test. Trust yourself first.</span></div>
+        <div class="prin"><strong>High Signal, Low Noise</strong><span>Focus on what matters, even when it's hard.</span></div>
+        <div class="prin"><strong>Choose Your Vision</strong><span>You become the chosen one when you choose yourself.</span></div>
     </div>
-
     <div class="prose">
-        <div class="section-label">Important</div>
-        <h2 class="section-title">A Note on Responsibility</h2>
-        <p>This is educational content — not therapy, medical advice, or financial advice. Consult licensed professionals for health, mental health, or financial decisions. You are 100% responsible for your own integration, decisions, and outcomes.</p>
-        <p>Reality-test everything taught here — including by the author. Question. Verify. Trust yourself first. If you feel unsure at any point, pause. Get support. There's no shame in taking time.</p>
+        <div class="sl">Important</div><h2 class="st">Responsibility</h2>
+        <p>This is educational content — not therapy, medical advice, or financial advice. Consult licensed professionals for health, mental health, or financial decisions. You are 100% responsible for your own integration, decisions, and outcomes. Reality-test everything taught here. Question. Verify. Trust yourself first.</p>
     </div>
-
-    <div class="section-label">Course Map</div>
-    <h2 class="section-title">What You'll Learn</h2>
-    <p style="font-size:.92rem;color:var(--text-tertiary);margin-bottom:1.5rem">Phase 1 — Foundation</p>
-
-    <div class="course-map">
-        <div class="course-card" onclick="showPage('level0')">
-            <div class="course-card-num">00</div>
-            <div class="course-card-title">Foundations</div>
-            <div class="course-card-desc">Optimize your vessel — sleep, energy, focus, material reality. Everything builds from here.</div>
-        </div>
-        <div class="course-card" style="opacity:.5;cursor:default">
-            <div class="course-card-num">01</div>
-            <div class="course-card-title">Discernment</div>
-            <div class="course-card-desc">Sharpen your filter. Learn to tell truth from lies, signal from noise.</div>
-            <span class="course-card-badge">Coming Soon</span>
-        </div>
-        <div class="course-card" style="opacity:.5;cursor:default">
-            <div class="course-card-num">02</div>
-            <div class="course-card-title">Words Are Spells</div>
-            <div class="course-card-desc">Your speech shapes reality. Make your word iron. Speak with conviction.</div>
-            <span class="course-card-badge">Coming Soon</span>
-        </div>
-        <div class="course-card" style="opacity:.5;cursor:default">
-            <div class="course-card-num">03</div>
-            <div class="course-card-title">Energy Mechanics</div>
-            <div class="course-card-desc">Understand life force, creative energy, and how to build charge.</div>
-            <span class="course-card-badge">Coming Soon</span>
-        </div>
-        <div class="course-card" style="opacity:.5;cursor:default">
-            <div class="course-card-num">04</div>
-            <div class="course-card-title">Power & Ethics</div>
-            <div class="course-card-desc">The responsibility that comes with understanding. Wield power wisely.</div>
-            <span class="course-card-badge">Coming Soon</span>
-        </div>
-        <div class="course-card" style="opacity:.5;cursor:default">
-            <div class="course-card-num">05</div>
-            <div class="course-card-title">AI as Alchemy</div>
-            <div class="course-card-desc">Use artificial intelligence as a tool for accelerated consciousness work.</div>
-            <span class="course-card-badge">Coming Soon</span>
-        </div>
+    <div class="sl">Course Map</div><h2 class="st">What You'll Learn</h2>
+    <p style="font-size:.92rem;color:var(--t3);margin-bottom:1.5rem">Phase 1 — Foundation</p>
+    <div class="cm">
+        <div class="cc" onclick="showPage('level0')"><div class="cc-n">00</div><div class="cc-ti">Foundations</div><div class="cc-d">Optimize your vessel — sleep, energy, focus, material reality. Everything builds from here.</div></div>
+        <div class="cc" onclick="showPage('level1')"><div class="cc-n">01</div><div class="cc-ti">Discernment</div><div class="cc-d">Sharpen your filter. Learn to tell truth from lies, signal from noise.</div></div>
+        <div class="cc" onclick="showPage('level2')"><div class="cc-n">02</div><div class="cc-ti">Words Are Spells</div><div class="cc-d">Your speech shapes reality. Make your word iron. Speak with conviction.</div></div>
+        <div class="cc lk"><div class="cc-n">03</div><div class="cc-ti">Energy Mechanics</div><div class="cc-d">Understand life force, creative energy, and how to build charge.</div><span class="cc-b">Coming Soon</span></div>
+        <div class="cc lk"><div class="cc-n">04</div><div class="cc-ti">Power & Ethics</div><div class="cc-d">The responsibility that comes with understanding. Wield power wisely.</div><span class="cc-b">Coming Soon</span></div>
+        <div class="cc lk"><div class="cc-n">05</div><div class="cc-ti">AI as Alchemy</div><div class="cc-d">Use artificial intelligence as a tool for accelerated consciousness work.</div><span class="cc-b">Coming Soon</span></div>
     </div>
-
-    <p style="font-size:.82rem;color:var(--text-muted);margin-top:2rem;letter-spacing:.05em">Phase 2 — Consciousness · Coming Soon</p>
-
+    <p style="font-size:.82rem;color:var(--tm);margin-top:2rem;letter-spacing:.05em">Phase 2 — Consciousness · Coming Soon</p>
 </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     LEVEL 0 — FOUNDATIONS
-     ════════════════════════════════════════ -->
+<!-- ══════════ LEVEL 0 — FOUNDATIONS ══════════ -->
 <div class="page" id="page-level0">
-<div class="page-content">
-
-    <header class="page-header">
-        <div class="page-label">Module 0</div>
-        <h1 class="page-title">Foundations</h1>
-        <div class="module-stack">MODULE 0: FOUNDATIONS
-  ↑
-= CLEAN VESSEL</div>
-        <p class="module-intro">You're starting at the foundation. Everything builds from here. By the end of this module, your vessel will be optimized — your physical and mental foundation sharpened, your mind clear, your energy high. You'll be ready to ascend.</p>
-    </header>
-
-    <!-- ═══ TIER TABS ═══ -->
+<div class="pc">
+    <header class="ph"><div class="pl">Level 0</div><h1 class="pt">Foundations</h1>
+    <div class="ms">LEVEL 0: FOUNDATIONS  ↑  = CLEAN VESSEL</div>
+    <p class="mi">You're starting at the foundation. Everything builds from here. By the end of this level, your vessel will be optimized — your physical and mental foundation sharpened, your mind clear, your energy high.</p></header>
     <div class="tier-section">
-        <nav class="tier-nav">
-            <button class="tier-tab active" data-tier="beginner">Beginner</button>
-            <button class="tier-tab" data-tier="ascending">Ascending</button>
-            <button class="tier-tab" data-tier="master">Master</button>
-            <button class="tier-tab" data-tier="convergence">Convergence</button>
-            <button class="tier-tab" data-tier="protocols">Protocols</button>
-            <button class="tier-tab" data-tier="prompts">Prompts</button>
+        <nav class="tn">
+            <button class="tt active" data-tier="beginner">Beginner</button>
+            <button class="tt" data-tier="ascending">Ascending</button>
+            <button class="tt" data-tier="master">Master</button>
+            <button class="tt" data-tier="convergence">Convergence</button>
+            <button class="tt" data-tier="protocols">Protocols</button>
+            <button class="tt" data-tier="prompts">Prompts</button>
+            <button class="tt" data-tier="progress">Progress</button>
         </nav>
 
-        <!-- ═══ BEGINNER ═══ -->
-        <div class="tier-content active" data-tier-content="beginner"><div class="prose">
-
-            <div class="section-label">Getting Started</div>
-            <h2 class="section-title">What This Course Is (And Isn't)</h2>
-            <p>This isn't a get-rich-quick scheme. It's not empty promises or strict business blueprints. And while the fixes deploy <em>rapidly</em> once you execute — this isn't a quick fix either.</p>
-            <p>This <strong>is</strong> consciousness elevation. It's studying the laws of reality that govern your existence. It's showing you your true nature and potential — the secrets of the universe, compressed into something usable.</p>
-            <p>Take what resonates. Leave what doesn't. Everyone's path is different. This is about <em>your</em> personal empowerment.</p>
-
-            <div class="callout callout-gold"><div class="callout-title">Key Insight</div><p>When you achieve maximum potential for yourself, it benefits others even more. This is how evolution functions. Your growth is not selfish — it's necessary.</p></div>
-
-            <h3 class="section-subtitle">What You'll Gain</h3>
-            <p>Deeper appreciation for nature, art, and the divine. Synchronicities beyond your current belief. Fearless self-expression. Fearless pursuit of truth. More energy. More <em>life</em>. This isn't a promise — it's what happens when you engage with the material honestly.</p>
-
-            <h3 class="section-subtitle">You Are the Chosen One</h3>
-            <p>Who chose the Chosen Ones? What made them special? The answer: <strong>they chose themselves</strong>. They remembered the great secret — the source of all energy is within you.</p>
-
-            <blockquote>The universe is a song. It's a frequency. Everything is made of sound waves.<span class="cite">— Nikola Tesla (paraphrased)</span></blockquote>
-
-            <div class="section-label">Vibration</div>
-            <h2 class="section-title">Everything Vibrates</h2>
-            <blockquote>"If you want to understand the universe, think in terms of energy, frequency, and vibration."<span class="cite">— Nikola Tesla</span></blockquote>
-            <p>This wasn't poetry. It was precision. Everything — matter, thoughts, emotions, words — operates at different frequencies. Even something that appears solid is, at its most fundamental level, vibrating energy.</p>
-            <p><strong>High frequency</strong> = clarity, power, health, abundance. <strong>Low frequency</strong> = confusion, weakness, stagnation, scarcity. This course is designed to raise your frequency systematically — and you'll understand exactly how as we progress.</p>
-
-            <div class="section-label">Focus</div>
-            <h2 class="section-title">High Signal, Low Noise</h2>
-            <p>Target what needs doing, even if it's hard. Most people get lost in noise — infinite scrolling, pointless debates, low-value activities that <em>feel</em> productive but aren't.</p>
-            <p><strong>High signal</strong> = surgical focus on what actually moves the needle. Ask yourself: what's the <em>one thing</em> I could do today that would make everything else easier? That's signal. Everything else is noise. Cut accordingly.</p>
-
-            <div class="section-label">Input</div>
-            <h2 class="section-title">Reading</h2>
-            <p>When you read, you're scanning for <em>frequency</em>, not just information. Some books are pure wisdom. Others have scattered gems buried in noise. AI can help you scan faster, but certain books need to be read front to back — they paint entire worlds in your mind that summaries can't capture.</p>
-            <p>When you read, your brain fills in the visual gaps. This builds new neural pathways. It <em>ascends</em> you. Make reading a daily practice if you can.</p>
-
-            <h2 class="section-title">Consumption vs. Co-Creation</h2>
-            <p>When you're on the right path, wasting time as a passive consumer doesn't even cross your mind. Find what you want to build, be, or do — and bring it forth.</p>
-            <p>Your greatest gift isn't what you <em>gain</em> from the world. It's what you <em>give to it</em>. You get more energy back. What can you bring to others like no one else can? Pursue that. When you choose yourself, reality does too.</p>
-
-            <div class="section-label">Alignment</div>
-            <h2 class="section-title">Facts Over Feelings</h2>
-            <p>Align with objective reality. Better tools create more leverage. Better information creates better decisions. Don't cope — on any dimension of life. Material mastery is part of the journey, not separate from it.</p>
-
-            <div class="callout callout-gold"><div class="callout-title">Core Principle</div><p><strong>Take the advantage. Always.</strong> Every situation has leverage if you look for it. Assume responsibility. Assume you could do better. Don't blame others — optimize yourself.</p></div>
-
-            <h2 class="section-title">Goal Setting</h2>
-            <p>Take meaningful risk that can amplify your life. When you set ambitious goals and achieve them, it compounds — neurologically, hormonally, psychologically. Set small goals first. Achieve them <em>before</em> moving to the next. Everything builds. Think long-term. Be disciplined with yourself.</p>
-
-            <div class="section-label">The Vessel</div>
-            <h2 class="section-title">Sleep</h2>
-            <p>Sleep is a performance-enhancing drug. <strong>REM sleep</strong> handles memory consolidation, emotional regulation, and creative problem-solving. <strong>Deep sleep</strong> handles physical recovery, hormone regulation, and immune strengthening. Without both, everything suffers.</p>
-            <p>Protocols worth testing: blackout curtains, eye mask, earplugs, red light glasses, reading before bed, avoiding screens in bed, limiting late caffeine. Try them. Keep what works. Discard what doesn't.</p>
-            <p><strong>Command sleep:</strong> Practice directing your mind to shut down. Visualize being asleep in first person. This skill transfers far beyond the bedroom — it's the beginning of learning to direct your consciousness at will.</p>
-
-            <h2 class="section-title">Material Optimization</h2>
-            <p>We're optimizing for beauty, intelligence, and clarity — things that make your mind work better. A <strong>Kindle</strong> for better reading retention. A quality <strong>watch</strong> that builds self-respect. A fast <strong>phone and laptop</strong> — essential tools in the age of AI. <strong>Noise-cancelling headphones</strong> to protect your focus. These aren't luxuries. They're leverage.</p>
-
-            <h2 class="section-title">On Desire</h2>
-            <p>Some traditions teach that desire leads to suffering. There's truth in that — <em>ego-driven</em> desire does. But desire born from genuine goodness? Follow it. Being the best version of yourself is one of the greatest things you can do — for yourself and for everyone around you.</p>
-            <p>Don't suppress what moves you. Refine it. We'll explore this distinction much deeper as we progress.</p>
-
+        <div class="tc active" data-tier-content="beginner"><div class="prose">
+            <div class="sl">Getting Started</div><h2 class="st">What This Course Is (And Isn't)</h2>
+            <p>This isn't a get-rich-quick scheme or empty promises. While the insights deploy <em>rapidly</em> once you engage — this isn't a quick fix either.</p>
+            <p>This <strong>is</strong> consciousness elevation. Studying the laws of reality that govern your existence. Revealing your true nature and potential — the mechanics of the universe, compressed into something usable.</p>
+            <p>Take what resonates. Leave what doesn't. This is about <em>your</em> empowerment.</p>
+            <div class="co co-g"><div class="co-t">Key Insight</div><p>When you achieve maximum potential for yourself, it benefits others even more. Your growth is not selfish — it's necessary. This is how evolution functions.</p></div>
+            <h3 class="sst">What You'll Gain</h3>
+            <p>Deeper appreciation for nature, art, and the divine. Synchronicities beyond your current belief. Fearless self-expression and pursuit of truth. More energy. More <em>life</em>.</p>
+            <h3 class="sst">You Are the Chosen One</h3>
+            <p>Who chose the Chosen Ones? <strong>They chose themselves.</strong> The source of all energy is within you.</p>
+            <blockquote>"If you want to understand the universe, think in terms of energy, frequency, and vibration."<span class="ci">— Nikola Tesla</span></blockquote>
+            <p>This wasn't poetry. It was precision. Everything — matter, thoughts, emotions, words — operates at different frequencies. <strong>High frequency</strong> = clarity, power, health, abundance. <strong>Low frequency</strong> = confusion, weakness, stagnation, scarcity. This course raises your frequency systematically.</p>
+            <div class="sl">Focus</div><h2 class="st">High Signal, Low Noise</h2>
+            <p>Target what needs doing, even if it's hard. Most people get lost in noise — infinite scrolling, pointless debates, low-value activities that <em>feel</em> productive but aren't. <strong>High signal</strong> = surgical focus on what actually moves the needle. What's the <em>one thing</em> you could do today that would make everything else easier?</p>
+            <h2 class="st">Reading & Co-Creation</h2>
+            <p>When you read, you're scanning for <em>frequency</em>, not just information. Some books paint entire worlds in your mind that summaries can't capture. When your brain fills in the visual gaps, it builds new neural pathways. Make reading a daily practice.</p>
+            <p>Your greatest gift isn't what you <em>gain</em> from the world — it's what you <em>give to it</em>. Find what you want to build, be, or do — and bring it forth. When you choose yourself, reality does too.</p>
+            <div class="sl">Alignment</div><h2 class="st">Facts Over Feelings</h2>
+            <p>Align with objective reality. Better tools create more leverage. Don't cope — on any dimension of life. Material mastery is part of the journey.</p>
+            <div class="co co-g"><div class="co-t">Core Principle</div><p><strong>Take the advantage. Always.</strong> Every situation has leverage if you look for it. Assume responsibility. Optimize yourself.</p></div>
+            <h2 class="st">Goal Setting</h2>
+            <p>Take meaningful risk that amplifies your life. Set small goals first. Achieve them <em>before</em> moving to the next. Everything compounds. Think long-term. Be disciplined.</p>
+            <div class="sl">The Vessel</div><h2 class="st">Sleep</h2>
+            <p><strong>REM sleep</strong> handles memory, emotional regulation, and creative problem-solving. <strong>Deep sleep</strong> handles physical recovery, hormones, and immune function. Without both, everything suffers.</p>
+            <p>Protocols worth testing: blackout curtains, eye mask, earplugs, reading before bed, limiting late caffeine. Try them. Keep what works. <strong>Command sleep:</strong> practice directing your mind to shut down. Visualize being asleep in first person.</p>
+            <h2 class="st">Material Optimization</h2>
+            <p>A <strong>Kindle</strong> for better reading retention. A quality <strong>watch</strong> that builds self-respect. A fast <strong>phone and laptop</strong> — essential in the age of AI. <strong>Noise-cancelling headphones</strong> to protect your focus. These aren't luxuries — they're leverage.</p>
+            <h2 class="st">On Desire</h2>
+            <p>Ego-driven desire leads to suffering. But desire born from genuine goodness? Follow it. Being the best version of yourself is one of the greatest things you can do — for yourself and everyone around you. Don't suppress what moves you. Refine it.</p>
         </div></div>
 
-        <!-- ═══ ASCENDING ═══ -->
-        <div class="tier-content" data-tier-content="ascending"><div class="prose">
-
-            <div class="section-label">The Mechanism</div>
-            <h2 class="section-title">Why Vessel Optimization Compounds</h2>
-            <p>You can't build a skyscraper on a weak foundation. If your body is depleted — bad sleep, poor nutrition, low energy — your mind can't operate at full capacity. The two are inseparable.</p>
-
-            <p><strong>The negative spiral:</strong> Sleep deprivation impairs the prefrontal cortex (PFC) — your brain's executive center. This leads to worse decision-making, weaker willpower, and increased emotional reactivity. Add poor diet (inflammation, brain fog) and lack of physical optimization (low hormones, low drive), and you get a person running at 20% capacity without knowing it.</p>
-
-            <p><strong>The positive spiral:</strong> Quality sleep strengthens PFC function. Clean nutrition reduces inflammation and increases mental clarity. Physical optimization balances hormones and neurochemistry. High-quality information consumption builds intellectual sovereignty. Each one amplifies the others.</p>
-
-            <div class="callout callout-gold"><div class="callout-title">The Compound Effect</div><p>Every optimization stacks on the previous one. Sleep + Nutrition + Tools + Goal-setting = <strong>exponential</strong> improvement, not linear. This is why foundations come first.</p></div>
-
-            <h2 class="section-title">Reticular Activating System (RAS)</h2>
-            <p>Your brain filters approximately <strong>11 million bits</strong> of sensory data per second. You consciously process about 40. How does your brain decide what to surface? Based on what you <em>focus on</em> — through language, thought, and intention.</p>
-
-            <p>Buy a red car and you'll suddenly notice red cars everywhere. They were always there — your RAS simply wasn't highlighting them. Set a financial goal and you'll begin noticing opportunities, ideas, and people aligned with that goal. Repeat "I'm stuck" and your RAS highlights obstacles while filtering out exits.</p>
-
-            <p>This is why the words you use matter (explored in depth in Module 2). Your internal dialogue literally <strong>programs your perception filter</strong>. Optimize the input, and the filter reshapes reality around you.</p>
-
-            <div class="section-label">Desire Refined</div>
-            <h2 class="section-title">Building vs. Grasping</h2>
-            <p>Buddhism, Stoicism, and Christianity all converge on the same insight: align with something <em>higher</em> than ego-driven desire.</p>
-
-            <p><strong>Ego-driven desire</strong> — rooted in scarcity, grasping, never feeling enough — leads to suffering. <strong>Soul-aligned desire</strong> — building, creating, serving, expressing your gifts — leads to fulfillment.</p>
-
-            <p>The test is simple. Ego desire says: "I <em>need</em> this to feel complete." Soul desire says: "I'm <em>called</em> to build this." One depletes you. The other energizes you. We're not suppressing desire. We're learning to tell the difference — and pursuing what's real.</p>
-
+        <div class="tc" data-tier-content="ascending"><div class="prose">
+            <div class="sl">The Mechanism</div><h2 class="st">Why Vessel Optimization Compounds</h2>
+            <p>You can't build a skyscraper on a weak foundation. If your body is depleted, your mind can't operate at full capacity.</p>
+            <p><strong>Negative spiral:</strong> Sleep deprivation impairs the prefrontal cortex → worse decisions, weaker willpower. Poor diet → inflammation → brain fog. No optimization → low hormones, low drive → stagnation.</p>
+            <p><strong>Positive spiral:</strong> Quality sleep → stronger PFC → better decisions. Clean nutrition → mental clarity, high energy. Physical optimization → balanced neurochemistry → drive, focus, execution.</p>
+            <div class="co co-g"><div class="co-t">The Compound Effect</div><p>Every optimization stacks. Sleep + Nutrition + Tools + Goals = <strong>exponential</strong> improvement, not linear.</p></div>
+            <h2 class="st">Reticular Activating System (RAS)</h2>
+            <p>Your brain filters <strong>11 million bits</strong> per second. You process ~40. Your RAS decides what to surface based on what you <em>focus on</em>. Buy a red car → see them everywhere. Set a financial goal → notice aligned opportunities. Say "I'm stuck" → RAS highlights obstacles. Your internal dialogue <strong>programs your perception filter</strong>.</p>
+            <div class="sl">Desire Refined</div><h2 class="st">Building vs. Grasping</h2>
+            <p><strong>Ego-driven desire</strong> (scarcity, grasping) = suffering. <strong>Soul-aligned desire</strong> (building, creating, serving) = fulfillment. The test: ego desire says "I <em>need</em> this to feel complete." Soul desire says "I'm <em>called</em> to build this." One depletes. The other energizes. We're not suppressing desire — we're refining it.</p>
         </div></div>
 
-        <!-- ═══ MASTER ═══ -->
-        <div class="tier-content" data-tier-content="master"><div class="prose">
-
-            <div class="section-label">The Deep Pattern</div>
-            <h2 class="section-title">Foundation as Frequency</h2>
-            <p>Everything you've read in the previous tiers isn't just practical advice. At its core, it's <em>frequency optimization</em>.</p>
-            <p>Sleep well → you raise your baseline frequency. Eat clean → you reduce energetic density (less inflammation = lighter, clearer signal). Eliminate distractions → you increase signal clarity. Set and achieve goals → you build momentum, which is frequency acceleration.</p>
-
-            <div class="callout callout-gold"><div class="callout-title">The Physics</div><p>Reality responds to <strong>frequency</strong>. High-frequency states attract high-frequency outcomes — opportunities, relationships, synchronicities. Low-frequency states attract chaos, drama, and scarcity. We'll prove this scientifically in Module 6. For now, understand: foundation work <em>is</em> frequency work.</p></div>
-
+        <div class="tc" data-tier-content="master"><div class="prose">
+            <div class="sl">The Deep Pattern</div><h2 class="st">Foundation as Frequency</h2>
+            <p>Everything you've read isn't just practical advice — it's <em>frequency optimization</em>. Sleep well → raise baseline frequency. Eat clean → reduce density. Eliminate distractions → increase signal clarity. Achieve goals → frequency acceleration.</p>
+            <div class="co co-g"><div class="co-t">The Physics</div><p>Reality responds to <strong>frequency</strong>. High-frequency states attract high-frequency outcomes. Low-frequency states attract chaos. We'll prove this in Level 6. Foundation work <em>is</em> frequency work.</p></div>
             <p>You're not just "getting your life together." You're tuning your instrument so you can play the symphony.</p>
-
         </div></div>
 
-        <!-- ═══ CONVERGENCE ═══ -->
-        <div class="tier-content" data-tier-content="convergence"><div class="prose">
-
-            <div class="section-label">Across Traditions</div>
-            <h2 class="section-title">Every Path Teaches Foundation</h2>
-            <p>This isn't a modern invention. Every major wisdom tradition has taught the same principle:</p>
-
-            <blockquote>"First, say to yourself what you would be; then do what you have to do."<span class="cite">— Epictetus (Stoicism)</span></blockquote>
-            <p>Align with your highest self (vision), then build the foundation (actions).</p>
-
-            <blockquote>"Everyone who hears these words of mine and puts them into practice is like a wise man who built his house on the rock."<span class="cite">— Matthew 7:24 (Christianity)</span></blockquote>
-            <p>Build on solid ground — truth and alignment — not sand.</p>
-
-            <p><strong>Buddhism</strong> — Right Speech, Right Action, Right Livelihood are the foundational practices of the Eightfold Path. Without these, meditation and wisdom cannot stabilize.</p>
-
-            <blockquote>"As above, so below."<span class="cite">— The Kybalion (Hermeticism)</span></blockquote>
-            <p>Your outer reality reflects your inner state. Optimize the inner (foundation), and the outer follows.</p>
-
-            <blockquote>"A journey of a thousand miles begins with a single step."<span class="cite">— Lao Tzu (Daoism)</span></blockquote>
-            <p>Start with foundation. Small, consistent actions compound into something extraordinary.</p>
-
-            <div class="callout"><div class="callout-title">The Universal Pattern</div><p>Every path, every tradition, every culture that has studied human potential arrives at the same conclusion: <strong>you cannot skip foundation</strong>. Material reality mastery creates the conditions for consciousness mastery — not the other way around.</p></div>
-
+        <div class="tc" data-tier-content="convergence"><div class="prose">
+            <div class="sl">Across Traditions</div><h2 class="st">Every Path Teaches Foundation</h2>
+            <blockquote>"First, say to yourself what you would be; then do what you have to do."<span class="ci">— Epictetus (Stoicism)</span></blockquote>
+            <p>Align with your highest self, then build the foundation.</p>
+            <blockquote>"Everyone who hears these words of mine and puts them into practice is like a wise man who built his house on the rock."<span class="ci">— Matthew 7:24 (Christianity)</span></blockquote>
+            <p>Build on truth, not sand.</p>
+            <p><strong>Buddhism</strong> — Right Speech, Right Action, Right Livelihood are foundational. Without these, wisdom cannot stabilize.</p>
+            <blockquote>"As above, so below."<span class="ci">— The Kybalion (Hermeticism)</span></blockquote>
+            <p>Your outer reality reflects your inner state. Optimize within, and without follows.</p>
+            <blockquote>"A journey of a thousand miles begins with a single step."<span class="ci">— Lao Tzu (Daoism)</span></blockquote>
+            <div class="co"><div class="co-t">The Universal Pattern</div><p>Every tradition arrives at the same conclusion: <strong>you cannot skip foundation.</strong></p></div>
         </div></div>
 
-        <!-- ═══ PROTOCOLS ═══ -->
-        <div class="tier-content" data-tier-content="protocols">
-
-            <div class="section-label">This Week</div>
-            <h2 class="section-title">Quick Actions</h2>
-
-            <div class="protocol"><div class="protocol-number">01</div><div class="protocol-title">Sleep Optimization (Tonight)</div><ul><li>Blackout curtains or eye mask</li><li>Track sleep quality (1–10) for 7 days</li><li>Adjust based on what you learn</li></ul></div>
-
-            <div class="protocol"><div class="protocol-number">02</div><div class="protocol-title">Eliminate One Draining Input</div><ul><li>Identify one thing depleting your energy (junk food, doom-scrolling, a draining relationship, etc.)</li><li>Cut it for 7 days</li><li>Notice the shift</li></ul></div>
-
-            <div class="protocol"><div class="protocol-number">03</div><div class="protocol-title">Material Upgrade</div><ul><li>Choose one item from the recommendations that would genuinely help</li><li>If budget allows — get it this week</li><li>If not — set a savings goal toward it</li></ul></div>
-
-            <div class="protocol"><div class="protocol-number">04</div><div class="protocol-title">Goal Setting</div><ul><li>Write down one small, achievable goal for this week</li><li>Complete it before setting the next one</li><li>Track: did you follow through? Yes or No. Be honest.</li></ul></div>
-
-            <div class="protocol"><div class="protocol-number">05</div><div class="protocol-title">Basic Meditation (10 Minutes)</div><p>Sit up straight. Close your eyes. Silence. Just be there for 10 minutes. Notice the racing thoughts — don't fight them, just observe. As you practice, you'll learn to rise above the thought stream into a state of higher awareness and clarity. Eventually, you'll operate from that level naturally.</p></div>
-
+        <div class="tc" data-tier-content="protocols">
+            <div class="sl">This Week</div><h2 class="st">Quick Actions</h2>
+            <div class="proto"><div class="proto-n">01</div><div class="proto-ti">Sleep Optimization</div><ul><li>Blackout curtains or eye mask</li><li>Track sleep quality (1–10) for 7 days</li><li>Adjust based on what you learn</li></ul></div>
+            <div class="proto"><div class="proto-n">02</div><div class="proto-ti">Eliminate One Draining Input</div><ul><li>Identify one thing depleting your energy</li><li>Cut it for 7 days</li><li>Notice the shift</li></ul></div>
+            <div class="proto"><div class="proto-n">03</div><div class="proto-ti">Material Upgrade</div><ul><li>Choose one item that would genuinely help</li><li>Get it or set a savings goal toward it</li></ul></div>
+            <div class="proto"><div class="proto-n">04</div><div class="proto-ti">Goal Setting</div><ul><li>Write one small, achievable goal for this week</li><li>Complete it before setting the next</li><li>Track: did you follow through?</li></ul></div>
+            <div class="proto"><div class="proto-n">05</div><div class="proto-ti">Basic Meditation (10 Minutes)</div><p>Sit up straight. Close your eyes. Silence. Just observe the racing thoughts — don't fight them. As you practice, you'll rise above the thought stream into clarity.</p></div>
         </div>
 
-        <!-- ═══ PROMPTS ═══ -->
-        <div class="tier-content" data-tier-content="prompts">
-
-            <div class="section-label">AI Prompt</div>
-            <h2 class="section-title">Use This with Claude or ChatGPT</h2>
-            <div class="ai-prompt">I'm on Module 0 of Whitepill — a consciousness course by HOMEUniversity (Foundations — vessel optimization).
+        <div class="tc" data-tier-content="prompts">
+            <div class="sl">AI Prompt</div><h2 class="st">Use This with Claude or ChatGPT</h2>
+            <div class="aip">I'm on Level 0 of Whitepill — a consciousness course by HOMEUniversity (Foundations — vessel optimization).
 
 I'm working on: [your focus]
 My biggest challenge right now: [your challenge]
@@ -551,41 +328,277 @@ Help me:
 
 Respond from: I CAN optimize my foundation.
 Small changes compound. Clarity is my birthright.</div>
+            <div class="sl" style="margin-top:3rem">Mind Prompts</div><h2 class="st">Quotes to Sit With</h2>
+            <blockquote>"The impediment to action advances action. What stands in the way becomes the way."<span class="ci">— Marcus Aurelius</span></blockquote>
+            <blockquote>"If you want to find the secrets of the universe, think in terms of energy, frequency, and vibration."<span class="ci">— Nikola Tesla</span></blockquote>
+        </div>
 
-            <div class="section-label" style="margin-top:3rem">Mind Prompts</div>
-            <h2 class="section-title">Quotes to Sit With</h2>
-
-            <blockquote>"The impediment to action advances action. What stands in the way becomes the way."<span class="cite">— Marcus Aurelius</span></blockquote>
-
-            <blockquote>"If you want to find the secrets of the universe, think in terms of energy, frequency, and vibration."<span class="cite">— Nikola Tesla</span></blockquote>
-
-            <blockquote>"A true genius appreciates simplicity."</blockquote>
-
+        <div class="tc" data-tier-content="progress">
+            <div class="sl">Level Complete</div><h2 class="st">Foundations — Integrated</h2>
+            <div class="prose"><p>You've integrated <strong>Foundations</strong>: how the course works, that everything vibrates, high signal over noise, vessel optimization, goal setting, and facts over feelings.</p>
+            <p>Your vessel is <strong>clean</strong>.</p></div>
+            <div class="pbc"><div class="pb" style="width:6.7%"></div></div>
+            <div class="pbl">6.7% complete — 1 of 15 levels</div>
+            <div class="nm" onclick="showPage('level1')"><div><div class="nm-l">Next Level</div><div class="nm-ti">Level 1 · Discernment</div></div><div class="nm-a">→</div></div>
         </div>
     </div>
-    <!-- end tier-section -->
+</div>
+</div>
 
-    <!-- ═══ PROGRESS ═══ -->
-    <div class="progress-section reveal">
-        <div class="section-label">Progress</div>
-        <h2 class="section-title">Module Complete</h2>
-        <div class="prose"><p>You've integrated <strong>Foundations</strong> — how the course works, that everything vibrates, high signal over noise, vessel optimization, goal setting, and the principle of facts over feelings.</p></div>
-        <div class="progress-bar-container"><div class="progress-bar" style="width:6.7%"></div></div>
-        <div class="progress-label">6.7% complete — 1 of 15 modules</div>
-        <p style="margin-top:1.5rem;font-size:.92rem;color:var(--text-secondary)">Your vessel is <strong>clean</strong>.</p>
+<!-- ══════════ LEVEL 1 — DISCERNMENT ══════════ -->
+<div class="page" id="page-level1">
+<div class="pc">
+    <header class="ph"><div class="pl">Level 1</div><h1 class="pt">Discernment</h1>
+    <div class="ms">LEVEL 1: DISCERNMENT  ↑  LEVEL 0: FOUNDATIONS  = CLEAN VESSEL + SHARP FILTER</div>
+    <p class="mi">Your vessel is clean. Now we sharpen your filter. By the end of this level, you'll trust your own judgment over any authority, detect manipulation instantly, and navigate information with surgical precision.</p></header>
+    <div class="tier-section">
+        <nav class="tn">
+            <button class="tt active" data-tier="beginner">Beginner</button>
+            <button class="tt" data-tier="ascending">Ascending</button>
+            <button class="tt" data-tier="master">Master</button>
+            <button class="tt" data-tier="convergence">Convergence</button>
+            <button class="tt" data-tier="protocols">Protocols</button>
+            <button class="tt" data-tier="prompts">Prompts</button>
+            <button class="tt" data-tier="progress">Progress</button>
+        </nav>
+
+        <div class="tc active" data-tier-content="beginner"><div class="prose">
+            <div class="sl">Definition</div><h2 class="st">What Is Discernment?</h2>
+            <p>Discernment is your ability to tell truth from lies. Signal from noise. Real from manufactured. It's the sharpness of your thinking.</p>
+            <p>Why does it matter <em>right now</em>? Because we're drowning in information. AI can generate infinite content. Everyone has a framework, a system, a "truth." Even the system you were educated in was a designed framework. All information gets filtered somehow — everyone colors truth with their own experience. Your job: be constantly scanning for what's real.</p>
+            <div class="co co-g"><div class="co-t">The Rule</div><p><strong>Trust, but verify. Always.</strong> Even this course. Especially this course. You decide what works. You test it. You keep what's real.</p></div>
+
+            <div class="sl">Application</div><h2 class="st">How to Build Discernment</h2>
+            <p>When someone tells you something, don't just listen to their words — look at <em>them</em>. How do they live? What have they achieved? Are they honest? Open? Do they have an ulterior motive? The words don't matter nearly as much as who and where they come from.</p>
+            <p><strong>Verify, verify, verify.</strong> Train yourself to trust your own pattern-matching capabilities. Ask: Is this person being straight with me? How can I figure it out? What's objective vs. opinion? What's a fact vs. an assumption?</p>
+
+            <h3 class="sst">Red Flags — Spot Manipulation</h3>
+            <p>"Just trust me" (bypasses your discernment). Unfalsifiable claims ("You'll understand when you're enlightened"). Appeal to authority without evidence. Emotional manipulation — fear, guilt, shame used to control you. Manufactured urgency. Cult of personality. No questions allowed.</p>
+            <p>If someone uses these tactics, your discernment alarm should go off.</p>
+
+            <h3 class="sst">Green Flags — Trustworthy Sources</h3>
+            <p>Evidence-based (cites data, measurable results). Reality-testable ("Try it yourself"). Encourages questioning. Admits limitations and uncertainty. Transparent motives. Consistent behavior — they practice what they preach.</p>
+
+            <div class="sl">Integrity</div><h2 class="st">The Iron Word Test</h2>
+            <p>One of the best ways to discern someone's character: <strong>do their words match their actions?</strong></p>
+            <p>If someone says they'll do something, do they do it? If yes → trustworthy. Their word has weight. If no → unreliable. Their words are noise.</p>
+            <p>Apply this to the people around you, to public figures, to teachers — and most importantly, to <strong>yourself</strong>.</p>
+        </div></div>
+
+        <div class="tc" data-tier-content="ascending"><div class="prose">
+            <div class="sl">Root Cause</div><h2 class="st">Why Most People Lack Discernment</h2>
+            <p>They've been trained to defer to authority since childhood. Parents said "because I said so." Teachers said "it's on the test." Media said "experts agree." Society said "don't question this." Discernment was trained <em>out</em> of you.</p>
+            <p>Every time you suppress your gut instinct and defer to external authority, you weaken your internal compass. It's like a muscle — use it or lose it. The cost? You become a reactor, not a creator. You let reality happen <em>to</em> you instead of co-creating it.</p>
+            <div class="co co-g"><div class="co-t">Rebuilding</div><p>Notice when you're about to defer → pause, ask what <em>you</em> actually think. Reality-test claims independently. Trust your gut — if something feels off, investigate. Accept being wrong — discernment improves through error correction, not perfection.</p></div>
+
+            <h2 class="st">RAS — Discernment Edition</h2>
+            <p>Your Reticular Activating System (from Level 0) doesn't just filter for abundance — it filters for <strong>truth vs. lies</strong> based on what you're looking for. If you're scanning for manipulation, you'll start noticing it everywhere. If you're looking for honesty, you'll notice genuine people. The sharper your discernment, the better your perception filter.</p>
+
+            <h2 class="st">Scientific Grounding</h2>
+            <p>Studies on epistemic humility show that people who question both their own beliefs <em>and</em> others' beliefs make better decisions long-term. They update faster, adapt quicker, and build greater resilience. Blind trust — in self or others — leads to dogma and fragility. Discernment is epistemic flexibility.</p>
+            <p>The <strong>prefrontal cortex</strong> (PFC) handles impulse control, decision-making, error detection, and reality-testing. When you practice discernment — pausing before believing, testing claims — you strengthen your PFC. MRI studies show increased gray matter density after 8 weeks of metacognitive training. Conversely, constant dopamine hits (social media, junk content) weaken it. Level 0 came first for a reason.</p>
+        </div></div>
+
+        <div class="tc" data-tier-content="master"><div class="prose">
+            <div class="sl">Deep Pattern</div><h2 class="st">The Archetypal Truth</h2>
+            <p>Discernment is the <strong>Sword</strong>. In tarot: Ace of Swords — cuts through illusion. In mythology: every hero receives a blade (Excalibur, Kusanagi, Andúril). It's the tool of <em>distinction</em>. Without it, you're wandering blind.</p>
+            <h3 class="sst">The Paradox</h3>
+            <p>True mastery of discernment means you can hold contradictory truths simultaneously. "I am divine" (true at highest level). "I am human" (true at material level). Both true. No conflict.</p>
+            <p>Most people need one answer. Master-level discernment? You can hold multiple truths at once and know which applies <em>right now</em>.</p>
+            <h3 class="sst">The Fractal</h3>
+            <p>Discernment operates across all dimensions of experience — physical (is this good for me?), emotional (is this person safe?), mental (is this idea true?), intuitive (does this feel aligned?). You're building all of them simultaneously. By course end, this will feel natural.</p>
+        </div></div>
+
+        <div class="tc" data-tier-content="convergence"><div class="prose">
+            <div class="sl">Across Traditions</div><h2 class="st">The Eternal Principle</h2>
+            <blockquote>"Test all things. Hold fast to what is good."<span class="ci">— 1 Thessalonians 5:21</span></blockquote>
+            <blockquote>"Beloved, do not believe every spirit, but test the spirits to see whether they are from God."<span class="ci">— 1 John 4:1 (Christianity)</span></blockquote>
+            <p>Even spiritual messages can be misleading. Paul is commanding discernment — not blind faith.</p>
+            <blockquote>"Do not believe something just because your teacher said it, it's in scripture, it sounds logical, or it aligns with your beliefs. Believe it when you have tested it and found it true."<span class="ci">— The Kalama Sutta (Buddhism)</span></blockquote>
+            <p>Buddha is saying: reality-test everything — including his own teaching.</p>
+            <blockquote>"The fish trap exists because of the fish. Once you've gotten the fish, you can forget the trap."<span class="ci">— Zhuangzi (Daoism)</span></blockquote>
+            <p>Don't worship the method. Use discernment to extract truth, then move on.</p>
+            <blockquote>"The lips of wisdom are closed, except to the ears of Understanding."<span class="ci">— The Kybalion (Hermeticism)</span></blockquote>
+            <p>Truth reveals itself to those with discernment, not to those who blindly believe.</p>
+            <p><strong>Karl Popper's</strong> falsifiability criterion: a claim is only scientific if it can be tested and potentially disproven. If someone says "just trust me" — that's a red flag at every level.</p>
+            <div class="co"><div class="co-t">The Pattern</div><p>Every tradition teaches the same core truth: <strong>test everything. Trust yourself. Update when evidence changes. Hold fast to what's real.</strong></p></div>
+        </div></div>
+
+        <div class="tc" data-tier-content="protocols">
+            <div class="sl">This Week</div><h2 class="st">Quick Actions</h2>
+            <div class="proto"><div class="proto-n">01</div><div class="proto-ti">Daily Discernment Practice</div><ul><li>Catch one claim daily (media, friend, self, this course)</li><li>Ask: how would I test this? What would prove or disprove it?</li><li>Apply the Iron Word Test to the source</li></ul></div>
+            <div class="proto"><div class="proto-n">02</div><div class="proto-ti">Reality-Test One Belief</div><ul><li>Pick something you currently believe</li><li>Ask: how do I <em>know</em> this is true? What evidence supports or contradicts it?</li><li>Update your model if needed</li></ul></div>
+            <div class="proto"><div class="proto-n">03</div><div class="proto-ti">Iron Word Audit (Weekly)</div><ul><li>Did <em>you</em> follow through on what you said this week?</li><li>Did the people around you follow through?</li><li>If not — why? Adjust accordingly</li></ul></div>
+            <div class="proto"><div class="proto-n">04</div><div class="proto-ti">Community Leverage</div><p>Share one thing you tested. Format: what you tested, how you verified it, what you found, whether you updated your belief. Learn from what others tested.</p></div>
+        </div>
+
+        <div class="tc" data-tier-content="prompts">
+            <div class="sl">AI Prompt</div><h2 class="st">Use This with Claude or ChatGPT</h2>
+            <div class="aip">I'm on Level 1 of Whitepill — a consciousness course by HOMEUniversity (Discernment / Reality Testing).
+
+I'm working on sharpening my discernment and trusting my own judgment.
+My biggest challenge right now: [your challenge]
+
+Help me:
+1. Create a short discernment training plan for daily use
+2. Reality test my approach — what blind spots might I have?
+3. Suggest one claim I should test this week
+4. Ask me a question about my own belief system
+
+Respond from: I CAN develop surgical discernment.
+Small tests compound. Clarity is my birthright.</div>
+            <div class="sl" style="margin-top:3rem">Mind Prompts</div><h2 class="st">Quotes to Sit With</h2>
+            <blockquote>"Test all things. Hold fast to what is good."<span class="ci">— 1 Thessalonians 5:21</span></blockquote>
+            <blockquote>"Those who know do not speak. Those who speak do not know."<span class="ci">— Lao Tzu</span></blockquote>
+        </div>
+
+        <div class="tc" data-tier-content="progress">
+            <div class="sl">Level Complete</div><h2 class="st">Discernment — Integrated</h2>
+            <div class="prose"><p>You know how to tell truth from lies (reality-test everything), why discernment matters (information warfare, manipulation detection), how to build it (daily practice, Iron Word Test), and the eternal principle across every tradition.</p>
+            <p>Your vessel is <strong>clean</strong> (L0). Your filter is <strong>sharp</strong> (L1).</p></div>
+            <div class="pbc"><div class="pb" style="width:13.3%"></div></div>
+            <div class="pbl">13.3% complete — 2 of 15 levels</div>
+            <div class="co" style="margin-top:1.5rem"><div class="co-t">Compounding</div><p>Better sleep (L0) → sharper discernment (L1). When well-rested, you catch lies you'd miss tired. Dopamine regulation (L0) → harder to manipulate you with hype. Material tools (L0) → faster research → better reality-testing. The stack builds.</p></div>
+            <div class="nm" onclick="showPage('level2')"><div><div class="nm-l">Next Level</div><div class="nm-ti">Level 2 · Words Are Spells</div></div><div class="nm-a">→</div></div>
+        </div>
     </div>
+</div>
+</div>
 
-    <div class="next-module reveal" onclick="alert('Level 1 · Discernment — coming soon!')">
-        <div><div class="next-module-label">Next Module</div><div class="next-module-title">Level 1 · Discernment</div></div>
-        <div class="next-module-arrow">→</div>
+<!-- ══════════ LEVEL 2 — WORDS ARE SPELLS ══════════ -->
+<div class="page" id="page-level2">
+<div class="pc">
+    <header class="ph"><div class="pl">Level 2</div><h1 class="pt">Words Are Spells</h1>
+    <div class="ms">LEVEL 2: SPELLCASTING  ↑  LEVEL 1: DISCERNMENT  ↑  LEVEL 0: FOUNDATIONS  = CLEAN VESSEL + SHARP FILTER + REALITY-BENDING SPEECH</div>
+    <p class="mi">Your vessel is clean. Your filter is sharp. Now you learn to <em>speak</em> truth into reality. Words aren't just communication — they're commands. When you speak with precision, clarity, and conviction, reality responds.</p></header>
+    <div class="tier-section">
+        <nav class="tn">
+            <button class="tt active" data-tier="beginner">Beginner</button>
+            <button class="tt" data-tier="ascending">Ascending</button>
+            <button class="tt" data-tier="master">Master</button>
+            <button class="tt" data-tier="convergence">Convergence</button>
+            <button class="tt" data-tier="protocols">Protocols</button>
+            <button class="tt" data-tier="prompts">Prompts</button>
+            <button class="tt" data-tier="progress">Progress</button>
+        </nav>
+
+        <div class="tc active" data-tier-content="beginner"><div class="prose">
+            <div class="sl">Definition</div><h2 class="st">What Is Spellcasting?</h2>
+            <p>The words you use shape your reality. Not just externally — how others perceive you — but <em>internally</em>: how you perceive yourself, what actions you take, what opportunities you notice.</p>
+            <p>Your brain doesn't fully distinguish between "imagined" and "real" when processing language. Say "I'm exhausted" and your brain receives it as a command, allocating energy accordingly. Say "I'm building" and it shifts into creation mode. Same objective reality. Different spell cast.</p>
+
+            <h3 class="sst">Practical Shifts</h3>
+            <p>Instead of "I'll try to get this done" → <strong>"I'm doing this."</strong> Instead of "Maybe I can..." → <strong>"I will."</strong> Instead of "I'm bad at..." → <strong>"I'm developing..."</strong> Small shifts. Massive compounding effect.</p>
+
+            <div class="sl">Integrity</div><h2 class="st">Your Word Is Iron</h2>
+            <p>If you say you'll do something, you do it. Non-negotiable.</p>
+            <p>Every time you don't follow through, you're training yourself that your words don't matter — that <em>you</em> don't matter. You're casting the spell "I am unreliable." And reality responds accordingly.</p>
+            <div class="co co-g"><div class="co-t">The Cost of Weak Words</div><p>People stop trusting you. <em>You</em> stop trusting you. Opportunities dry up. Your own brain stops taking your commands seriously.</p></div>
+            <p><strong>The power of iron words:</strong> People know you're solid. <em>You</em> know you're solid. Opportunities compound. Your brain obeys your commands because it knows you follow through.</p>
+            <p>This week: say less. But mean <em>everything</em> you say. If you're not certain you'll do it, don't say it. Better to under-promise and over-deliver. Think before you speak — pause, breathe, choose your words deliberately.</p>
+
+            <div class="sl">Presence</div><h2 class="st">Conviction</h2>
+            <p>How do you speak with conviction? It must be <em>true to you</em>. Doesn't matter what it is — as long as it's your tested truth and you know it, you'll speak with conviction. This is the foundation of charisma.</p>
+            <p>People who are magnetic aren't performing. They're <em>certain</em>. They're not second-guessing or apologizing for their perspective. They speak from an empowered place.</p>
+            <p>How to develop it: know what you believe (Level 1 helps here). Test your beliefs. Speak <em>only</em> from tested beliefs. Accept consequences — conviction means you're willing to be wrong <em>and</em> defend your position until evidence changes.</p>
+
+            <h2 class="st">Oration Practice</h2>
+            <p>Most people can't explain an idea clearly without filler words, hedging, or losing the thread. Test yourself: pick a simple concept, record yourself explaining it for 60 seconds, listen back. Count the "um"s, the "I think"s, the unnecessary apologies.</p>
+            <p>Clear speech = clear thinking. If you can't articulate something out loud, you don't fully understand it yet. Practice daily — even 60 seconds. Track your progress. Watch yourself sharpen.</p>
+
+            <div class="sl">Internal</div><h2 class="st">Internal Monologue = Reality Generator</h2>
+            <p>How do you speak to <em>yourself</em>? Most people run weak internal monologue: "I can't..." "I'm not good at..." "I'll never..."</p>
+            <p>Every time you think or say these things, you're casting that reality. Your brain doesn't fact-check you — it just <em>obeys</em>. Athletes use self-talk to push through pain. Entrepreneurs use affirmations to stay driven. Meditators use mantras to shift states. Same mechanism: language commanding internal state.</p>
+            <p>Your internal monologue must be as optimized as your external speech. Speak to yourself the way you'd speak to someone you're building up. Not delusionally — <em>accurately</em>. "I'm developing X." "I'm building Y." "I'm becoming Z." Present continuous tense = progress = momentum.</p>
+        </div></div>
+
+        <div class="tc" data-tier-content="ascending"><div class="prose">
+            <div class="sl">The Science</div><h2 class="st">Words = Spells (Literally)</h2>
+            <p>The etymology of "spell" and "spelling" isn't accidental. When you <em>spell</em> a word, you're arranging symbols to create meaning. When you cast a <em>spell</em>, you're arranging words to create reality. Same mechanism.</p>
+            <p><strong>RAS connection:</strong> When you say "I'm looking for opportunities," your RAS starts noticing them. Say "Everything's going wrong" and it highlights problems, ignoring solutions. You're programming your perception filter with language.</p>
+            <p><strong>Self-fulfilling prophecy:</strong> Psychology shows that people who speak confidently <em>become</em> more confident — not the other way around. You don't find confidence then speak. You speak, and your brain updates your self-concept to match. It's a feedback loop.</p>
+            <p><strong>Placebo effect:</strong> When you believe something will work (because you've <em>said</em> it will), your body shifts to make it work — dopamine release, hormonal changes, behavioral adjustments. All triggered by language. This is psychoneuroendocrinology. Your words affect your brain, which affects your hormones, which affects your reality.</p>
+
+            <div class="sl">Hierarchy</div><h2 class="st">Thinking → Speaking → Directing</h2>
+            <p><strong>Directing</strong> (highest): what frequency are you tapped into? <strong>Thinking:</strong> what thoughts flow from that frequency? <strong>Speaking:</strong> what words express those thoughts? <strong>Action:</strong> what follows?</p>
+            <p>Most people try to change at the bottom (action) without addressing the top (frequency/directing). That's why affirmations alone don't work for most — they're speaking from ego, not alignment. As you progress through this course, your directing level improves, and everything downstream automatically improves with it.</p>
+            <p>For now, just be aware. When your speech feels weak, ask: "What am I tapped into right now?" Fear and scarcity produce weak words. Abundance and alignment produce powerful ones. Words carry frequency. People <em>feel</em> what's behind them.</p>
+
+            <h2 class="st">Frequency of Words</h2>
+            <p>Some words <strong>elevate</strong>: love, build, create, ascend, powerful, clear, truth. Some words <strong>depress</strong>: hate, destroy, fail, weak, confused, lies. High-frequency words activate the prefrontal cortex (clarity, executive function). Low-frequency words activate the amygdala (fear, stress, survival mode). Your word choice literally changes your brain state.</p>
+            <p><strong>The balance:</strong> Too much positivity = delusional. Too much negativity = demoralizing. Master level: speak <em>truth</em> (even if hard) from a place of <em>love</em> (generative intent). "This is hard. And I'm building through it."</p>
+
+            <h3 class="sst">The Paradox</h3>
+            <p>True mastery means knowing sometimes <strong>silence is the most powerful spell</strong>. When everyone's yelling, the quiet person commands attention. When everyone hedges, the person who speaks once with conviction wins. Master level = knowing when to speak, when to be silent, and how to speak when you do.</p>
+        </div></div>
+
+        <div class="tc" data-tier-content="master"><div class="prose">
+            <div class="sl">The Deep Pattern</div><h2 class="st">The Logos (Divine Word)</h2>
+            <blockquote>"In the beginning was the Word, and the Word was with God, and the Word was God."<span class="ci">— John 1:1</span></blockquote>
+            <p>This isn't poetry. Every spiritual tradition teaches that speech creates reality at the most fundamental level. God <em>spoke</em> creation into existence. You are made in that image. Therefore you speak reality into existence too — at your level.</p>
+            <p><strong>Hinduism — Om.</strong> The primordial sound. The universe was sung into existence. Mantra works because sound = vibration = reality.</p>
+            <p><strong>Kabbalah — "Abracadabra"</strong> comes from the Aramaic "Avra Kadavra" — meaning "I will create as I speak." Not a magic trick. Literal instruction.</p>
+            <p><strong>Quantum mechanics nods at this:</strong> The observer effect shows that observation (including verbal description) collapses the wave function into a specific state. Before observation: infinite possibility. After: one reality. Your words are observation tools. They collapse potential into specific outcomes.</p>
+
+            <h3 class="sst">The Throat Chakra</h3>
+            <p>In yogic traditions, the throat chakra (Vishuddha) governs expression, truth-speaking, and creative manifestation through sound. When blocked: weak voice, inability to express truth, fear of speaking up. When open: clear, powerful speech, effortless expression, magnetic communication. You don't need to "believe in chakras" for this to be useful — just notice that people with strong self-expression <em>command rooms</em>.</p>
+
+            <div class="co"><div class="co-t">Universal Principle</div><p><strong>Consciousness → Thought → Word → Manifestation.</strong> Reality is created through speech. Not metaphorically. This is the pattern across every tradition and every level of analysis.</p></div>
+        </div></div>
+
+        <div class="tc" data-tier-content="convergence"><div class="prose">
+            <div class="sl">Across Traditions</div><h2 class="st">Speech Creates Reality</h2>
+            <blockquote>"In the beginning was the Word, and the Word was with God, and the Word was God."<span class="ci">— John 1:1 (Christianity / Logos)</span></blockquote>
+            <p>The divine word creates reality. You share in that capacity.</p>
+            <p><strong>Hinduism:</strong> Om — the primordial sound from which the universe emerged. Mantra practice shifts consciousness through repetitive sacred sound.</p>
+            <blockquote>"As above, so below. As within, so without."<span class="ci">— Hermeticism</span></blockquote>
+            <p>Internal speech creates external reality. Align the two → power.</p>
+            <p><strong>Buddhism — Right Speech</strong> (Eightfold Path): avoid false speech, divisive speech, harsh speech, and idle chatter. Why? Because speech shapes karma — the chain of cause and effect. Speak truth, unity, kindness, and purpose → better reality.</p>
+            <blockquote>"The Dao that can be spoken is not the eternal Dao."<span class="ci">— Lao Tzu (Daoism)</span></blockquote>
+            <p>Ultimate truth transcends words. But in the manifest world, words are how you shape reality. Both true. No contradiction.</p>
+            <p><strong>Kabbalah:</strong> "Abracadabra" — "I will create as I speak." Speech is creation.</p>
+            <div class="co"><div class="co-t">The Pattern</div><p>Every tradition, every culture, every era: <strong>consciousness creates through word.</strong> Different languages. Same truth.</p></div>
+        </div></div>
+
+        <div class="tc" data-tier-content="protocols">
+            <div class="sl">This Week</div><h2 class="st">Quick Actions</h2>
+            <div class="proto"><div class="proto-n">01</div><div class="proto-ti">Iron Word Tracker (Daily)</div><ul><li>Write down one thing you commit to each day</li><li>Track: did you follow through? Yes / No</li><li>If no — why? Adjust. Either commit to less, or increase follow-through</li><li>Goal: 100% follow-through rate</li></ul></div>
+            <div class="proto"><div class="proto-n">02</div><div class="proto-ti">Oration Practice (Daily — 5 min)</div><ul><li>Record yourself speaking for 60 seconds on any topic</li><li>Listen back. Count filler words, hedging, unnecessary apologies</li><li>Target: reduce by 50% by end of week</li><li>How: pause before speaking. Breathe. Speak slower. Choose words deliberately</li></ul></div>
+            <div class="proto"><div class="proto-n">03</div><div class="proto-ti">Reframe One Limiting Belief</div><ul><li>Pick one belief: "I'm bad with money," "I'm not a good speaker," etc.</li><li>Reframe: "I'm developing financial skills." "I'm becoming a powerful speaker."</li><li>Write it down. Say it daily (out loud). Track: do your behaviors shift?</li></ul></div>
+            <div class="proto"><div class="proto-n">04</div><div class="proto-ti">Voice Dictation</div><p>Dictate at least 50% of your written communication this week. Notice: does your speech improve? Does output increase? Does thinking become clearer?</p></div>
+        </div>
+
+        <div class="tc" data-tier-content="prompts">
+            <div class="sl">AI Prompt</div><h2 class="st">Use This with Claude or ChatGPT</h2>
+            <div class="aip">I'm on Level 2 of Whitepill — a consciousness course by HOMEUniversity (Words Are Spells / Spellcasting).
+
+I'm working on speaking with conviction and making my word iron.
+My biggest challenge right now: [your challenge]
+
+Help me:
+1. Analyze my speech patterns — what weak language do you see?
+2. Give me one power phrase to use this week
+3. Suggest a daily practice to strengthen my word
+4. Ask me: what am I afraid will happen if I speak with full conviction?
+
+Respond from: I CAN command reality with my words.
+My word is iron. Clarity is my birthright.</div>
+            <div class="sl" style="margin-top:3rem">Mind Prompts</div><h2 class="st">Quotes to Sit With</h2>
+            <blockquote>"In the beginning was the Word, and the Word was with God, and the Word was God."<span class="ci">— John 1:1</span></blockquote>
+            <blockquote>"Those who know do not speak. Those who speak do not know."<span class="ci">— Lao Tzu</span></blockquote>
+            <blockquote>"As above, so below. As within, so without."<span class="ci">— Hermeticism</span></blockquote>
+        </div>
+
+        <div class="tc" data-tier-content="progress">
+            <div class="sl">Level Complete</div><h2 class="st">Words Are Spells — Integrated</h2>
+            <div class="prose"><p>You've integrated <strong>Spellcasting</strong>: words are commands (your brain obeys your language), your word is iron (follow through = power), conviction is magnetic force, speech operates on frequency, and every major tradition teaches that speech creates reality.</p>
+            <p>Your vessel is <strong>clean</strong> (L0). Your filter is <strong>sharp</strong> (L1). Your speech <strong>commands reality</strong> (L2).</p></div>
+            <div class="pbc"><div class="pb" style="width:20%"></div></div>
+            <div class="pbl">20% complete — 3 of 15 levels</div>
+            <div class="co" style="margin-top:1.5rem"><div class="co-t">Compounding</div><p>Better sleep (L0) → clearer speech (L2). Your articulation improves when rested. Discernment (L1) → conviction (L2). You can't speak with conviction if you don't know what you believe. Clean vessel + sharp filter + reality-bending speech = you're becoming <strong>magnetic</strong>.</p></div>
+            <div class="nm" onclick="alert('Level 3 · Energy Mechanics — coming soon!')"><div><div class="nm-l">Next Level</div><div class="nm-ti">Level 3 · Energy Mechanics</div></div><div class="nm-a">→</div></div>
+        </div>
     </div>
-
-    <div class="heroes-journey reveal">
-        <div class="heroes-journey-label">Hero's Journey — Optional</div>
-        <div class="heroes-journey-title">Ordinary World (Age 0–12)</div>
-        <p>I was here as a kid — dreaming, carefree, happy. Full of confidence. Loved music, loved people. Up until around age 12–13. Next stage: "Call to Adventure" (Module 1).</p>
-    </div>
-
 </div>
 </div>
 
@@ -596,39 +609,17 @@ function showPage(id){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     const pg=document.getElementById('page-'+id);
     if(pg){pg.classList.add('active');window.scrollTo(0,0)}
-    document.querySelectorAll('.nav-link,.nav-sub-link').forEach(l=>l.classList.remove('active'));
-    const nl=document.getElementById('nav-'+id);
-    if(nl)nl.classList.add('active');
+    document.querySelectorAll('.nl,.nsl').forEach(l=>l.classList.remove('active'));
+    const nl=document.getElementById('nav-'+id);if(nl)nl.classList.add('active');
     document.querySelector('.sidebar').classList.remove('open');
-    document.querySelector('.overlay').classList.remove('active');
+    document.querySelector('.ov').classList.remove('active');
     setTimeout(initReveal,50);
 }
-function toggleDD(id){
-    const el=document.getElementById(id);
-    if(el)el.classList.toggle('open');
-    if(id==='whitepill-dd')document.getElementById('wp-toggle')?.classList.toggle('expanded');
-}
-document.querySelectorAll('.tier-tab').forEach(tab=>{
-    tab.addEventListener('click',()=>{
-        const s=tab.closest('.tier-section'),t=tab.dataset.tier;
-        s.querySelectorAll('.tier-tab').forEach(x=>x.classList.remove('active'));
-        s.querySelectorAll('.tier-content').forEach(x=>x.classList.remove('active'));
-        tab.classList.add('active');
-        s.querySelector(`[data-tier-content="${t}"]`)?.classList.add('active');
-    });
-});
-document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
-    document.querySelector('.sidebar').classList.toggle('open');
-    document.querySelector('.overlay').classList.toggle('active');
-});
-document.querySelector('.overlay')?.addEventListener('click',()=>{
-    document.querySelector('.sidebar').classList.remove('open');
-    document.querySelector('.overlay').classList.remove('active');
-});
-function initReveal(){
-    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
-}
+function toggleDD(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');if(id==='wp')document.getElementById('wp-toggle')?.classList.toggle('exp')}
+document.querySelectorAll('.tt').forEach(tab=>{tab.addEventListener('click',()=>{const s=tab.closest('.tier-section'),t=tab.dataset.tier;s.querySelectorAll('.tt').forEach(x=>x.classList.remove('active'));s.querySelectorAll('.tc').forEach(x=>x.classList.remove('active'));tab.classList.add('active');s.querySelector(`[data-tier-content="${t}"]`)?.classList.add('active')})});
+document.querySelector('.mt')?.addEventListener('click',()=>{document.querySelector('.sidebar').classList.toggle('open');document.querySelector('.ov').classList.toggle('active')});
+document.querySelector('.ov')?.addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.querySelector('.ov').classList.remove('active')});
+function initReveal(){const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el))}
 initReveal();
 </script>
 </body>
