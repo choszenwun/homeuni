@@ -30,12 +30,9 @@
             font-size: 16px;
         }
         
-        /* Header */
         .header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 60px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -65,14 +62,12 @@
         
         .header-nav a:hover { color: var(--gold); }
         
-        /* Main Content */
         .content {
             max-width: 800px;
             margin: 0 auto;
             padding: 120px 2rem 80px;
         }
         
-        /* Hero Section */
         .thesis-hero {
             text-align: center;
             margin-bottom: 4rem;
@@ -106,15 +101,7 @@
             margin-bottom: 2rem;
         }
         
-        .thesis-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        
-        /* Section Styling */
-        .section {
-            margin-bottom: 3rem;
-        }
+        .section { margin-bottom: 3rem; }
         
         .section-number {
             font-family: 'JetBrains Mono', monospace;
@@ -141,17 +128,9 @@
             margin: 2rem 0 1rem;
         }
         
-        p {
-            margin-bottom: 1.25rem;
-            color: var(--text-dim);
-        }
+        p { margin-bottom: 1.25rem; color: var(--text-dim); }
+        strong { color: var(--text); font-weight: 500; }
         
-        strong {
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        /* Key Insight Boxes */
         .insight {
             background: var(--gold-light);
             border-left: 2px solid var(--gold);
@@ -160,15 +139,8 @@
             border-radius: 0 4px 4px 0;
         }
         
-        .insight p {
-            margin-bottom: 0;
-            color: var(--text);
-            font-size: 0.95rem;
-        }
-        
-        .insight p + p {
-            margin-top: 1rem;
-        }
+        .insight p { margin-bottom: 0; color: var(--text); font-size: 0.95rem; }
+        .insight p + p { margin-top: 1rem; }
         
         .insight-label {
             font-size: 0.7rem;
@@ -178,28 +150,11 @@
             margin-bottom: 0.75rem;
         }
         
-        /* Lists */
-        ul, ol {
-            margin: 1.25rem 0;
-            padding-left: 1.5rem;
-            color: var(--text-dim);
-        }
+        ul, ol { margin: 1.25rem 0; padding-left: 1.5rem; color: var(--text-dim); }
+        li { margin-bottom: 0.5rem; }
         
-        li {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Tables */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
+        .table-wrapper { overflow-x: auto; margin: 2rem 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         
         th {
             font-family: 'Cormorant Garamond', serif;
@@ -218,9 +173,7 @@
             vertical-align: top;
         }
         
-        tr:last-child td {
-            border-bottom: none;
-        }
+        tr:last-child td { border-bottom: none; }
         
         .table-caption {
             font-size: 0.85rem;
@@ -230,83 +183,30 @@
             margin-top: 1rem;
         }
         
-        /* Divider */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
             margin: 4rem 0;
         }
-        
-        /* Call to Action */
-        .cta-section {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-top: 4rem;
-        }
-        
-        .cta-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-section p {
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.85rem 2rem;
-            font-size: 0.9rem;
-            text-decoration: none;
-            border-radius: 3px;
-            transition: all 0.3s;
-            margin: 0.5rem;
-        }
-        
-        .btn-gold {
-            background: var(--gold);
-            color: #ffffff;
-            font-weight: 500;
-        }
-        
-        .btn-gold:hover {
-            background: #9a7209;
-            transform: translateY(-1px);
-        }
-        
-        .btn-outline {
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-        }
-        
-        .btn-outline:hover {
-            border-color: var(--gold);
+
+        a {
             color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-gold);
+            transition: border-color 0.2s;
         }
+
+        a:hover { border-color: var(--gold); }
         
-        /* References */
         .references {
             margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid var(--border);
         }
         
-        .references h2 {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
+        .references h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+        .references p { font-size: 0.85rem; margin-bottom: 0.75rem; color: var(--text-muted); }
         
-        .references p {
-            font-size: 0.85rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-muted);
-        }
-        
-        /* Footer */
         .footer {
             text-align: center;
             padding: 3rem;
@@ -316,7 +216,6 @@
             margin-top: 4rem;
         }
         
-        /* Responsive */
         @media (max-width: 640px) {
             .content { padding: 100px 1.25rem 60px; }
             .header { padding: 0 1.25rem; }
@@ -542,12 +441,11 @@
         
         <h3>7.1 Case Presentation</h3>
         <p>The author presents a single case (n=1) of full PFS symptom resolution following an intervention protocol specifically designed to target autonomic dysfunction rather than hormonal deficiency. The protocol was developed intuitively during the recovery process; the theoretical framework explaining its mechanism was identified subsequently.</p>
-        <p><strong>Patient background:</strong> Adult male with PFS following finasteride discontinuation. Full symptom profile present: genital tissue changes (altered texture, reduced dimensions), testicular changes, cognitive impairment (persistent brain fog), anhedonia, chronic fatigue, and gut dysfunction. Prior hormonal interventions unsuccessful.</p>
+        <p><strong>Patient background:</strong> Adult male with PFS following finasteride discontinuation. Full symptom profile present: genital tissue changes (altered texture, reduced dimensions), testicular changes, cognitive impairment (persistent brain fog), anhedonia, chronic fatigue, and gut dysfunction.</p>
         
         <h3>7.2 Intervention Protocol</h3>
-        <p>The protocol integrated multiple established therapeutic modalities targeting autonomic regulation rather than hormonal supplementation:</p>
-        <p><strong>Foundation phase (months):</strong> Complete alcohol abstinence (alcohol suppresses vagal tone); anti-inflammatory dietary modifications; protected sleep; development of somatic discharge capacity through Trauma Release Exercises (TRE) (Berceli, 2008).</p>
-        <p><strong>Activation phase:</strong> Bilateral stimulation combined with somatic targeting. The protocol adapted EMDR bilateral stimulation principles (Shapiro, 2001) while directing attention to areas identified in somatic trauma literature as freeze storage sites: psoas, hip flexors, pelvic floor (Levine, 2010). Specific techniques included alternating left-right glute engagement, visualized pendulum tracking, and cognitive-emotional oscillation between activation and resolution.</p>
+        <p><strong>Foundation phase (months):</strong> Complete alcohol abstinence (alcohol suppresses vagal tone); anti-inflammatory dietary modifications; protected sleep; semen retention; consciousness study; development of somatic discharge capacity through Trauma Release Exercises (TRE) (Berceli, 2008).</p>
+        <p><strong>Activation phase:</strong> The specific bilateral stimulation and somatic targeting protocol used is documented in full at the <a href="https://homeuniversity.xyz/bpot.html">Bilateral Pelvic Oscillation Technique (BPOT)</a>.</p>
         <p><strong>Discharge phase:</strong> Involuntary somatic discharge—neurogenic tremoring, shaking—as documented in trauma release literature (Levine, 2010). Discharge culminated in nausea and vomiting, documented markers of autonomic reset during intense somatic processing.</p>
         
         <h3>7.3 Outcomes</h3>
@@ -624,15 +522,10 @@
     <section class="section">
         <div class="section-number">09</div>
         <h2>Limitations</h2>
-        
         <p><strong>Single case:</strong> The case report represents n=1. Generalizability cannot be established from a single recovery. This paper is presented for investigation and replication.</p>
-        
         <p><strong>Unverified mechanism:</strong> Direct measurement of chronic pelvic vasoconstriction in PFS patients has not been conducted. The perfusion hypothesis is inferred from autonomic physiology, not direct PFS research.</p>
-        
         <p><strong>Polyvagal theory debate:</strong> Porges' specific claims about vagal pathways remain contested. This model relies on the broader principle that chronic autonomic states produce physiological consequences—a less controversial claim.</p>
-        
         <p><strong>No controlled trials:</strong> No intervention study has tested autonomic-targeted treatment against hormonal treatment in PFS.</p>
-        
         <p><strong>Self-report:</strong> Outcomes are self-reported by the author. Independent verification and objective measurement would strengthen the case.</p>
     </section>
 
@@ -648,8 +541,6 @@
             <p>PFS may not be the permanent sentence patients have been told it is. It may be a locked state awaiting the right key. Further case reports and controlled research will determine whether this model and intervention approach generalize to the broader PFS population.</p>
         </div>
     </section>
-
-   
 
     <!-- REFERENCES -->
     <section class="references">
