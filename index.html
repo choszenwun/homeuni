@@ -4,55 +4,639 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOMEUniversity</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --bg-card: #080808;
+            --bg-hover: #0e0e0e;
+            --white: #f0eeea;
+            --white-bright: #ffffff;
+            --dim: #555249;
+            --mid: #8a857b;
+            --faint: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --gold: #c9a84c;
+            --gold-dim: rgba(201,168,76,0.35);
+            --gold-glow: rgba(201,168,76,0.06);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === HEADER === */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-nav a {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover { color: var(--gold); }
+
+        .nav-cta {
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold) !important;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-glow);
+            border-color: var(--gold);
+        }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+        }
+
+        .cube-container {
+            width: 110px;
+            height: 110px;
+            margin-bottom: 3.5rem;
+            animation: fadeIn 1.5s ease-out;
+            filter: drop-shadow(0 0 50px rgba(255,255,255,0.04));
+        }
+
+        .cube-svg { width: 100%; height: 100%; }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 300;
+            letter-spacing: 0.06em;
+            color: var(--white-bright);
+            margin-bottom: 0.2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-rule {
+            width: 40px;
+            height: 1px;
+            background: var(--white);
+            margin: 1.6rem auto;
+            opacity: 0.15;
+            animation: fadeInUp 1s ease-out 0.45s both;
+        }
+
+        .hero-sub {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.55s both;
+        }
+
+        .hero-desc {
+            max-width: 480px;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--mid);
+            margin-bottom: 3.5rem;
+            animation: fadeInUp 1s ease-out 0.65s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.75s both;
+        }
+
+        .btn {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--bg);
+            border: 1px solid var(--white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--dim);
+            border: 1px solid var(--border-hover);
+        }
+
+        .btn-ghost:hover {
+            color: var(--gold);
+            border-color: var(--gold-dim);
+            background: var(--gold-glow);
+        }
+
+        /* === DIVIDER === */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+        }
+
+        .divider .line {
+            width: 100%;
+            max-width: 600px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* === SECTIONS === */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--dim);
+            max-width: 540px;
+            line-height: 1.75;
+            margin-bottom: 3rem;
+        }
+
+        /* === PROTOCOL CARDS === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover { background: var(--bg-hover); }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover::before { transform: scaleX(1); }
+
+        .card-num {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--dim);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .card:hover .card-num { opacity: 1; color: var(--gold); }
+
+        .card-title {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 0.7rem;
+        }
+
+        .card-text {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        .card-status {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        .card-status.live { color: var(--white); }
+        .card:hover .card-status.live { color: var(--gold); }
+
+        /* === CONSCIOUSNESS LEVELS === */
+        .levels-row {
+            display: flex;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .levels-row::-webkit-scrollbar { display: none; }
+
+        .lvl {
+            min-width: 165px;
+            padding: 2rem 1.4rem;
+            background: var(--bg-card);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .lvl:hover { background: var(--bg-hover); }
+
+        .lvl-n {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            color: var(--white);
+            opacity: 0.1;
+            margin-bottom: 0.8rem;
+            transition: opacity 0.3s;
+        }
+
+        .lvl:hover .lvl-n { opacity: 0.35; }
+
+        .lvl-name {
+            font-family: var(--serif);
+            font-size: 0.95rem;
+            color: var(--white);
+            margin-bottom: 0.35rem;
+        }
+
+        .lvl-tag {
+            font-family: var(--mono);
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        .lvl-tag.open { color: var(--mid); }
+        .lvl:hover .lvl-tag.open { color: var(--gold); }
+
+        .lvl.locked {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* === COACHING === */
+        .coach-box {
+            border: 1px solid var(--border);
+            padding: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            background: var(--bg-card);
+            transition: border-color 0.4s;
+        }
+
+        .coach-box:hover { border-color: var(--border-hover); }
+
+        .coach-text { max-width: 480px; }
+
+        .coach-text h3 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+        }
+
+        .coach-text p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--dim);
+            line-height: 1.75;
+        }
+
+        /* === FOOTER === */
+        footer {
+            padding: 2.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .foot-l {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--dim);
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .foot-r {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .foot-r a {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: var(--dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .foot-r a:hover { color: var(--gold); }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === MOBILE === */
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.5rem; }
+            .header-nav { display: none; }
+            .hero { padding: 7rem 1.5rem 4rem; min-height: 90vh; }
+            .cube-container { width: 85px; height: 85px; margin-bottom: 2.5rem; }
+            .section { padding: 4rem 1.5rem; }
+            .coach-box { padding: 2rem 1.5rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-<header class="mh"><h1>HOMEUniversity</h1><button class="mt" aria-label="Menu"><span></span><span></span><span></span></button></header>
-<div class="ov"></div>
-<aside class="sidebar">
-    <div class="s-logo"><a href="index.html"><h1>HOMEUniversity</h1><div class="sub">Elevate · Empower · Evolve</div></a></div>
-    <nav class="s-nav">
-        <div class="ng"><div class="ng-t">Start Here</div>
-            <a class="nl" href="welcome.html">Welcome</a>
-        </div>
-        <div class="ng"><div class="ng-t">Whitepill</div>
-            <div class="nl" id="wp-toggle" onclick="toggleDD('wp')">Phase 1 — Foundation <span class="arr">›</span></div>
-            <div class="ndd" id="wp">
-                <a class="nsl" href="level0.html">Level 0 · Foundations</a>
-                <a class="nsl" href="level1.html">Level 1 · Discernment</a>
-                <a class="nsl" href="level2.html">Level 2 · Words Are Spells</a>
-                <a class="nsl dim">Level 3 · Energy Mechanics</a>
-                <a class="nsl dim">Level 4 · Power & Ethics</a>
-                <a class="nsl dim">Level 5 · AI as Alchemy</a>
-            </div>
-            <div class="nl" style="opacity:.4;cursor:default;font-size:.82rem">Phase 2 — Coming Soon</div>
-        </div>
-        <div class="ng"><div class="ng-t">Protocols</div>
-            <a class="nl" href="pfs.html">PFS Thesis</a>
-            <a class="nl" href="bpot.html">BPOT Technique</a>
-            <a class="nl" style="opacity:.4;cursor:default">ICP · Coming Soon</a>
-        </div>
-        <div class="ng"><div class="ng-t">More</div>
-            <a class="nl" style="opacity:.4;cursor:default">Musicpill</a>
-            <a class="nl" style="opacity:.4;cursor:default">Glossary</a>
-        </div>
+
+<header>
+    <a href="index.html" class="header-logo">HOMEUniversity</a>
+    <nav class="header-nav">
+        <a href="#protocols">Protocols</a>
+        <a href="#consciousness">Consciousness</a>
     </nav>
-    <div class="s-foot">© HOMEUniversity 2026</div>
-</aside>
-<main class="main">
-    <section class="hero">
-        <div class="h-icon"><svg viewBox="0 0 120 120" fill="none"><path d="M60 20 L100 42 L100 82 L60 104 L20 82 L20 42 Z" fill="none" stroke="#B8860B" stroke-width=".8" opacity=".3"/><path d="M60 20 L100 42 L60 62 L20 42 Z" fill="rgba(184,134,11,.04)" stroke="#B8860B" stroke-width=".8" opacity=".5"/><path d="M60 62 L100 42 L100 82 L60 104 Z" fill="rgba(184,134,11,.02)" stroke="#B8860B" stroke-width=".8" opacity=".4"/><path d="M60 62 L20 42 L20 82 L60 104 Z" fill="rgba(184,134,11,.06)" stroke="#B8860B" stroke-width=".8" opacity=".35"/><line x1="60" y1="62" x2="60" y2="104" stroke="#B8860B" stroke-width=".5" opacity=".3"/></svg></div>
-        <h2 class="h-title">HOMEUniversity</h2>
-        <div class="h-div"></div>
-        <p class="h-sub">A modern educational resource designed to help you understand consciousness, master your mind, and build a life of clarity and purpose.</p>
-        <div class="h-cta">
-            <a class="btn btn-p" href="welcome.html">Learn More</a>
-            <a class="btn btn-g" href="level0.html">Start Learning</a>
-            <a class="btn btn-g" href="bpot.html">BPOT Technique</a>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="cube-container">
+        <svg class="cube-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="top" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="100%" stop-color="#e0e0e0"/>
+                </linearGradient>
+                <linearGradient id="left" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#b0b0b0"/>
+                    <stop offset="100%" stop-color="#cccccc"/>
+                </linearGradient>
+                <linearGradient id="right" x1="100%" y1="0%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#999999"/>
+                    <stop offset="100%" stop-color="#b8b8b8"/>
+                </linearGradient>
+            </defs>
+            <!-- Top face -->
+            <polygon points="100,38 158,68 100,98 42,68" fill="url(#top)"/>
+            <!-- Left face -->
+            <polygon points="42,68 100,98 100,158 42,128" fill="url(#left)"/>
+            <!-- Right face -->
+            <polygon points="158,68 100,98 100,158 158,128" fill="url(#right)"/>
+        </svg>
+    </div>
+
+    <h1 class="hero-title">HOMEUniversity</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Consciousness &middot; Sovereignty</p>
+    <p class="hero-desc">Open-source research and protocols for consciousness development, autonomic recovery, and masculine restoration. Built from lived experience.</p>
+    <div class="hero-actions">
+        <a href="#protocols" class="btn btn-primary">Explore Protocols</a>
+        <a href="#consciousness" class="btn btn-ghost">Consciousness Course</a>
+    </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- ═══════════ PROTOCOLS ═══════════ -->
+<section class="section reveal" id="protocols">
+    <div class="section-label">Protocols & Research</div>
+    <h2 class="section-title">Applied Recovery</h2>
+    <p class="section-desc">Original research and techniques developed through direct experience. Every protocol here was built to solve a real problem.</p>
+
+    <div class="card-grid">
+        <a href="pfs.html" class="card">
+            <div class="card-num">001</div>
+            <div class="card-title">PFS Thesis</div>
+            <div class="card-text">Post-Finasteride Syndrome reframed as autonomic dysregulation. Why hormone replacement fails and what the condition actually is.</div>
+            <div class="card-status live">Read</div>
+        </a>
+        <a href="bpot.html" class="card">
+            <div class="card-num">002</div>
+            <div class="card-title">BPOT Technique</div>
+            <div class="card-text">Bilateral Pelvic Oscillation Technique. A somatic protocol for autonomic reset combining bilateral stimulation, thermal cycling, and purge.</div>
+            <div class="card-status live">Read</div>
+        </a>
+        <a href="icp.html" class="card">
+            <div class="card-num">003</div>
+            <div class="card-title">Circumcision &amp; Autonomic Imprinting</div>
+            <div class="card-text">How neonatal surgical trauma imprints freeze-state patterns into the developing nervous system. The vulnerability factor nobody discusses.</div>
+            <div class="card-status">Coming Soon</div>
+        </a>
+    </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- ═══════════ CONSCIOUSNESS ═══════════ -->
+<section class="section reveal" id="consciousness">
+    <div class="section-label">Consciousness Curriculum</div>
+    <h2 class="section-title">The Ascension Path</h2>
+    <p class="section-desc">A 15-level progression through consciousness mechanics, energy work, manifestation, and esoteric philosophy. Open access.</p>
+
+    <div class="levels-row">
+        <a href="level0.html" class="lvl">
+            <div class="lvl-n">00</div>
+            <div class="lvl-name">Foundations</div>
+            <div class="lvl-tag open">Available</div>
+        </a>
+        <a href="level1.html" class="lvl">
+            <div class="lvl-n">01</div>
+            <div class="lvl-name">Discernment</div>
+            <div class="lvl-tag open">Available</div>
+        </a>
+        <a href="level2.html" class="lvl">
+            <div class="lvl-n">02</div>
+            <div class="lvl-name">Words Are Spells</div>
+            <div class="lvl-tag open">Available</div>
+        </a>
+        <div class="lvl locked">
+            <div class="lvl-n">03</div>
+            <div class="lvl-name">Energy Mechanics</div>
+            <div class="lvl-tag">Coming Soon</div>
         </div>
-    </section>
-</main>
-<script src="nav.js"></script>
+        <div class="lvl locked">
+            <div class="lvl-n">04</div>
+            <div class="lvl-name">Power &amp; Ethics</div>
+            <div class="lvl-tag">Coming Soon</div>
+        </div>
+        <div class="lvl locked">
+            <div class="lvl-n">05</div>
+            <div class="lvl-name">AI as Alchemy</div>
+            <div class="lvl-tag">Coming Soon</div>
+        </div>
+        <div class="lvl locked">
+            <div class="lvl-n">06–14</div>
+            <div class="lvl-name">Advanced Path</div>
+            <div class="lvl-tag">In Development</div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- ═══════════ COACHING ═══════════ -->
+<section class="section reveal" id="coaching">
+    <div class="section-label">Direct Access</div>
+    <h2 class="section-title">Coaching</h2>
+    <p class="section-desc" style="margin-bottom:2rem">Everything on this site is free. If you want direct guidance, one-on-one sessions are available.</p>
+
+    <div class="coach-box">
+        <div class="coach-text">
+            <h3>One-on-One</h3>
+            <p>Direct conversation about your situation. PFS recovery, consciousness development, or whatever you're working through. No scripts.</p>
+        </div>
+        <a href="mailto:contact@homeuniversity.xyz" class="btn btn-ghost">Get in Touch</a>
+    </div>
+</section>
+
+<footer>
+    <div class="foot-l">&copy; HOMEUniversity 2026</div>
+    <div class="foot-r">
+        <a href="https://youtube.com/@choszenwun">YouTube</a>
+        <a href="https://homeuniversity.xyz">Home</a>
+    </div>
+</footer>
+
+<script>
+    const ro = new IntersectionObserver(es => {
+        es.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+
 </body>
 </html>
