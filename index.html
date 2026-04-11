@@ -31,83 +31,27 @@
         }
 
         html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg);
-            color: var(--t1);
-            font-family: var(--sans);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
+        body { background: var(--bg); color: var(--t1); font-family: var(--sans); line-height: 1.7; -webkit-font-smoothing: antialiased; }
         ::selection { background: var(--ac-g); color: var(--ac); }
 
         /* HEADER */
-        header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 1.1rem 2.5rem;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(253,252,250,0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--bl);
-        }
-        .h-logo {
-            font-family: var(--serif); font-size: 1.1rem; font-weight: 500;
-            letter-spacing: .12em; color: var(--t1); text-decoration: none;
-        }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(253,252,250,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--bl); }
+        .h-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; letter-spacing: .12em; color: var(--t1); text-decoration: none; }
         .h-nav { display: flex; gap: 2rem; align-items: center; }
-        .h-nav a {
-            font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
-            text-transform: uppercase; color: var(--t3); text-decoration: none;
-            transition: color .3s;
-        }
+        .h-nav a { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); text-decoration: none; transition: color .3s; }
         .h-nav a:hover { color: var(--ac); }
 
         /* HERO */
-        .hero {
-            min-height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 8rem 2rem 6rem; position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
-            width: 700px; height: 700px;
-            background: radial-gradient(ellipse, rgba(184,134,11,.04) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 8rem 2rem 6rem; position: relative; }
+        .hero::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(ellipse, rgba(184,134,11,.04) 0%, transparent 70%); pointer-events: none; }
         .cube { width: 100px; height: 100px; margin-bottom: 3rem; animation: fadeIn 1.2s ease-out; }
         .cube svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 20px rgba(28,25,23,.08)); }
-
-        .hero h1 {
-            font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300; letter-spacing: .06em; color: var(--t1);
-            animation: fadeUp .8s ease-out .2s both;
-        }
-        .hero-line {
-            width: 50px; height: 1px; background: var(--ac);
-            margin: 1.4rem auto; opacity: .5;
-            animation: fadeUp .8s ease-out .35s both;
-        }
-        .hero-tag {
-            font-family: var(--mono); font-size: .68rem; letter-spacing: .25em;
-            text-transform: uppercase; color: var(--t3); margin-bottom: 2.5rem;
-            animation: fadeUp .8s ease-out .45s both;
-        }
-        .hero p {
-            max-width: 480px; font-size: .98rem; font-weight: 300;
-            line-height: 1.8; color: var(--t2); margin-bottom: 3rem;
-            animation: fadeUp .8s ease-out .55s both;
-        }
-        .hero-btns {
-            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-            animation: fadeUp .8s ease-out .65s both;
-        }
-        .btn {
-            font-family: var(--sans); font-size: .78rem; font-weight: 500;
-            letter-spacing: .15em; text-transform: uppercase;
-            padding: .8rem 2rem; text-decoration: none; transition: all .3s; cursor: pointer;
-            border-radius: 2px;
-        }
+        .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; letter-spacing: .06em; color: var(--t1); animation: fadeUp .8s ease-out .2s both; }
+        .hero-line { width: 50px; height: 1px; background: var(--ac); margin: 1.4rem auto; opacity: .5; animation: fadeUp .8s ease-out .35s both; }
+        .hero-tag { font-family: var(--mono); font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: var(--t3); margin-bottom: 2.5rem; animation: fadeUp .8s ease-out .45s both; }
+        .hero p { max-width: 460px; font-size: .95rem; font-weight: 300; line-height: 1.8; color: var(--t2); margin-bottom: 3rem; animation: fadeUp .8s ease-out .55s both; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp .8s ease-out .65s both; }
+        .btn { font-family: var(--sans); font-size: .78rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; padding: .8rem 2rem; text-decoration: none; transition: all .3s; cursor: pointer; border-radius: 2px; }
         .btn-p { background: var(--ac); color: #fff; border: 1px solid var(--ac); }
         .btn-p:hover { background: #9A7209; box-shadow: var(--sg); }
         .btn-g { background: none; color: var(--ac); border: 1px solid var(--ac-b); }
@@ -118,139 +62,77 @@
 
         /* SECTIONS */
         .sec { padding: 5.5rem 2rem; max-width: 1060px; margin: 0 auto; }
-        .sec-label {
-            font-family: var(--sans); font-size: .6rem; font-weight: 600;
-            letter-spacing: .25em; text-transform: uppercase; color: var(--t3);
-            margin-bottom: .8rem;
-        }
-        .sec-title {
-            font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 300; color: var(--t1); margin-bottom: 3rem; letter-spacing: .02em;
-        }
+        .sec-label { font-family: var(--sans); font-size: .6rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--t3); margin-bottom: .8rem; }
+        .sec-title { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--t1); margin-bottom: 1.5rem; letter-spacing: .02em; }
+        .sec-desc { font-size: .92rem; font-weight: 300; color: var(--t2); max-width: 600px; line-height: 1.8; margin-bottom: 2.5rem; }
+
+        /* M1 FEATURE */
+        .m1-feature { text-align: center; }
+        .m1-feature .m1-img { width: 160px; height: 160px; margin: 0 auto 2rem; }
+        .m1-feature .m1-img img { width: 100%; height: auto; }
+        .m1-feature .m1-placeholder { width: 160px; height: 160px; border: 2px dashed var(--bl); background: var(--bg-tier); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--t3); font-family: var(--mono); font-size: .6rem; border-radius: 4px; margin: 0 auto 2rem; }
+        .m1-feature h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--t1); margin-bottom: .5rem; }
+        .m1-feature .m1-sub { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--t3); margin-bottom: 1.5rem; }
+        .m1-feature p { font-size: .92rem; font-weight: 300; color: var(--t2); max-width: 520px; margin: 0 auto 2rem; line-height: 1.8; }
+        .m1-feature .m1-link { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; color: var(--ac); text-decoration: none; border-bottom: 1px solid var(--ac-b); padding-bottom: 2px; transition: all .3s; }
+        .m1-feature .m1-link:hover { border-bottom-color: var(--ac); }
+
+        /* MAS INTRO */
+        .mas-intro { display: flex; gap: 2.5rem; align-items: flex-start; flex-wrap: wrap; }
+        .mas-text { flex: 1; min-width: 280px; }
+        .mas-text p { font-size: .9rem; font-weight: 300; color: var(--t2); line-height: 1.8; margin-bottom: 1rem; }
+        .mas-vectors { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: .5rem; }
+        .mas-v { padding: .7rem 1rem; background: var(--bg-card); border: 1px solid var(--bl); border-radius: 4px; font-size: .8rem; color: var(--t2); display: flex; align-items: center; gap: .6rem; }
+        .mas-v-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ac); opacity: .4; flex-shrink: 0; }
 
         /* CARDS */
-        .cards {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-        .card {
-            background: var(--bg-card); padding: 2.2rem 1.8rem;
-            border: 1px solid var(--bl); border-radius: 6px;
-            transition: all .35s; text-decoration: none; color: inherit; display: block;
-            box-shadow: var(--ss); position: relative;
-        }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .card { background: var(--bg-card); padding: 2.2rem 1.8rem; border: 1px solid var(--bl); border-radius: 6px; transition: all .35s; text-decoration: none; color: inherit; display: block; box-shadow: var(--ss); }
         .card:hover { border-color: var(--ac-b); box-shadow: var(--sg); transform: translateY(-2px); }
-        .c-num {
-            font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
-            color: var(--ac-l); opacity: .5; margin-bottom: .5rem;
-        }
+        .c-num { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--ac-l); opacity: .5; margin-bottom: .5rem; }
         .card:hover .c-num { opacity: .8; }
-        .c-title {
-            font-family: var(--sans); font-size: .95rem; font-weight: 600;
-            color: var(--t1); margin-bottom: .5rem;
-        }
+        .c-title { font-family: var(--sans); font-size: .95rem; font-weight: 600; color: var(--t1); margin-bottom: .5rem; }
         .c-desc { font-size: .82rem; font-weight: 300; color: var(--t2); line-height: 1.7; }
-        .c-tag {
-            display: inline-block; margin-top: 1rem; font-size: .6rem; font-weight: 600;
-            letter-spacing: .15em; text-transform: uppercase; color: var(--tm);
-            padding: .2rem .6rem; border: 1px solid var(--bl); border-radius: 2px;
-        }
+        .c-tag { display: inline-block; margin-top: 1rem; font-size: .6rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--tm); padding: .2rem .6rem; border: 1px solid var(--bl); border-radius: 2px; }
         .c-tag.live { color: var(--ac); border-color: var(--ac-b); }
 
         /* ASCENDED */
-        .asc-title {
-            font-family: var(--serif);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 300; color: var(--t1);
-            margin-bottom: .4rem; letter-spacing: .03em;
-        }
-        .asc-sub {
-            font-family: var(--mono); font-size: .65rem; letter-spacing: .2em;
-            text-transform: uppercase; color: var(--t3); margin-bottom: 3rem;
-        }
-        .phase-label {
-            font-family: var(--sans); font-size: .58rem; font-weight: 600;
-            letter-spacing: .2em; text-transform: uppercase; color: var(--t3);
-            margin-bottom: .8rem; margin-top: 2rem;
-        }
+        .asc-title { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--t1); margin-bottom: .4rem; letter-spacing: .03em; }
+        .asc-sub { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--t3); margin-bottom: 3rem; }
+        .phase-label { font-family: var(--sans); font-size: .58rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--t3); margin-bottom: .8rem; margin-top: 2rem; }
         .phase-label:first-of-type { margin-top: 0; }
-
-        .levels {
-            display: flex; gap: 1rem; overflow-x: auto;
-            scrollbar-width: none; margin-bottom: 0; padding-bottom: .5rem;
-        }
+        .levels { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; margin-bottom: 0; padding-bottom: .5rem; }
         .levels::-webkit-scrollbar { display: none; }
-        .lv {
-            min-width: 155px; padding: 1.5rem 1.3rem;
-            background: var(--bg-card); border: 1px solid var(--bl); border-radius: 6px;
-            text-decoration: none; color: inherit; transition: all .3s; flex-shrink: 0;
-            box-shadow: var(--ss);
-        }
+        .lv { min-width: 155px; padding: 1.5rem 1.3rem; background: var(--bg-card); border: 1px solid var(--bl); border-radius: 6px; text-decoration: none; color: inherit; transition: all .3s; flex-shrink: 0; box-shadow: var(--ss); }
         .lv:hover { border-color: var(--ac-b); box-shadow: var(--sg); transform: translateY(-2px); }
-        .lv-n {
-            font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
-            color: var(--ac-l); opacity: .3; margin-bottom: .5rem; transition: opacity .3s;
-        }
+        .lv-n { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--ac-l); opacity: .3; margin-bottom: .5rem; transition: opacity .3s; }
         .lv:hover .lv-n { opacity: .6; }
         .lv-name { font-family: var(--sans); font-size: .85rem; font-weight: 500; color: var(--t1); margin-bottom: .3rem; }
-        .lv-s {
-            font-size: .55rem; font-weight: 600; letter-spacing: .12em;
-            text-transform: uppercase; color: var(--tm);
-        }
+        .lv-s { font-size: .55rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tm); }
         .lv-s.on { color: var(--ac); }
         .lv.off { opacity: .35; pointer-events: none; }
 
         /* VIDEOS */
-        .vid-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
-        }
-        .vid-slot {
-            aspect-ratio: 16/9; background: var(--bg-card);
-            border: 1px solid var(--bl); border-radius: 6px;
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-            box-shadow: var(--ss);
-        }
+        .vid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .vid-slot { aspect-ratio: 16/9; background: var(--bg-card); border: 1px solid var(--bl); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: var(--ss); }
         .vid-slot iframe { width: 100%; height: 100%; border: none; }
-        .vid-ph {
-            font-family: var(--mono); font-size: .6rem; letter-spacing: .15em;
-            text-transform: uppercase; color: var(--tm);
-        }
+        .vid-ph { font-family: var(--mono); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--tm); }
 
         /* SOCIALS */
-        .socials {
-            padding: 4rem 2rem; max-width: 1060px; margin: 0 auto; text-align: center;
-        }
-        .socials-label {
-            font-family: var(--sans); font-size: .58rem; font-weight: 600;
-            letter-spacing: .25em; text-transform: uppercase; color: var(--t3); margin-bottom: 1.5rem;
-        }
+        .socials { padding: 4rem 2rem; max-width: 1060px; margin: 0 auto; text-align: center; }
+        .socials-label { font-family: var(--sans); font-size: .58rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--t3); margin-bottom: 1.5rem; }
         .socials-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-        .socials-links a {
-            font-family: var(--sans); font-size: .75rem; font-weight: 500;
-            letter-spacing: .1em; text-transform: uppercase; color: var(--t2);
-            text-decoration: none; padding: .5rem 0; transition: color .3s;
-            border-bottom: 1px solid transparent;
-        }
+        .socials-links a { font-family: var(--sans); font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--t2); text-decoration: none; padding: .5rem 0; transition: color .3s; border-bottom: 1px solid transparent; }
         .socials-links a:hover { color: var(--ac); border-bottom-color: var(--ac-b); }
 
         /* FOOTER */
-        footer {
-            padding: 2rem 2.5rem; border-top: 1px solid var(--bl); text-align: center;
-        }
-        .f-copy {
-            font-size: .6rem; color: var(--tm); letter-spacing: .1em;
-        }
+        footer { padding: 2rem 2.5rem; border-top: 1px solid var(--bl); text-align: center; }
+        .f-copy { font-size: .6rem; color: var(--tm); letter-spacing: .1em; }
 
         /* ANIMATIONS */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reveal {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity .6s ease, transform .6s ease;
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
         .reveal.vis { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
@@ -261,6 +143,7 @@
             .sec { padding: 3.5rem 1.5rem; }
             .cards { grid-template-columns: 1fr; }
             .vid-grid { grid-template-columns: 1fr; }
+            .mas-intro { flex-direction: column; }
         }
     </style>
 </head>
@@ -269,29 +152,21 @@
 <header>
     <a href="index.html" class="h-logo">HOMEUniversity</a>
     <nav class="h-nav">
+        <a href="#m1">M1</a>
         <a href="#research">Research</a>
         <a href="#ascended">Ascended</a>
         <a href="#videos">Videos</a>
     </nav>
 </header>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
     <div class="cube">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <linearGradient id="t" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="100%" stop-color="#e0e0e0"/>
-                </linearGradient>
-                <linearGradient id="l" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#adadad"/>
-                    <stop offset="100%" stop-color="#c8c8c8"/>
-                </linearGradient>
-                <linearGradient id="r" x1="100%" y1="0%" x2="0%" y2="0%">
-                    <stop offset="0%" stop-color="#959595"/>
-                    <stop offset="100%" stop-color="#b3b3b3"/>
-                </linearGradient>
+                <linearGradient id="t" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e0e0e0"/></linearGradient>
+                <linearGradient id="l" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#adadad"/><stop offset="100%" stop-color="#c8c8c8"/></linearGradient>
+                <linearGradient id="r" x1="100%" y1="0%" x2="0%" y2="0%"><stop offset="0%" stop-color="#959595"/><stop offset="100%" stop-color="#b3b3b3"/></linearGradient>
             </defs>
             <polygon points="100,38 158,68 100,98 42,68" fill="url(#t)"/>
             <polygon points="42,68 100,98 100,158 42,128" fill="url(#l)"/>
@@ -301,19 +176,63 @@
     <h1>HOMEUniversity</h1>
     <div class="hero-line"></div>
     <div class="hero-tag">Consciousness &middot; Sovereignty</div>
-    <p>Independent research, protocols, and consciousness education. Built from lived experience.</p>
+    <p>A sovereign masculine restoration project. Research, recovery protocols, and consciousness education — open access.</p>
     <div class="hero-btns">
-        <a href="#research" class="btn btn-p">Research &amp; Protocols</a>
-        <a href="#ascended" class="btn btn-g">Consciousness Course</a>
+        <a href="#m1" class="btn btn-p">Enter</a>
+        <a href="#research" class="btn btn-g">Research &amp; Protocols</a>
     </div>
 </section>
 
 <div class="dv"></div>
 
-<!-- RESEARCH & PROTOCOLS -->
+<!-- ═══ M1 ═══ -->
+<section class="sec reveal" id="m1">
+    <div class="m1-feature">
+        <div class="m1-img">
+            <!-- REPLACE WITH: <img src="images/m1-symbol.png" alt="M1"> -->
+            <div class="m1-placeholder">M1</div>
+        </div>
+        <h2>M1 — The Sovereign Ascendant</h2>
+        <div class="m1-sub">Frequency Anchor Sigil</div>
+        <p>An egregoric anchor point for the frequency of sovereign masculine restoration. Where the Suppression Axis diminishes, M1 operates as the counter-frequency. The named point of ascent.</p>
+        <a href="m1.html" class="m1-link">Read the full framework →</a>
+    </div>
+</section>
+
+<div class="dv"></div>
+
+<!-- ═══ MAS ═══ -->
+<section class="sec reveal" id="mas">
+    <div class="sec-label">The Problem</div>
+    <div class="sec-title">The Male Attenuation Spectrum</div>
+    <div class="mas-intro">
+        <div class="mas-text">
+            <p>MAS is a classification system describing how many seemingly isolated forces of modern society converge into an overarching framework of diminished masculine function — a state of stolen potential.</p>
+            <p>These forces span chemical, pharmacological, surgical, cultural, dietary, and behavioural domains. Some are commercially driven. Some are culturally inherited. Many are normalised to the point of invisibility.</p>
+            <p><a href="mas.html" style="color:var(--ac);font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-decoration:none;border-bottom:1px solid var(--ac-b);padding-bottom:2px;">Read the full taxonomy →</a></p>
+        </div>
+        <div class="mas-vectors">
+            <div class="mas-v"><div class="mas-v-dot"></div>Xenoestrogens &amp; endocrine disruptors</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>SSRIs &amp; Post-SSRI Sexual Dysfunction</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Finasteride &amp; Post-Finasteride Syndrome</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Lack of structured consciousness &amp; spiritual sciences education</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Statins, antipsychotics, opioids</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Infant circumcision &amp; autonomic imprinting</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Pornography &amp; dopamine dysregulation</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Chronic stress normalisation</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Ultra-processed diet</div>
+            <div class="mas-v"><div class="mas-v-dot"></div>Identity fragmentation &amp; absent initiation</div>
+        </div>
+    </div>
+</section>
+
+<div class="dv"></div>
+
+<!-- ═══ RESEARCH ═══ -->
 <section class="sec reveal" id="research">
-    <div class="sec-label">Independent Research &amp; Protocols</div>
-    <div class="sec-title">Applied Work</div>
+    <div class="sec-label">Applied Work</div>
+    <div class="sec-title">Research &amp; Protocols</div>
+    <div class="sec-desc">Original research addressing specific vectors of the Male Attenuation Spectrum. Each protocol was developed through direct experience.</div>
     <div class="cards">
         <a href="pfs.html" class="card">
             <div class="c-num">001</div>
@@ -328,86 +247,37 @@
             <div class="c-tag live">Read</div>
         </a>
         <a href="icp.html" class="card">
-    <div class="c-num">003</div>
-    <div class="c-title">ICP</div>
-    <div class="c-desc">Societal Optimization via Infant Calibration. A systematic assessment of the Infant Calibration Protocol and its autonomic imprinting effects.</div>
-    <div class="c-tag live">Read</div>
-
-            <a href="mas.html" class="card">
-    <div class="c-num">004</div>
-    <div class="c-title">MAS — Male Attenuation Spectrum</div>
-    <div class="c-desc">Clinical taxonomy of the chemical, pharmacological, surgical, and cultural vectors systematically suppressing male biology and autonomic regulation.</div>
-    <div class="c-tag live">Read</div>
-</a>
-<a href="m1.html" class="card">
-    <div class="c-num">005</div>
-    <div class="c-title">M1 — The Sovereign Ascendant</div>
-    <div class="c-desc">The counter-symbol to MAS. Alignment protocol for active restoration across every axis of the Suppression Axis.</div>
-    <div class="c-tag live">Read</div>
-</a>
-</a>
+            <div class="c-num">003</div>
+            <div class="c-title">ICP</div>
+            <div class="c-desc">Infant Calibration Protocol. How neonatal surgical trauma imprints freeze-state patterns into the developing nervous system.</div>
+            <div class="c-tag live">Read</div>
+        </a>
     </div>
 </section>
 
 <div class="dv"></div>
 
-<!-- ASCENDED -->
+<!-- ═══ ASCENDED ═══ -->
 <section class="sec reveal" id="ascended">
-    <div class="sec-label">Ascended</div>
-    <div class="asc-title">Consciousness Development Educational System</div>
-    <div class="asc-sub">15-level open-access progression</div>
+    <div class="sec-label">The Foundation</div>
+    <div class="asc-title">Ascended</div>
+    <div class="asc-sub">Consciousness Development Educational System &middot; 15 Levels</div>
 
     <div class="phase-label">Phase 1 — Foundation</div>
     <div class="levels">
-        <a href="level0.html" class="lv">
-            <div class="lv-n">00</div>
-            <div class="lv-name">Foundations</div>
-            <div class="lv-s on">Available</div>
-        </a>
-        <a href="level1.html" class="lv">
-            <div class="lv-n">01</div>
-            <div class="lv-name">Discernment</div>
-            <div class="lv-s on">Available</div>
-        </a>
-        <a href="level2.html" class="lv">
-            <div class="lv-n">02</div>
-            <div class="lv-name">Words Are Spells</div>
-            <div class="lv-s on">Available</div>
-        </a>
-        <div class="lv off">
-            <div class="lv-n">03</div>
-            <div class="lv-name">Energy Mechanics</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
-        <div class="lv off">
-            <div class="lv-n">04</div>
-            <div class="lv-name">Power &amp; Ethics</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
-        <div class="lv off">
-            <div class="lv-n">05</div>
-            <div class="lv-name">AI Leverage</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
+        <a href="level0.html" class="lv"><div class="lv-n">00</div><div class="lv-name">Foundations</div><div class="lv-s on">Available</div></a>
+        <a href="level1.html" class="lv"><div class="lv-n">01</div><div class="lv-name">Discernment</div><div class="lv-s on">Available</div></a>
+        <a href="level2.html" class="lv"><div class="lv-n">02</div><div class="lv-name">Words Are Spells</div><div class="lv-s on">Available</div></a>
+        <div class="lv off"><div class="lv-n">03</div><div class="lv-name">Energy Mechanics</div><div class="lv-s">Coming Soon</div></div>
+        <div class="lv off"><div class="lv-n">04</div><div class="lv-name">Power &amp; Ethics</div><div class="lv-s">Coming Soon</div></div>
+        <div class="lv off"><div class="lv-n">05</div><div class="lv-name">AI Leverage</div><div class="lv-s">Coming Soon</div></div>
     </div>
 
     <div class="phase-label">Phase 2 — Integration</div>
     <div class="levels">
-        <div class="lv off">
-            <div class="lv-n">06</div>
-            <div class="lv-name">Consciousness</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
-        <div class="lv off">
-            <div class="lv-n">07</div>
-            <div class="lv-name">Alchemy</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
-        <div class="lv off">
-            <div class="lv-n">08</div>
-            <div class="lv-name">Manifestation</div>
-            <div class="lv-s">Coming Soon</div>
-        </div>
+        <div class="lv off"><div class="lv-n">06</div><div class="lv-name">Consciousness</div><div class="lv-s">Coming Soon</div></div>
+        <div class="lv off"><div class="lv-n">07</div><div class="lv-name">Alchemy</div><div class="lv-s">Coming Soon</div></div>
+        <div class="lv off"><div class="lv-n">08</div><div class="lv-name">Manifestation</div><div class="lv-s">Coming Soon</div></div>
     </div>
 
     <div class="phase-label">Phase 3 — Advanced</div>
@@ -423,23 +293,19 @@
 
 <div class="dv"></div>
 
-<!-- VIDEOS -->
+<!-- ═══ VIDEOS ═══ -->
 <section class="sec reveal" id="videos">
     <div class="sec-label">Videos</div>
     <div class="sec-title">Official Content</div>
     <div class="vid-grid">
-        <div class="vid-slot">
-            <span class="vid-ph">Video 1 — Embed Here</span>
-        </div>
-        <div class="vid-slot">
-            <span class="vid-ph">Video 2 — Embed Here</span>
-        </div>
+        <div class="vid-slot"><span class="vid-ph">Video 1 — Embed Here</span></div>
+        <div class="vid-slot"><span class="vid-ph">Video 2 — Embed Here</span></div>
     </div>
 </section>
 
 <div class="dv"></div>
 
-<!-- SOCIALS -->
+<!-- ═══ SOCIALS ═══ -->
 <div class="socials">
     <div class="socials-label">Connect</div>
     <div class="socials-links">
