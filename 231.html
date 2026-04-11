@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 231 Technique — HOMEUniversity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cycle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+        .cycle-card {
+            padding: 1.8rem 1.5rem;
+            background: var(--bg-card, #FFFFFF);
+            border: 1px solid var(--bl, #ECEAE6);
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(28,25,23,.04);
+        }
+        .cycle-num {
+            font-family: var(--fd, 'Cormorant Garamond', serif);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--ac, #B8860B);
+            opacity: .4;
+            line-height: 1;
+            margin-bottom: .6rem;
+        }
+        .cycle-word {
+            font-family: var(--fb, 'DM Sans', sans-serif);
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--t1, #1C1917);
+            margin-bottom: .5rem;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+        .cycle-desc {
+            font-size: .82rem;
+            color: var(--t2, #57534E);
+            line-height: 1.7;
+        }
+        .scale-item {
+            padding: 1.2rem 1.5rem;
+            border-left: 2px solid var(--ac-b, rgba(184,134,11,.15));
+            background: var(--bg-tier, #FAF9F7);
+            margin-bottom: .8rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .scale-item strong { color: var(--t1, #1C1917); display: block; margin-bottom: .3rem; font-size: .85rem; }
+        .scale-item p { margin: 0; font-size: .85rem; color: var(--t2, #57534E); line-height: 1.7; }
+        @media (max-width: 600px) { .cycle-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header class="mh"><h1>HOMEUniversity</h1><button class="mt" aria-label="Menu"><span></span><span></span><span></span></button></header>
+<div class="ov"></div>
+<aside class="sidebar">
+    <div class="s-logo"><a href="index.html"><h1>HOMEUniversity</h1><div class="sub">Consciousness · Sovereignty</div></a></div>
+    <nav class="s-nav">
+        <div class="ng"><div class="ng-t">Research & Protocols</div>
+            <div class="nl" id="pr-toggle" onclick="toggleDD('pr')">Protocols <span class="arr">›</span></div>
+            <div class="ndd" id="pr">
+                <a class="nsl" href="pfs.html">PFS Thesis</a>
+                <a class="nsl" href="bpot.html">BPOT Technique</a>
+                <a class="nsl" href="icp.html">ICP</a>
+                <a class="nsl" href="mas.html">MAS</a>
+                <a class="nsl" href="m1.html">M1 · The Sovereign Ascendant</a>
+                <a class="nsl" href="231.html">The 231 Technique</a>
+            </div>
+        </div>
+        <div class="ng"><div class="ng-t">Ascended</div>
+            <div class="nl" id="p1-toggle" onclick="toggleDD('p1')">Phase 1 — Foundation <span class="arr">›</span></div>
+            <div class="ndd" id="p1">
+                <a class="nsl" href="level0.html">Level 0 · Foundations</a>
+                <a class="nsl" href="level1.html">Level 1 · Discernment</a>
+                <a class="nsl" href="level2.html">Level 2 · Words Are Spells</a>
+                <a class="nsl dim">Level 3 · Energy Mechanics</a>
+                <a class="nsl dim">Level 4 · Power & Ethics</a>
+                <a class="nsl dim">Level 5 · AI Leverage</a>
+            </div>
+            <div class="nl" style="opacity:.4;cursor:default;font-size:.82rem">Phase 2 — Coming Soon</div>
+            <div class="nl" style="opacity:.4;cursor:default;font-size:.78rem">Phase 3 — Coming Soon</div>
+        </div>
+    </nav>
+    <div class="s-foot">© HOMEUniversity 2026</div>
+</aside>
+
+<main class="main">
+<div class="pc">
+    <header class="ph">
+        <div class="pl">Protocol · Framework</div>
+        <h1 class="pt">The 231 Technique</h1>
+        <p class="mi">A numerical framework for rendering intention into reality.</p>
+    </header>
+
+    <div class="sl">Definition</div>
+    <h2 class="st">Overview</h2>
+    <div class="prose">
+        <p>The 231 Technique is a momentum framework reduced to its most primordial form. It describes the fundamental cycle through which anything gets created — from doing the dishes to launching a career. When action feels overwhelming or impossible, 231 reduces the process to three numbers and removes the noise.</p>
+    </div>
+
+    <div class="sl">Framework</div>
+    <h2 class="st">The Cycle</h2>
+
+    <div class="cycle-grid">
+        <div class="cycle-card">
+            <div class="cycle-num">2</div>
+            <div class="cycle-word">Separation</div>
+            <div class="cycle-desc">Two things exist: you and the idea. A vision of something that doesn't exist yet. Right now it's just you and the thought. They're separate.</div>
+        </div>
+        <div class="cycle-card">
+            <div class="cycle-num">3</div>
+            <div class="cycle-word">Creation</div>
+            <div class="cycle-desc">You act. Now three things exist: you, the idea, and the completed product. The idea has been rendered from thought into material reality.</div>
+        </div>
+        <div class="cycle-card">
+            <div class="cycle-num">1</div>
+            <div class="cycle-word">Integration</div>
+            <div class="cycle-desc">You release it. The separation collapses. It becomes one — complete, integrated, done. You and your reality have changed.</div>
+        </div>
+    </div>
+
+    <div class="prose">
+        <p>Then the cycle resets. A new 2 forms. A new idea separates from you. And it begins again.</p>
+    </div>
+
+    <div class="sl">Application</div>
+    <h2 class="st">Every Scale</h2>
+    <div class="prose">
+        <p>231 operates at every scale. The framework is the same at every level. The scale changes. The cycle doesn't.</p>
+    </div>
+
+    <div class="scale-item">
+        <strong>Micro</strong>
+        <p>The dishes are in the sink. You and the task exist separately (2). You do them (3). They're done — collapses to one (1). Momentum generated.</p>
+    </div>
+    <div class="scale-item">
+        <strong>Medium</strong>
+        <p>You have a song idea. You and the idea (2). You produce it (3). You release it (1). Next song begins.</p>
+    </div>
+    <div class="scale-item">
+        <strong>Macro</strong>
+        <p>You have a vision for your life. You and the vision (2). You build it over years (3). It becomes your reality (1).</p>
+    </div>
+
+    <div class="sl">Mechanism</div>
+    <h2 class="st">Why It Works</h2>
+    <div class="prose">
+        <p>When you're overwhelmed, it's usually because you're seeing the full complexity of a task — every substep, every possible failure, every thing that could go wrong. 231 strips all of that away. There are only ever three states: separated, created, integrated. You're always in one of them. Identify which one, and the next move is obvious.</p>
+        <p>Numbers are primary. Before language, before narrative, before the story you tell yourself about why something is hard — there's just the count. Two things need to become three, then three collapses to one. That's it.</p>
+    </div>
+
+    <div class="sl">Compounding</div>
+    <h2 class="st">Momentum</h2>
+    <div class="prose">
+        <p>Each completed 231 cycle feeds the next. The confidence, energy, and evidence generated by finishing one cycle makes the next cycle easier to initiate. This is how momentum compounds — not through motivation or willpower, but through repeated completion of the cycle at whatever scale is available to you.</p>
+        <p>If you can't do the macro cycle, do a micro one. Do the dishes. Send the message. Finish the verse. Each completion is a proof of concept that you can render reality. Stack enough of them and the bigger cycles become possible.</p>
+    </div>
+
+</div>
+</main>
+
+<script src="nav.js"></script>
+</body>
+</html>
